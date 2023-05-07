@@ -1,5 +1,5 @@
 <?php
 
-$conn = mysqli_connect('localhost','root','','veridis') or die('connection failed');
+$conn = mysqli_connect('localhost','root','','makotek') or die('connection failed');
 
 ?>
