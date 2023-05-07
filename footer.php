@@ -36,6 +36,6 @@
 
    </div>
 
-   <p class="credit"> &copy; Veridis <?php echo date('Y'); ?> All rights reserved. </p>
+   <p class="credit"> &copy; Makotek Computers <?php echo date('Y'); ?> All rights reserved. </p>
 
 </section>

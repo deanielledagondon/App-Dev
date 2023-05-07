@@ -27,7 +27,7 @@ if(isset($message)){
 
    <div class="header-2">
       <div class="flex">
-         <a href="home.php" class="logo">Veridis</a>
+         <a href="home.php" class="logo">Makotek</a>
 
          <nav class="navbar">
             <a href="home.php">Home</a>
@@ -51,6 +51,7 @@ if(isset($message)){
          <div class="user-box">
             <p> Username: <span><?php echo $_SESSION['user_name']; ?></span></p>
             <p> Email: <span><?php echo $_SESSION['user_email']; ?></span></p>
+            <a href="account.php" class="view-btn">View Profile</a>
             <a href="logout.php" class="delete-btn">Logout</a>
          </div>
       </div>

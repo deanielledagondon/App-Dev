@@ -1,7 +1,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;600&display=swap');
 
-:root{
+:root{ 
+   --blue:#0047AB;
    --purple:#8e44ad;
+   --green: #008000;
    --red:#c0392b;
    --orange:#f39c12;
    --black:#333;
@@ -98,6 +100,7 @@ section{
 .option-btn,
 .delete-btn,
 .update-btn,
+.view-btn,
 .white-btn{
    display: inline-block;
    margin-top: 1rem;
@@ -112,6 +115,7 @@ section{
 .btn:hover,
 .option-btn:hover,
 .update-btn:hover,
+.view-btn:hover,
 .delete-btn:hover{
    background-color: var(--black);
 }
@@ -125,12 +129,17 @@ section{
    background-color: var(--orange);
 }
 
+.view-btn{
+   background-color: var(--blue);
+}
+
+
 .delete-btn{
    background-color: var(--red);
 }
 
 .update-btn{
-   background-color: var(--red);
+   background-color: var(--green);
 }
 
 .white-btn:hover{
