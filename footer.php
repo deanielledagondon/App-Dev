@@ -25,7 +25,6 @@
          <p> <i class="fas fa-phone"></i> +63 995 634 8480 </p>
          <p> <i class="fas fa-envelope"></i> help@makotekcomputers.com </p>
          <p> <i class="fas fa-envelope"></i> customercare@makotekcomputers.com </p>
-
          <p> <i class="fas fa-map-marker-alt"></i> G/F LK Bldg, 5 Rizal St.
                                                    Gaston Park Circle
                                                    Cagayan de Oro City
