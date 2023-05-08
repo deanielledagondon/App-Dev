@@ -20,10 +20,14 @@
 
       <div class="box">
          <h3>Contact info</h3>
-         <p> <i class="fas fa-phone"></i> +123-456-7890 </p>
-         <p> <i class="fas fa-phone"></i> +111-222-3333 </p>
-         <p> <i class="fas fa-envelope"></i> abcd@gmail.com </p>
-         <p> <i class="fas fa-map-marker-alt"></i> Cagayan de Oro, Philippines </p>
+         <p> <i class="fas fa-phone"></i> +63 88 859 2110 </p>
+         <p> <i class="fas fa-phone"></i> +63 968 366 7648 </p>
+         <p> <i class="fas fa-phone"></i> +63 995 634 8480 </p>
+         <p> <i class="fas fa-envelope"></i> help@makotekcomputers.com </p>
+         <p> <i class="fas fa-map-marker-alt"></i> G/F LK Bldg, 5 Rizal St.
+Gaston Park Circle
+Cagayan de Oro City
+Philippines 9000 </p>
       </div>
 
       <div class="box">
@@ -37,10 +41,6 @@
    </div>
 
    
-   <p class="credit"> &copy; Makotek Computers <?php echo date('Y'); ?> All rights reserved. </p>
+   <p class="credit"> &copy; Makotek Computer Sales Inc <?php echo date('Y'); ?> All rights reserved. </p>
    
-   <div class="box">
-   <a href="admin_login.php"><img src="images/logo.png" alt="Admin Login"></a>
-</div>
-
 </section>

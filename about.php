@@ -48,8 +48,8 @@ if (!isset($_SESSION['user_id'])) {
 
       <div class="content">
          <h3>Why choose us?</h3>
-         <p>At Veridis, we believe that fashion is an art form, and we're passionate about helping our customers find unique pieces that allow them to express their individuality. We offer a carefully curated collection of clothing, shoes, and accessories from some of the world's most innovative and exciting designers.</p>
-         <p>Our mission is to provide our customers with high-quality, affordable fashion that is both stylish and sustainable. We pride ourselves on our exceptional customer service, and we're always here to help you find the perfect outfit for any occasion. </p>
+         <p>MakoTek is an IT shop that aims to provide high-quality computers and gaming peripherals at reasonable prices. Our goal is to cater to everyone's needs, from casual users to businesses requiring enterprise-level solutions. We take pride in our ability to build customized PC setups that are tailored to your budget and preferences.
+         <p>Our shop is located on the Ground Floor of LK Building, which is situated on 5 Rizal St in Gaston Park, Cagayan de Oro City. We have a team of knowledgeable and skilled technicians who are dedicated to providing the best solutions and services to our customers.</p>
          <a href="contact.php" class="btn">Contact us</a>
       </div>
 
@@ -64,8 +64,7 @@ if (!isset($_SESSION['user_id'])) {
    <div class="box-container">
 
       <div class="box">
-         <img src="images/pic-1.jpg" alt="">
-         <p>I'm so impressed with the customer service at Veridis. I had a question about sizing, and their support team responded to my email within an hour with helpful advice. I ended up ordering a pair of pants that fit like a dream. I appreciate how easy it was to shop with them, and I'll be a loyal customer from now on.</p>
+         <p>Thank you Makotek I just bought my computer set na sulit kaayo ang price plus grabe ka accomodating. So happy Excellent customer service. Highly recommend gyud.</p>
          <div class="stars">
             <i class="fas fa-star"></i>
             <i class="fas fa-star"></i>
@@ -73,12 +72,11 @@ if (!isset($_SESSION['user_id'])) {
             <i class="fas fa-star"></i>
             <i class="fas fa-star"></i>
          </div>
-         <h3>Nico Pacuit</h3>
+         <h3>Sandra</h3>
       </div>
 
       <div class="box">
-         <img src="images/pic-2.jpg" alt="">
-         <p>I recently bought a dress from Veridis, and I couldn't be happier with my purchase. The quality of the fabric is excellent, and the fit is perfect. I received so many compliments on the dress when I wore it to a party. I will definitely be shopping at Veridis again!</p>
+         <p>Thank you kaayo sa pag build up computer mga boss solid kaayo akong money thank you.</p>
          <div class="stars">
             <i class="fas fa-star"></i>
             <i class="fas fa-star"></i>
@@ -86,12 +84,11 @@ if (!isset($_SESSION['user_id'])) {
             <i class="fas fa-star"></i>
             <i class="fas fa-star"></i>
          </div>
-         <h3>Llane Benting</h3>
+         <h3>Benidick</h3>
       </div>
 
       <div class="box">
-         <img src="images/pic-3.jpg" alt="">
-         <p>I'm always hesitant to buy clothes online, but I took a chance on Veridis, and I'm so glad I did. The clothes are even better than I expected - high-quality, trendy, and affordable. The shipping was fast, and the items were packaged beautifully. I've already placed my second order and can't wait to see what they have in store next!</p>
+         <p>Thank you Makotek! Very responsive and accomodating team Sulit pa build diri</p>
          <div class="stars">
             <i class="fas fa-star"></i>
             <i class="fas fa-star"></i>
@@ -99,94 +96,12 @@ if (!isset($_SESSION['user_id'])) {
             <i class="fas fa-star"></i>
             <i class="fas fa-star"></i>
          </div>
-         <h3>Deanielle Dagondon</h3>
+         <h3>Christian</h3>
       </div>
 
    </div>
 
 </section>
-
-<section class="authors">
-
-   <h1 class="title">best designers</h1>
-
-   <div class="box-container">
-
-      <div class="box">
-         <img src="images/author-1.jpg" alt="">
-         <div class="share">
-            <a href="#" class="fab fa-facebook-f"></a>
-            <a href="#" class="fab fa-twitter"></a>
-            <a href="#" class="fab fa-instagram"></a>
-            <a href="#" class="fab fa-linkedin"></a>
-         </div>
-         <h3>Coco Chanel</h3>
-      </div>
-
-      <div class="box">
-         <img src="images/author-2.jpg" alt="">
-         <div class="share">
-            <a href="#" class="fab fa-facebook-f"></a>
-            <a href="#" class="fab fa-twitter"></a>
-            <a href="#" class="fab fa-instagram"></a>
-            <a href="#" class="fab fa-linkedin"></a>
-         </div>
-         <h3>Ralph Lauren</h3>
-      </div>
-
-      <div class="box">
-         <img src="images/author-3.jpg" alt="">
-         <div class="share">
-            <a href="#" class="fab fa-facebook-f"></a>
-            <a href="#" class="fab fa-twitter"></a>
-            <a href="#" class="fab fa-instagram"></a>
-            <a href="#" class="fab fa-linkedin"></a>
-         </div>
-         <h3>Christian Dior</h3>
-      </div>
-
-      <div class="box">
-         <img src="images/author-4.jpg" alt="">
-         <div class="share">
-            <a href="#" class="fab fa-facebook-f"></a>
-            <a href="#" class="fab fa-twitter"></a>
-            <a href="#" class="fab fa-instagram"></a>
-            <a href="#" class="fab fa-linkedin"></a>
-         </div>
-         <h3>Donatella Versace</h3>
-      </div>
-
-      <div class="box">
-         <img src="images/author-5.jpg" alt="">
-         <div class="share">
-            <a href="#" class="fab fa-facebook-f"></a>
-            <a href="#" class="fab fa-twitter"></a>
-            <a href="#" class="fab fa-instagram"></a>
-            <a href="#" class="fab fa-linkedin"></a>
-         </div>
-         <h3>Marc Jacobs</h3>
-      </div>
-
-      <div class="box">
-         <img src="images/author-6.jpg" alt="">
-         <div class="share">
-            <a href="#" class="fab fa-facebook-f"></a>
-            <a href="#" class="fab fa-twitter"></a>
-            <a href="#" class="fab fa-instagram"></a>
-            <a href="#" class="fab fa-linkedin"></a>
-         </div>
-         <h3>Calvin Klein</h3>
-      </div>
-
-   </div>
-
-</section>
-
-
-
-
-
-
 
 <?php include 'footer.php'; ?>
 
