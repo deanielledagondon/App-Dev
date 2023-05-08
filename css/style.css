@@ -42,6 +42,18 @@
    background-color: var(--purple);
 }
 
+.centered-box {
+   display: flex;
+   justify-content: center;
+   margin-top: 50px;
+   margin-bottom: 0;
+ }
+ body {
+   background-image: url("images\background_image.png");
+   background-repeat: no-repeat;
+   background-size: cover;
+ }
+
 html{
    font-size: 62.5%;
    overflow-x: hidden;
@@ -187,7 +199,7 @@ section{
 }
 
 .form-container{
-   min-height: 100vh;
+   min-height: 100pt;
    background-color: var(--light-bg);
    display: flex;
    align-items: center;
@@ -880,6 +892,7 @@ section{
 }
 
 .footer .box-container{
+   text-align: center;
    max-width: 1200px;
    margin:0 auto;
    display: grid;

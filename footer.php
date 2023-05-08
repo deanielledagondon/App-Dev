@@ -38,10 +38,9 @@
 
    
    <p class="credit"> &copy; Makotek Computers <?php echo date('Y'); ?> All rights reserved. </p>
-   <br>
    
    <div class="box">
-   <a href="admin_login.php">Login as an Admin</a>
+   <a href="admin_login.php"><img src="images/logo.png" alt="Admin Login"></a>
 </div>
 
 </section>

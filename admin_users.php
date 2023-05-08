@@ -60,6 +60,9 @@ if(isset($_GET['delete'])){
 
 </section>
 
+<section class="users">
+
+
 <div class="box-container">  <!-- need iparehas sa taas where ma display pud ang admin users -->
       <?php
          $select_users = mysqli_query($conn, "SELECT * FROM `admins`") or die('query failed');
@@ -69,7 +72,7 @@ if(isset($_GET['delete'])){
          <p> User ID: <span><?php echo $fetch_users['id']; ?></span> </p>
          <p> Username: <span><?php echo $fetch_users['name']; ?></span> </p>
          <p> Email: <span><?php echo $fetch_users['email']; ?></span> </p>
-         <p> User Type: <span style="color:<?php if($fetch_users['user_type'] == 'admin'){ echo 'var(--blue)'; } ?>"><?php echo $fetch_users['user_type']; ?></span> </p>
+         <p> User Type: <span style="color:<?php if($fetch_users['user_type'] == 'user'){ echo 'var(--blue)'; } ?>"><?php echo $fetch_users['user_type']; ?></span> </p>
          <a href="admin_users.php?delete=<?php echo $fetch_users['id']; ?>" onclick="return confirm('Delete this user?');" class="delete-btn">Delete user</a>
       </div>
       <?php

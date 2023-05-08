@@ -39,6 +39,7 @@ if(isset($_POST['submit'])){
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
    <meta charset="UTF-8">
    <meta http-equiv="X-UA-Compatible" content="IE=edge">
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -65,7 +66,15 @@ if(isset($message)){
    }
 }
 ?>
-   
+
+   <div class="centered-box">
+       <div class="box">
+           <a href="admin_login.php"><img src="images/logo.png" alt="Admin Login"></a>
+       </div>
+   </div>
+
+
+
 <div class="form-container">
 
    <form action="" method="post">
@@ -80,9 +89,6 @@ if(isset($message)){
 
 </div>
 
-<div class="box">
-   <a href="admin_login.php">Login as an Admin</a>
-</div>
 
 </body>
 </html>

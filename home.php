@@ -4,7 +4,6 @@ include 'config.php';
 
 session_start();
 
-$user_id = $_SESSION['user_id'];
 
 
 // Check if the user is attempting to access a protected page or feature
@@ -13,6 +12,8 @@ if (!isset($_SESSION['user_id'])) {
    $guest_user_id = 0; // Set the guest user ID
    $_SESSION['user_id'] = $guest_user_id; // Set the session user ID
 }
+
+$user_id = $_SESSION['user_id'];
 
 // Allow the user to access the page
 
