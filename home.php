@@ -6,9 +6,16 @@ session_start();
 
 $user_id = $_SESSION['user_id'];
 
-if(!isset($user_id)){
-   header('location:login.php');
+
+// Check if the user is attempting to access a protected page or feature
+if (!isset($_SESSION['user_id'])) {
+   // If not, log them in using the guest user account
+   $guest_user_id = 0; // Set the guest user ID
+   $_SESSION['user_id'] = $guest_user_id; // Set the session user ID
 }
+
+// Allow the user to access the page
+
 
 if(isset($_POST['add_to_cart'])){
 

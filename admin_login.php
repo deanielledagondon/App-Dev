@@ -8,25 +8,24 @@ if(isset($_POST['submit'])){
    $email = mysqli_real_escape_string($conn, $_POST['email']);
    $pass = mysqli_real_escape_string($conn, md5($_POST['password']));
 
-   $select_users = mysqli_query($conn, "SELECT * FROM `users` WHERE email = '$email' AND password = '$pass'") or die('query failed');
+   $select_users = mysqli_query($conn, "SELECT * FROM `admins` WHERE email = '$email' AND password = '$pass'") or die('query failed');
 
    if(mysqli_num_rows($select_users) > 0){
 
       $row = mysqli_fetch_assoc($select_users);
 
-      if($row['user_type'] == 'user'){
+      if($row['user_type'] == 'admin'){
 
-         $_SESSION['user_name'] = $row['name'];
-         $_SESSION['user_email'] = $row['email'];
-         $_SESSION['user_id'] = $row['id'];
-         header('location:home.php');
+        $_SESSION['admin_name'] = $row['name'];
+        $_SESSION['admin_email'] = $row['email'];
+        $_SESSION['admin_id'] = $row['id'];
+        header('location:admin_page.php');
 
-      }
-      else {
-         // User is not a registered user, treat as guest
-         $_SESSION['guest'] = true;
-         header('location:home.php');
-      }
+      }else {
+        $message[] = 'You are not allowed to access this page.';
+        header('location:login.php');
+        exit();
+     }
 
    }else{
       $message[] = 'Incorrect email or password!';
@@ -42,7 +41,7 @@ if(isset($_POST['submit'])){
    <meta charset="UTF-8">
    <meta http-equiv="X-UA-Compatible" content="IE=edge">
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-   <title>Login</title>
+   <title>Admin Login</title>
 
    <!-- font awesome cdn link  -->
    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
@@ -73,15 +72,9 @@ if(isset($message)){
       <input type="email" name="email" placeholder="Enter your email" required class="box">
       <input type="password" name="password" placeholder="Enter your password" required class="box">
       <input type="submit" name="submit" value="login now" class="btn">
-      <p><a href="home.php">Continue as a Guest</a></p>
-      <br>
-      <p>Don't have an account? <a href="register.php">Register now</a></p>
+      <p>Don't have an account? <a href="admin_register.php">Register now</a></p>
    </form>
 
-</div>
-
-<div class="box">
-   <a href="admin_login.php">Login as an Admin</a>
 </div>
 
 </body>

@@ -1,37 +1,27 @@
 <?php
 
 include 'config.php';
-session_start();
 
 if(isset($_POST['submit'])){
 
+   $name = mysqli_real_escape_string($conn, $_POST['name']);
    $email = mysqli_real_escape_string($conn, $_POST['email']);
    $pass = mysqli_real_escape_string($conn, md5($_POST['password']));
+   $cpass = mysqli_real_escape_string($conn, md5($_POST['cpassword']));
 
-   $select_users = mysqli_query($conn, "SELECT * FROM `users` WHERE email = '$email' AND password = '$pass'") or die('query failed');
+   $select_users = mysqli_query($conn, "SELECT * FROM `admins` WHERE email = '$email' AND password = '$pass'") or die('query failed');
 
    if(mysqli_num_rows($select_users) > 0){
-
-      $row = mysqli_fetch_assoc($select_users);
-
-      if($row['user_type'] == 'user'){
-
-         $_SESSION['user_name'] = $row['name'];
-         $_SESSION['user_email'] = $row['email'];
-         $_SESSION['user_id'] = $row['id'];
-         header('location:home.php');
-
-      }
-      else {
-         // User is not a registered user, treat as guest
-         $_SESSION['guest'] = true;
-         header('location:home.php');
-      }
-
+      $message[] = 'User already exist!';
    }else{
-      $message[] = 'Incorrect email or password!';
+      if($pass != $cpass){
+         $message[] = 'Confirm password not matched!';
+      }else{
+         mysqli_query($conn, "INSERT INTO `admins`(name, email, password) VALUES('$name', '$email', '$cpass')") or die('query failed');
+         $message[] = 'Registered successfully!';
+         header('location:admin_login.php');
+      }
    }
-
 }
 
 ?>
@@ -42,7 +32,7 @@ if(isset($_POST['submit'])){
    <meta charset="UTF-8">
    <meta http-equiv="X-UA-Compatible" content="IE=edge">
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-   <title>Login</title>
+   <title>Register</title>
 
    <!-- font awesome cdn link  -->
    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
@@ -52,6 +42,8 @@ if(isset($_POST['submit'])){
 
 </head>
 <body>
+
+
 
 <?php
 if(isset($message)){
@@ -69,19 +61,19 @@ if(isset($message)){
 <div class="form-container">
 
    <form action="" method="post">
-      <h3>login now</h3>
+      <h3>Register now</h3>
+      <input type="text" name="name" placeholder="Enter your name" required class="box">
       <input type="email" name="email" placeholder="Enter your email" required class="box">
       <input type="password" name="password" placeholder="Enter your password" required class="box">
-      <input type="submit" name="submit" value="login now" class="btn">
-      <p><a href="home.php">Continue as a Guest</a></p>
-      <br>
-      <p>Don't have an account? <a href="register.php">Register now</a></p>
+      <input type="password" name="cpassword" placeholder="Confirm your password" required class="box">
+      <!-- <select name="user_type" class="box">
+         <option value="user">User</option>
+         <option value="admin">Admin</option>
+      </select> -->
+      <input type="submit" name="submit" value="register now" class="btn">
+      <p>Already have an account? <a href="admin_login.php">Login now</a></p>
    </form>
 
-</div>
-
-<div class="box">
-   <a href="admin_login.php">Login as an Admin</a>
 </div>
 
 </body>
