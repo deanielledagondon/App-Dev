@@ -59,7 +59,7 @@ if(isset($_POST['add_to_cart'])){
 
 <section class="home">
    <div class="content">
-      <h3>A selection of clothes with just a click.</h3>
+      <h3>Our mission is to build your dream</h3>
       <p>Step into our virtual store and discover a world of possibilities, where quality meets affordability.</p>
       <a href="about.php" class="white-btn">Discover more</a>
    </div>
@@ -111,7 +111,7 @@ if(isset($_POST['add_to_cart'])){
 
       <div class="content">
          <h3>About Us</h3>
-         <p>At Veridis, we're passionate about providing you with the latest fashion trends that are both stylish and comfortable. Our team of fashion experts works tirelessly to curate a collection of clothing that is not only affordable but also high-quality. We pride ourselves on providing exceptional customer service, and we are always here to help you find the perfect outfit for any occasion.</p>
+         <p>MakoTek provides reliable and efficient technology products and services to help customers achieve their goals. Their extensive range of products, from desktops and laptops to gaming peripherals and accessories, caters to all needs. The company's motto "Name it and we make IT happen at MakoTek!" reflects their dedication to fulfilling customer needs. MakoTek constantly improves its products and services to ensure the best possible experience for their customers.</p>
          <a href="about.php" class="btn">Read more</a>
       </div>
 

@@ -27,7 +27,11 @@ if(isset($message)){
 
    <div class="header-2">
       <div class="flex">
-         <a href="home.php" class="logo">Makotek</a>
+         <div class="centered-box">
+            <div class="box">
+                <a href="home.php"><img src="images/logo.png" alt="Admin Login"></a>
+       </div>
+   </div>
 
          <nav class="navbar">
             <a href="home.php">Home</a>
