@@ -3,7 +3,6 @@
 include 'config.php';
 
 if(isset($_POST['submit'])){
-
    $name = mysqli_real_escape_string($conn, $_POST['name']);
    $email = mysqli_real_escape_string($conn, $_POST['email']);
    $pass = mysqli_real_escape_string($conn, md5($_POST['password']));
@@ -12,14 +11,40 @@ if(isset($_POST['submit'])){
    $select_users = mysqli_query($conn, "SELECT * FROM `users` WHERE email = '$email' AND password = '$pass'") or die('query failed');
 
    if(mysqli_num_rows($select_users) > 0){
-      $message[] = 'User already exist!';
+      $message[] = 'User already exists!';
    }else{
       if($pass != $cpass){
          $message[] = 'Confirm password not matched!';
       }else{
-         mysqli_query($conn, "INSERT INTO `users`(name, email, password) VALUES('$name', '$email', '$cpass')") or die('query failed');
-         $message[] = 'Registered successfully!';
-         header('location:login.php');
+         // File upload 
+         $file_name = $_FILES['pp']['name'];
+         $file_tmp = $_FILES['pp']['tmp_name'];
+         $file_size = $_FILES['pp']['size'];
+         $file_type = $_FILES['pp']['type'];
+         $file_ext = strtolower(pathinfo($file_name, PATHINFO_EXTENSION));
+
+         $extensions = array("jpeg", "jpg", "png");
+
+         if(in_array($file_ext, $extensions) === false){
+            $message[] = "Extension not allowed, please choose a JPEG or PNG file.";
+         } elseif($file_size > 26214400) {
+            $message[] = 'File size must be less than 25 MB';
+         } else {
+            $target_directory = "uploads/";
+            $target_file = $target_directory . $file_name;
+
+
+            if (move_uploaded_file($file_tmp, $target_file)) {
+               $file_path = 'uploads/' . $file_name;
+               mysqli_query($conn, "INSERT INTO `users` (name, email, password, pp) VALUES ('$name', '$email', '$cpass', '$file_path')") or die('query failed');
+               $message[] = 'Registered successfully!';
+               header('location: login.php');
+            } else {
+               $message[] = 'Error uploading the file. Please try again.';
+         }
+
+
+         }
       }
    }
 }
@@ -43,8 +68,6 @@ if(isset($_POST['submit'])){
 </head>
 <body>
 
-
-
 <?php
 if(isset($message)){
    foreach($message as $message){
@@ -57,20 +80,18 @@ if(isset($message)){
    }
 }
 ?>
-   
+
 <div class="form-container">
 
-   <form action="" method="post">
+   <form action="" method="post" enctype="multipart/form-data">
       <h3>Register now</h3>
       <input type="text" name="name" placeholder="Enter your name" required class="box">
       <input type="email" name="email" placeholder="Enter your email" required class="box">
       <input type="password" name="password" placeholder="Enter your password" required class="box">
       <input type="password" name="cpassword" placeholder="Confirm your password" required class="box">
-      <!-- <select name="user_type" class="box">
-         <option value="user">User</option>
-         <option value="admin">Admin</option>
-      </select> -->
-      <input type="submit" name="submit" value="register now" class="btn">
+      <input type="file" name="pp" placeholder="Profile Picture" required class="box">
+       
+      <input type="submit" name="submit" value="Register now" class="btn">
       <p>Already have an account? <a href="login.php">Login now</a></p>
    </form>
 
