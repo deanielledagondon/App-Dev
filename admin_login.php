@@ -19,6 +19,7 @@ if(isset($_POST['submit'])){
         $_SESSION['admin_name'] = $row['name'];
         $_SESSION['admin_email'] = $row['email'];
         $_SESSION['admin_id'] = $row['id'];
+        $_SESSION['user_image'] = $row['admin_pp'];
         header('location:admin_page.php');
 
       }else {
