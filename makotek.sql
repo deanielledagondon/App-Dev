@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 08, 2023 at 12:02 PM
+-- Generation Time: May 17, 2023 at 07:00 PM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.2.0
 
@@ -32,15 +32,16 @@ CREATE TABLE `admins` (
   `name` varchar(100) NOT NULL,
   `email` varchar(100) NOT NULL,
   `password` varchar(100) NOT NULL,
-  `user_type` varchar(20) NOT NULL DEFAULT 'admin'
+  `user_type` varchar(20) NOT NULL DEFAULT 'admin',
+  `admin_pp` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `admins`
 --
 
-INSERT INTO `admins` (`id`, `name`, `email`, `password`, `user_type`) VALUES
-(1, 'Dean Dagondon', 'deandagondon@gmail.com', '32222eee4b29d86ee97304bc958ff7b9', 'admin');
+INSERT INTO `admins` (`id`, `name`, `email`, `password`, `user_type`, `admin_pp`) VALUES
+(5, 'Angel Deanielle Dagondon', 'dean@gmail.com', '25d55ad283aa400af464c76d713c07ad', 'admin', 'uploads/PM02_20230302212124.png');
 
 -- --------------------------------------------------------
 
@@ -116,16 +117,17 @@ CREATE TABLE `users` (
   `name` varchar(100) NOT NULL,
   `email` varchar(100) NOT NULL,
   `password` varchar(100) NOT NULL,
-  `user_type` varchar(20) NOT NULL DEFAULT 'user'
+  `user_type` varchar(20) NOT NULL DEFAULT 'user',
+  `pp` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`id`, `name`, `email`, `password`, `user_type`) VALUES
-(1, 'Dolan Chase', 'dolanchase@gmail.com', '676dd21527f72e094ea8708a494d1c13', 'user'),
-(5, 'Nelle Travis', 'nelletravis@gmail.com', '1f9dd34aa27bbd3285d267224d90ce91', 'user');
+INSERT INTO `users` (`id`, `name`, `email`, `password`, `user_type`, `pp`) VALUES
+(8, 'Angel Deanielle Dagondon', 'dean@gmail.com', '25d55ad283aa400af464c76d713c07ad', 'user', 'uploads/defaultpp.png'),
+(10, 'Mark Bontia', 'mark@gmail.com', '25d55ad283aa400af464c76d713c07ad', 'user', 'uploads/Untitled.png');
 
 --
 -- Indexes for dumped tables
@@ -175,7 +177,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `admins`
 --
 ALTER TABLE `admins`
-  MODIFY `id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `cart`
@@ -205,7 +207,7 @@ ALTER TABLE `products`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
