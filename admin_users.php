@@ -64,6 +64,7 @@ if(isset($_GET['delete'])){
          <p>Username: <span><?php echo $fetch_users['name']; ?></span> </p>
          <p>Email: <span><?php echo $fetch_users['email']; ?></span> </p>
          <p>User Type: <span style="color:<?php if($fetch_users['user_type'] == 'user'){ echo 'var(--orange)'; } ?>"><?php echo $fetch_users['user_type']; ?></span> </p>
+         <a href="edit_user-profile.php?id=<?php echo $fetch_users['id']; ?>" onclick="return confirm('Update information?');" class="btn btn-primary">Update user</a>
          <a href="admin_users.php?delete=<?php echo $fetch_users['id']; ?>" onclick="return confirm('Delete this user?');" class="delete-btn">Delete user</a>
       </div>
       <?php
@@ -86,6 +87,7 @@ if(isset($_GET['delete'])){
          <p>Username: <span><?php echo $fetch_admins['name']; ?></span> </p>
          <p>Email: <span><?php echo $fetch_admins['email']; ?></span> </p>
          <p>User Type: <span style="color:<?php if($fetch_admins['user_type'] == 'user'){ echo 'var(--blue)'; } ?>"><?php echo $fetch_admins['user_type']; ?></span> </p>
+         <a href="edit_admin-profile.php?id=<?php echo $fetch_users['id']; ?>" onclick="return confirm('Update information?');" class="btn btn-primary">Update user</a>
          <a href="admin_users.php?delete=<?php echo $fetch_admins['id']; ?>" onclick="return confirm('Delete this user?');" class="delete-btn">Delete user</a>
       </div>
       <?php

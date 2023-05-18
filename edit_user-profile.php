@@ -1,19 +1,29 @@
-<?php require_once("config.php");
-if(!isset($_SESSION["login_sess"])) 
-{
-    header("location:login.php"); 
+<?php
+
+include 'config.php';
+session_start();
+
+
+$admin_id = $_SESSION['user_id'];
+
+if(!isset($admin_id)){
+   header('location:login.php');
 }
-  $email=$_SESSION["login_email"];
-  $findresult = mysqli_query($dbc, "SELECT * FROM users WHERE email= '$email'");
+
+  $email=$_SESSION["email"];
+
+  $findresult = mysqli_query($conn, "SELECT * FROM users WHERE email= '$email'");
 if($res = mysqli_fetch_array($findresult))
 {
-$username = $res['username']; 
-$oldusername =$res['username']; 
-$fname = $res['fname'];   
-$lname = $res['lname'];  
+$name = $res['name']; 
+$oldname =$res['name']; 
+// $fname = $res['fname'];   
+// $lname = $res['lname'];  
 $email = $res['email'];  
 $image= $res['image'];
 }
+
+
  ?> 
  <!DOCTYPE html>
 <html>
@@ -35,16 +45,19 @@ $image= $res['image'];
 
  <img src="https://technosmarter.com/assets/images/logo.png" alt="Techno Smarter" class="logo img-fluid"> <br> <?php 
  if(isset($_POST['update_profile'])){
-$fname=$_POST['fname'];
- $lname=$_POST['lname'];  
- $username=$_POST['username']; 
- $folder='images/';
- $file = $_FILES['image']['tmp_name'];  
-$file_name = $_FILES['image']['name']; 
-$file_name_array = explode(".", $file_name); 
- $extension = end($file_name_array);
- $new_image_name ='profile_'.rand() . '.' . $extension;
-  if ($_FILES["image"]["size"] >1000000) {
+    // $fname=$_POST['fname'];
+    // $lname=$_POST['lname'];  
+    $name=$_POST['name']; 
+    $folder='uploads/';
+    $file_name = $_FILES['pp']['name'];
+    $file_tmp = $_FILES['pp']['tmp_name'];
+    $file_size = $_FILES['pp']['size'];
+    $file_type = $_FILES['pp']['type'];
+    $file_name_array = explode(".", $file_name); 
+    $extension = end($file_name_array);
+    $new_image_name ='profile_'.rand() . '.' . $extension;
+
+  if ($_FILES["pp"]["size"] >1000000) {
    $error[] = 'Sorry, your image is too large. Upload less than 1 MB in size .';
  
 }
@@ -57,32 +70,32 @@ if($extension!= "jpg" && $extension!= "png" && $extension!= "jpeg"
 }
 }
 
-$sql="SELECT * from users where username='$username'";
-      $res=mysqli_query($dbc,$sql);
+$sql="SELECT * from users where name='$name'";
+      $res=mysqli_query($conn,$sql);
    if (mysqli_num_rows($res) > 0) {
 $row = mysqli_fetch_assoc($res);
 
-   if($oldusername!=$username){
-     if($username==$row['username'])
+   if($oldname!=$name){
+     if($name==$row['name'])
      {
-           $error[] ='Username alredy Exists. Create Unique username';
+           $error[] ='Name already exists. Create a unique username.';
           } 
    }
 }
     if(!isset($error)){ 
           if($file!= "")
           {
-            $stmt = mysqli_query($dbc,"SELECT image FROM  users WHERE email='$email'");
+            $stmt = mysqli_query($conn,"SELECT image FROM  users WHERE email='$email'");
             $row = mysqli_fetch_array($stmt); 
-            $deleteimage=$row['image'];
-unlink($folder.$deleteimage);
-move_uploaded_file($file, $folder . $new_image_name); 
-mysqli_query($dbc,"UPDATE users SET image='$new_image_name' WHERE email='$email'");
+            $deleteimage=$row['pp'];
+            unlink($folder.$deleteimage);
+            move_uploaded_file($file, $folder . $new_image_name); 
+            mysqli_query($conn,"UPDATE users SET image='$new_image_name' WHERE email='$email'");
           }
-           $result = mysqli_query($dbc,"UPDATE users SET fname='$fname',lname='$lname',username='$username' WHERE email='$email'");
+           $result = mysqli_query($conn,"UPDATE users SET name='name' WHERE email='$email'");
            if($result)
            {
-       header("location:account.php?profile_updated=1");
+       header("location:user_profile.php?profile_updated=1");
            }
            else 
            {
