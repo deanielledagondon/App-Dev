@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 17, 2023 at 07:00 PM
+-- Generation Time: May 20, 2023 at 04:45 PM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.2.0
 
@@ -29,7 +29,15 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `admins` (
   `id` int(100) NOT NULL,
-  `name` varchar(100) NOT NULL,
+  `username` varchar(100) NOT NULL,
+  `oldname` varchar(100) NOT NULL,
+  `firstName` varchar(100) NOT NULL,
+  `lastName` varchar(100) NOT NULL,
+  `middleInitial` varchar(100) NOT NULL,
+  `age` int(100) NOT NULL,
+  `address` varchar(100) NOT NULL,
+  `position` varchar(100) NOT NULL,
+  `monthlySalary` varchar(100) NOT NULL,
   `email` varchar(100) NOT NULL,
   `password` varchar(100) NOT NULL,
   `user_type` varchar(20) NOT NULL DEFAULT 'admin',
@@ -40,8 +48,9 @@ CREATE TABLE `admins` (
 -- Dumping data for table `admins`
 --
 
-INSERT INTO `admins` (`id`, `name`, `email`, `password`, `user_type`, `admin_pp`) VALUES
-(5, 'Angel Deanielle Dagondon', 'dean@gmail.com', '25d55ad283aa400af464c76d713c07ad', 'admin', 'uploads/PM02_20230302212124.png');
+INSERT INTO `admins` (`id`, `username`, `oldname`, `firstName`, `lastName`, `middleInitial`, `age`, `address`, `position`, `monthlySalary`, `email`, `password`, `user_type`, `admin_pp`) VALUES
+(5, '', '', 'Angel Deanielle Dagondon', '', '', 0, '', '', '', 'dean@gmail.com', '25d55ad283aa400af464c76d713c07ad', 'admin', 'uploads/PM02_20230302212124.png'),
+(6, 'username', '', 'KD ', '', '', 0, '', '', '', 'kd@gmail.com', '87221652a79fc3c9b04cde0b335fdd5b', 'admin', 'uploads/anime-girl-fantasy-samurai-katana-pistol-4k-wallpaper-uhdpaper.com-408@0@h.jpg');
 
 -- --------------------------------------------------------
 
@@ -114,9 +123,15 @@ CREATE TABLE `products` (
 
 CREATE TABLE `users` (
   `id` int(100) NOT NULL,
-  `name` varchar(100) NOT NULL,
+  `firstName` varchar(100) NOT NULL,
+  `lastName` varchar(100) NOT NULL,
+  `middleInitial` varchar(100) NOT NULL,
+  `username` varchar(100) NOT NULL,
+  `oldname` varchar(100) NOT NULL,
   `email` varchar(100) NOT NULL,
   `password` varchar(100) NOT NULL,
+  `age` int(100) NOT NULL,
+  `address` varchar(100) NOT NULL,
   `user_type` varchar(20) NOT NULL DEFAULT 'user',
   `pp` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -125,9 +140,10 @@ CREATE TABLE `users` (
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`id`, `name`, `email`, `password`, `user_type`, `pp`) VALUES
-(8, 'Angel Deanielle Dagondon', 'dean@gmail.com', '25d55ad283aa400af464c76d713c07ad', 'user', 'uploads/defaultpp.png'),
-(10, 'Mark Bontia', 'mark@gmail.com', '25d55ad283aa400af464c76d713c07ad', 'user', 'uploads/Untitled.png');
+INSERT INTO `users` (`id`, `firstName`, `lastName`, `middleInitial`, `username`, `oldname`, `email`, `password`, `age`, `address`, `user_type`, `pp`) VALUES
+(8, 'Angel Deanielle Dagondon', '', '', '0', '0', 'dean@gmail.com', '25d55ad283aa400af464c76d713c07ad', 0, '', 'user', 'uploads/defaultpp.png'),
+(10, 'Mark Bontia', '', '', '0', '0', 'mark@gmail.com', '25d55ad283aa400af464c76d713c07ad', 0, '', 'user', 'uploads/Untitled.png'),
+(11, 'KD ', '', '', '0', '0', 'kd@gmail.com', '87221652a79fc3c9b04cde0b335fdd5b', 0, '', 'user', 'uploads/anime-girl-fantasy-samurai-katana-pistol-4k-wallpaper-uhdpaper.com-408@0@h.jpg');
 
 --
 -- Indexes for dumped tables
@@ -177,7 +193,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `admins`
 --
 ALTER TABLE `admins`
-  MODIFY `id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `cart`
@@ -207,7 +223,7 @@ ALTER TABLE `products`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

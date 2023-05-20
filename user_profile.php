@@ -7,15 +7,20 @@ if(!isset($_SESSION["user_id"]))
 {
     header("location:login.php"); 
 }
-  $email=$_SESSION["email"];
+
+  $email=$_SESSION["user_email"];
   $findresult = mysqli_query($conn, "SELECT * FROM users WHERE email= '$email'");
+
 if($res = mysqli_fetch_array($findresult))
 {
-$name = $res['name']; 
-$fname = $res['fname'];   
-$lname = $res['lname'];  
-$email = $res['email'];  
-$image= $res['image'];
+  $firstName = $res['firstName']; 
+  $lastName = $res['lastName'];
+  $middleInitial = $res['middleInitial'];
+  $username = $res['username']; 
+  $email = $res['email'];  
+  $age = $res['age'];
+  $address = $res['address'];
+  $pp= $res['pp'];
 }
  ?> 
  <!DOCTYPE html>
@@ -34,7 +39,6 @@ $image= $res['image'];
         </div>
         <div class="col-sm-6">
   <div class="login_form">
- <img src="https://technosmarter.com/assets/images/logo.png" alt="Techno Smarter" class="logo img-fluid"> <br> 
      
           <div class="row">
             <div class="col"></div>
@@ -48,14 +52,54 @@ $image= $res['image'];
     <div class="successmsg">Password has been changed...</div>
       <?php } ?>
             <center>
-            <?php if($image==NULL)
+            <?php if($pp==NULL)
                 {
                  echo '<img src="https://technosmarter.com/assets/icon/user.png">';
-                } else { echo '<img src="images/'.$image.'" style="height:80px;width:auto;border-radius:50%;">';}?> 
+                } else { echo '<img src="uploads\nime-girl-fantasy-samurai-katana-pistol-4k-wallpaper-uhdpaper.com-408@0@h.jpg'.$pp.'" style="height:80px;width:auto;border-radius:50%;">';}?> 
 
-  <p> Welcome! <span style="color:#33CC00"><?php echo $name; ?></span> </p>
+  <p> Welcome! <span style="color:#33CC00"><?php echo $username; ?></span> </p>
   </center>
            </div>
-            <div class="col"><p><a href="logout.php"><span style="color:red;">Logout</span> </a></p>
-         </div>
-          </div>
+       </div>
+
+
+          <form>
+                        <div class="form-group">
+                            <label for="firstName">First Name:</label>
+                            <input type="text" class="form-control" id="firstName" value="<?php echo $firstName; ?>" readonly>
+                        </div>
+                        <div class="form-group">
+                            <label for="lastName">Last Name:</label>
+                            <input type="text" class="form-control" id="lastName" value="<?php echo $lastName; ?>" readonly>
+                        </div>
+                        <div class="form-group">
+                            <label for="middleInitial">Middle Initial:</label>
+                            <input type="text" class="form-control" id="middleInitial" value="<?php echo $middleInitial; ?>" readonly>
+                        </div>
+                        <div class="form-group">
+                            <label for="age">Username:</label>
+                            <input type="text" class="form-control" id="username" value="<?php echo $username; ?>" readonly>
+                        </div>
+                        <div class="form-group">
+                            <label for="age">Enail:</label>
+                            <input type="text" class="form-control" id="email" value="<?php echo $email; ?>" readonly>
+                        </div>
+                        <div class="form-group">
+                            <label for="age">Age:</label>
+                            <input type="text" class="form-control" id="age" value="<?php echo $age; ?>" readonly>
+                        </div>
+                        <div class="form-group">
+                            <label for="address">Address:</label>
+                            <input type="text" class="form-control" id="address" value="<?php echo $address; ?>" readonly>
+                            <div class="form-group">
+                            <a href="edit_user-profile.php" class="btn btn-primary">Edit Profile</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
+

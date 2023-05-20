@@ -4,23 +4,34 @@ include 'config.php';
 session_start();
 
 
-$admin_id = $_SESSION['user_id'];
+$user_id = $_SESSION['user_id'];
 
-if(!isset($admin_id)){
+if(!isset($user_id)){
    header('location:login.php');
 }
 
-  $email=$_SESSION["email"];
+if (isset($_SESSION['user_email'])) {
+  $email = $_SESSION['user_email'];
 
-  $findresult = mysqli_query($conn, "SELECT * FROM users WHERE email= '$email'");
-if($res = mysqli_fetch_array($findresult))
-{
-$name = $res['name']; 
-$oldname =$res['name']; 
-// $fname = $res['fname'];   
-// $lname = $res['lname'];  
-$email = $res['email'];  
-$image= $res['image'];
+  $findresult = mysqli_query($conn, "SELECT * FROM admins WHERE email= '$email'");
+
+  if ($res = mysqli_fetch_array($findresult)) {
+
+  $username = $res['username'];
+  $firstName = $res['firstName'];
+  $lastName = $res['lastName'];
+  $middleInitial = $res['middleInitial'];
+  $age = $res['age'];
+  $address = $res['address'];
+  $oldname = $res['oldname'];
+  $pp = $res['pp'];
+  if (empty($pp)) {
+    $pp = null;
+}
+}
+  } else {
+    header('location:admin_login.php');
+      exit();
 }
 
 
@@ -43,11 +54,16 @@ $image= $res['image'];
      <form action="" method="POST" enctype='multipart/form-data'>
   <div class="login_form">
 
- <img src="https://technosmarter.com/assets/images/logo.png" alt="Techno Smarter" class="logo img-fluid"> <br> <?php 
+<?php 
  if(isset($_POST['update_profile'])){
-    // $fname=$_POST['fname'];
-    // $lname=$_POST['lname'];  
-    $name=$_POST['name']; 
+ 
+  $username=$_POST['username'];
+  $firstName=$_POST['firstName'];
+  $lastName=$_POST['lastName'];  
+  $middleInitial=$_POST['middleInitial']; 
+  $age=$_POST['age']; 
+  $address=$_POST['address']; 
+
     $folder='uploads/';
     $file_name = $_FILES['pp']['name'];
     $file_tmp = $_FILES['pp']['tmp_name'];
@@ -55,7 +71,10 @@ $image= $res['image'];
     $file_type = $_FILES['pp']['type'];
     $file_name_array = explode(".", $file_name); 
     $extension = end($file_name_array);
-    $new_image_name ='profile_'.rand() . '.' . $extension;
+    $pp ='profile_'.rand() . '.' . $extension;
+
+    $file = isset($_FILES['pp']) ? $_FILES['pp']['tmp_name'] : '';
+
 
   if ($_FILES["pp"]["size"] >1000000) {
    $error[] = 'Sorry, your image is too large. Upload less than 1 MB in size .';
@@ -70,13 +89,13 @@ if($extension!= "jpg" && $extension!= "png" && $extension!= "jpeg"
 }
 }
 
-$sql="SELECT * from users where name='$name'";
+$sql="SELECT * from users where name='$username'";
       $res=mysqli_query($conn,$sql);
    if (mysqli_num_rows($res) > 0) {
 $row = mysqli_fetch_assoc($res);
 
-   if($oldname!=$name){
-     if($name==$row['name'])
+   if($oldname!=$username){
+     if($username==$row['username'])
      {
            $error[] ='Name already exists. Create a unique username.';
           } 
@@ -85,27 +104,23 @@ $row = mysqli_fetch_assoc($res);
     if(!isset($error)){ 
           if($file!= "")
           {
-            $stmt = mysqli_query($conn,"SELECT image FROM  users WHERE email='$email'");
+            $stmt = mysqli_query($conn,"SELECT pp FROM  users WHERE email='$email'");
             $row = mysqli_fetch_array($stmt); 
             $deleteimage=$row['pp'];
             unlink($folder.$deleteimage);
-            move_uploaded_file($file, $folder . $new_image_name); 
-            mysqli_query($conn,"UPDATE users SET image='$new_image_name' WHERE email='$email'");
+            move_uploaded_file($file, $folder . $pp); 
+            mysqli_query($conn,"UPDATE users SET pp='$pp' WHERE email='$email'");
           }
-           $result = mysqli_query($conn,"UPDATE users SET name='name' WHERE email='$email'");
-           if($result)
-           {
-       header("location:user_profile.php?profile_updated=1");
-           }
-           else 
-           {
-            $error[]='Something went wrong';
-           }
+           $result = mysqli_query($conn,"UPDATE users SET username='username' WHERE email='$email'");
+           if ($result) {
+            header("location:edit_admin-profile.php?message=success");
+            exit();
+          } else {
+            $error[] = 'Something went wrong';
+          }
+        }
+      }
 
-    }
-
-
-        }    
         if(isset($error)){ 
 
 foreach($error as $error){ 
@@ -120,13 +135,13 @@ foreach($error as $error){
             <div class="col"></div>
            <div class="col-6"> 
             <center>
-            <?php if($image==NULL)
+            <?php if($pp==NULL)
                 {
                  echo '<img src="https://technosmarter.com/assets/icon/user.png">';
-                } else { echo '<img src="images/'.$image.'" style="height:80px;width:auto;border-radius:50%;">';}?> 
+                } else { echo '<img src="uploads/'.$pp.'" style="height:80px;width:auto;border-radius:50%;">';}?> 
                 <div class="form-group">
                 <label>Change Image &#8595;</label>
-                <input class="form-control" type="file" name="image" style="width:100%;" >
+                <input class="form-control" type="file" name="pp" style="width:100%;" >
             </div>
 
   </center>
@@ -141,7 +156,7 @@ foreach($error as $error){
                 <label>First Name</label>
             </div>
              <div class="col">
-                <input type="text" name="fname" value="<?php echo $fname;?>" class="form-control">
+                <input type="text" name="firstName" value="<?php echo $firstName;?>" class="form-control">
             </div>
           </div>
       </div>
@@ -151,7 +166,7 @@ foreach($error as $error){
                 <label>Last Name</label>
             </div>
              <div class="col">
-                <input type="text" name="lname" value="<?php echo $lname;?>" class="form-control">
+                <input type="text" name="lastName" value="<?php echo $lastName;?>" class="form-control">
             </div>
           </div>
       </div>

@@ -2,10 +2,17 @@
 include 'config.php';
 
 if (isset($_POST['submit'])) {
-   $name = mysqli_real_escape_string($conn, $_POST['name']);
+   $firstName = mysqli_real_escape_string($conn, $_POST['firstName']);
+   $lastName = mysqli_real_escape_string($conn, $_POST['lastName']);
+   $middleInitial = mysqli_real_escape_string($conn, $_POST['middleInitial']);
+   $username = mysqli_real_escape_string($conn, $_POST['username']);
    $email = mysqli_real_escape_string($conn, $_POST['email']);
    $pass = mysqli_real_escape_string($conn, md5($_POST['password']));
    $cpass = mysqli_real_escape_string($conn, md5($_POST['cpassword']));
+   $age = mysqli_real_escape_string($conn, $_POST['age']);
+   $address = mysqli_real_escape_string($conn, $_POST['address']);
+   $position = mysqli_real_escape_string($conn, $_POST['position']);
+   $monthlySalary = mysqli_real_escape_string($conn, $_POST['monthlySalary']);
 
    $select_users = mysqli_query($conn, "SELECT * FROM `admins` WHERE email = '$email' AND password = '$pass'") or die('query failed');
 
@@ -34,9 +41,9 @@ if (isset($_POST['submit'])) {
 
             if (move_uploaded_file($file_tmp, $target_file)) {
                $file_path = 'uploads/' . $file_name;
-               mysqli_query($conn, "INSERT INTO `admins` (name, email, password, admin_pp) VALUES ('$name', '$email', '$cpass', '$file_path')") or die('query failed');
+               mysqli_query($conn, "INSERT INTO `admins` (username, email, password, admin_pp) VALUES ('$username', '$email', '$cpass', '$file_path')") or die('query failed');
                $message[] = 'Registered successfully!';
-               header('location: login.php');
+               header('location: admin_login.php');
             } else {
                $message[] = 'Error uploading the file. Please try again.';
             }
@@ -59,7 +66,7 @@ if (isset($_POST['submit'])) {
    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 
    <!-- custom css file link  -->
-   <link rel="stylesheet" href="css/style.css">
+   <link rel="stylesheet" href="css/admin-style.css">
 
 </head>
 
@@ -77,13 +84,34 @@ if (isset($_POST['submit'])) {
    }
    ?>
 
-   <div class="form-container">
+<div class="form-container">
       <form action="" method="post" enctype="multipart/form-data">
          <h3>Register now</h3>
-         <input type="text" name="name" placeholder="Enter your name" required class="box">
-         <input type="email" name="email" placeholder="Enter your email" required class="box">
-         <input type="password" name="password" placeholder="Enter your password" required class="box">
-         <input type="password" name="cpassword" placeholder="Confirm your password" required class="box">
+
+         <div class="row-container">
+            <input type="text" name="firstName" placeholder="First name" required class="box">
+            <input type="text" name="lastName" placeholder="Last name" required class="box">
+            <input type="text" name="middleInitial" placeholder="M.I" required class="box">
+         </div>
+
+         <div class="row-container">
+         <input type="username" name="username" placeholder="Username" required class="box">
+         <input type="email" name="email" placeholder="Email" required class="box">
+         </div>
+
+         <div class="row-container">
+            <input type="password" name="password" placeholder="password" required class="box">
+            <input type="password" name="cpassword" placeholder="Confirm your password" required class="box">
+         </div>
+
+         <input type="number" name="age" placeholder="Age" required class="box">
+         <input type="text" name="address" placeholder="Address" required class="box">
+
+         <div class="row-container">
+         <input type="text" name="position" placeholder="Position" required class="box">
+         <input type="number" name="monthlySalary" placeholder="Monthly salary" required class="box">
+         </div>
+
          <input type="file" name="admin_pp" placeholder="Profile Picture" required class="box">
          <input type="submit" name="submit" value="register now" class="btn">
          <p>Already have an account? <a href="admin_login.php">Login now</a></p>
