@@ -130,13 +130,16 @@ foreach($error as $error){
 
 
         ?> 
+        
      <form method="post" enctype='multipart/form-data' action="">
           <div class="row">
+            
             <div class="col"></div>
            <div class="col-6"> 
             <center>
             <?php if($pp==NULL)
                 {
+                  
                  echo '<img src="https://technosmarter.com/assets/icon/user.png">';
                 } else { echo '<img src="uploads/'.$pp.'" style="height:80px;width:auto;border-radius:50%;">';}?> 
                 <div class="form-group">
@@ -145,6 +148,7 @@ foreach($error as $error){
             </div>
 
   </center>
+  
            </div>
             <div class="col"><p><a href="logout.php"><span style="color:red;">Logout</span> </a></p>
          </div>

@@ -69,6 +69,7 @@ if(isset($_GET['delete'])){
 </section>
 
 <section class="users">
+<h1 class="title">Admin Accounts</h1>
 
    <div class="box-container">
       <?php
@@ -76,12 +77,12 @@ if(isset($_GET['delete'])){
          while($fetch_admins = mysqli_fetch_assoc($select_admins)){
       ?>
       <div class="box">
-         <span><img src="<?php echo $fetch_admins['admin_pp']; ?>" class="profile-img"></span>
+      <span><img src="<?php echo $fetch_admins['admin_pp']; ?>" class="profile-img"></span>
          <p>User ID: <span><?php echo $fetch_admins['id']; ?></span> </p>
-         <p>Username: <span><?php echo $fetch_admins['username']; ?></span> </p>
          <p>Email: <span><?php echo $fetch_admins['email']; ?></span> </p>
-         <p>User Type: <span style="color:<?php if($fetch_admins['user_type'] == 'user'){ echo 'var(--blue)'; } ?>"><?php echo $fetch_admins['user_type']; ?></span> </p>
+         <p>User Type: <span style="color:<?php if($fetch_admins['user_type'] == 'admin'){ echo 'var(--blue)'; } ?>"><?php echo $fetch_admins['user_type']; ?></span> </p>
          <p>Position: <span><?php echo $fetch_admins['position']; ?></span> </p>
+         <p>Monthly Salary: <span><?php echo $fetch_admins['monthlySalary']; ?></span> </p>
 
          <a href="edit_admin-profile.php?id=<?php echo $fetch_admins['id']; ?>" onclick="return confirm('Update information?');" class="btn btn-primary">Update user</a>
          <a href="admin_users.php?delete=<?php echo $fetch_admins['id']; ?>" onclick="return confirm('Delete this user?');" class="delete-btn">Delete user</a>

@@ -17,7 +17,7 @@ if($res = mysqli_fetch_array($findresult)) {
     $address = $res['address'];
     $position = $res['position'];
     $monthlySalary = $res['monthlySalary'];
-    $image = $res['image'];
+    $image = $res['admin_pp'];
 }
 ?> 
 
