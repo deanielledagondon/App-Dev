@@ -25,14 +25,6 @@ if(isset($_GET['delete'])){
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<style>
-      .profile-img {
-      width: 100px; 
-      height: 100px; 
-      border-radius: 50%;
-      box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); 
-    }
-   </style>
    <meta charset="UTF-8">
    <meta http-equiv="X-UA-Compatible" content="IE=edge">
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -61,9 +53,12 @@ if(isset($_GET['delete'])){
       <div class="box">
          <span><img src="<?php echo $fetch_users['pp']; ?>" class="profile-img"></span>
          <p>User ID: <span><?php echo $fetch_users['id']; ?></span> </p>
-         <p>Username: <span><?php echo $fetch_users['name']; ?></span> </p>
          <p>Email: <span><?php echo $fetch_users['email']; ?></span> </p>
          <p>User Type: <span style="color:<?php if($fetch_users['user_type'] == 'user'){ echo 'var(--orange)'; } ?>"><?php echo $fetch_users['user_type']; ?></span> </p>
+
+         
+         
+         <a href="edit_user-profile.php?id=<?php echo $fetch_users['id']; ?>" onclick="return confirm('Update information?');" class="btn btn-primary">Update user</a>
          <a href="admin_users.php?delete=<?php echo $fetch_users['id']; ?>" onclick="return confirm('Delete this user?');" class="delete-btn">Delete user</a>
       </div>
       <?php
@@ -83,9 +78,12 @@ if(isset($_GET['delete'])){
       <div class="box">
          <span><img src="<?php echo $fetch_admins['admin_pp']; ?>" class="profile-img"></span>
          <p>User ID: <span><?php echo $fetch_admins['id']; ?></span> </p>
-         <p>Username: <span><?php echo $fetch_admins['name']; ?></span> </p>
+         <p>Username: <span><?php echo $fetch_admins['username']; ?></span> </p>
          <p>Email: <span><?php echo $fetch_admins['email']; ?></span> </p>
          <p>User Type: <span style="color:<?php if($fetch_admins['user_type'] == 'user'){ echo 'var(--blue)'; } ?>"><?php echo $fetch_admins['user_type']; ?></span> </p>
+         <p>Position: <span><?php echo $fetch_admins['position']; ?></span> </p>
+
+         <a href="edit_admin-profile.php?id=<?php echo $fetch_admins['id']; ?>" onclick="return confirm('Update information?');" class="btn btn-primary">Update user</a>
          <a href="admin_users.php?delete=<?php echo $fetch_admins['id']; ?>" onclick="return confirm('Delete this user?');" class="delete-btn">Delete user</a>
       </div>
       <?php
@@ -94,6 +92,7 @@ if(isset($_GET['delete'])){
    </div>
 
 </section>
+
 
 <!-- custom admin js file link  -->
 <script src="js/admin_script.js"></script>
