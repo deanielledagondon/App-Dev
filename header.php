@@ -29,7 +29,7 @@ if(isset($message)){
       <div class="flex">
          <div class="centered-box">
             <div class="box">
-                <a href="home.php"><img src="images/logo.png" alt="Admin Login"></a>
+                <a href="home.php"><img src="images/logo.PNG" alt="Admin Login"></a>
        </div>
    </div>
 
