@@ -1,54 +1,59 @@
 <?php
-
 include 'config.php';
 
-if(isset($_POST['submit'])){
-   $name = mysqli_real_escape_string($conn, $_POST['name']);
-   $email = mysqli_real_escape_string($conn, $_POST['email']);
-   $pass = mysqli_real_escape_string($conn, md5($_POST['password']));
-   $cpass = mysqli_real_escape_string($conn, md5($_POST['cpassword']));
+$message = array(); // Initialize the message array
 
-   $select_users = mysqli_query($conn, "SELECT * FROM `users` WHERE email = '$email' AND password = '$pass'") or die('query failed');
+if(isset($_POST['submit'])){
+   $firstName = mysqli_real_escape_string($conn, $_POST['firstName']);
+   $lastName = mysqli_real_escape_string($conn, $_POST['lastName']);
+   $middleInitial = mysqli_real_escape_string($conn, $_POST['middleInitial']);
+   $username = mysqli_real_escape_string($conn, $_POST['username']);
+   $email = mysqli_real_escape_string($conn, $_POST['email']);
+   $password = mysqli_real_escape_string($conn, md5($_POST['password']));
+   $cpassword = mysqli_real_escape_string($conn, md5($_POST['cpassword']));
+   $age = mysqli_real_escape_string($conn, $_POST['age']);
+   $address = mysqli_real_escape_string($conn, $_POST['address']);
+   $pp = $_FILES['pp'] ?? null;
+   $select_users = mysqli_query($conn, "SELECT * FROM `users` WHERE email = '$email' AND password = '$password'") or die('query failed');
 
    if(mysqli_num_rows($select_users) > 0){
       $message[] = 'User already exists!';
    }else{
-      if($pass != $cpass){
+      if($password != $cpassword){
          $message[] = 'Confirm password not matched!';
       }else{
-         // File upload 
-         $file_name = $_FILES['pp']['name'];
-         $file_tmp = $_FILES['pp']['tmp_name'];
-         $file_size = $_FILES['pp']['size'];
-         $file_type = $_FILES['pp']['type'];
-         $file_ext = strtolower(pathinfo($file_name, PATHINFO_EXTENSION));
+         // File upload
+         if ($pp !== null && $pp['error'] === UPLOAD_ERR_OK && $pp['size'] > 0) {
+            $file_name = $pp['name'];
+            $file_tmp = $pp['tmp_name'];
+            $file_size = $pp['size'];
+            $file_type = $pp['type'];
+            $file_ext = strtolower(pathinfo($file_name, PATHINFO_EXTENSION));
 
-         $extensions = array("jpeg", "jpg", "png");
+            $extensions = array("jpeg", "jpg", "png");
 
-         if(in_array($file_ext, $extensions) === false){
-            $message[] = "Extension not allowed, please choose a JPEG or PNG file.";
-         } elseif($file_size > 26214400) {
-            $message[] = 'File size must be less than 25 MB';
-         } else {
-            $target_directory = "uploads/";
-            $target_file = $target_directory . $file_name;
-
-
-            if (move_uploaded_file($file_tmp, $target_file)) {
-               $file_path = 'uploads/' . $file_name;
-               mysqli_query($conn, "INSERT INTO `users` (name, email, password, pp) VALUES ('$name', '$email', '$cpass', '$file_path')") or die('query failed');
-               $message[] = 'Registered successfully!';
-               header('location: login.php');
+            if(in_array($file_ext, $extensions) === false){
+               $message[] = "Extension not allowed, please choose a JPEG or PNG file.";
+            } elseif($file_size > 26214400) {
+               $message[] = 'File size must be less than 25 MB';
             } else {
-               $message[] = 'Error uploading the file. Please try again.';
-         }
+               $target_directory = "uploads/";
+               $target_file = $target_directory . $file_name;
 
-
-         }
+               if (move_uploaded_file($file_tmp, $target_file)) {
+                  $file_path = 'uploads/' . $file_name;
+                  mysqli_query($conn, "INSERT INTO `users` (firstName, lastName, middleInitial, username, email, password, age, address,  pp) VALUES ('$firstName', '$lastName', '$middleInitial',  '$username', '$email', '$password', '$age', '$address', '$file_path')") or die('query failed');
+                  $message[] = 'Registered successfully!';
+                  header('location: login.php');
+                  exit();
+               } else {
+                  $message[] = 'Error uploading the file. Please try again.';
+               }
+            }
+         } 
       }
    }
 }
-
 ?>
 
 <!DOCTYPE html>
@@ -57,45 +62,50 @@ if(isset($_POST['submit'])){
    <meta charset="UTF-8">
    <meta http-equiv="X-UA-Compatible" content="IE=edge">
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-   <title>Register</title>
+   <title>Login</title>
 
    <!-- font awesome cdn link  -->
    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 
    <!-- custom css file link  -->
-   <link rel="stylesheet" href="css/style.css">
-
+   <link rel="stylesheet" href="css/admin_style.css">
 </head>
 <body>
-
-<?php
-if(isset($message)){
-   foreach($message as $message){
-      echo '
-      <div class="message">
-         <span>'.$message.'</span>
-         <i class="fas fa-times" onclick="this.parentElement.remove();"></i>
-      </div>
-      ';
+   <?php
+   if (isset($message)) {
+      foreach ($message as $msg) {
+         echo '
+         <div class="message">
+            <span>' . $msg . '</span>
+            <i class="fas fa-times" onclick="this.parentElement.remove();"></i>
+         </div>
+         ';
+      }
    }
-}
-?>
+   ?>
 
-<div class="form-container">
-
-   <form action="" method="post" enctype="multipart/form-data">
-      <h3>Register now</h3>
-      <input type="text" name="name" placeholder="Enter your name" required class="box">
-      <input type="email" name="email" placeholder="Enter your email" required class="box">
-      <input type="password" name="password" placeholder="Enter your password" required class="box">
-      <input type="password" name="cpassword" placeholder="Confirm your password" required class="box">
-      <input type="file" name="pp" placeholder="Profile Picture" required class="box">
-       
-      <input type="submit" name="submit" value="Register now" class="btn">
-      <p>Already have an account? <a href="login.php">Login now</a></p>
-   </form>
-
-</div>
-
+   <div class="form-container">
+      <form action="" method="post" enctype="multipart/form-data">
+         <h3>Register now</h3>
+         <div class="row-container">
+            <input type="text" name="firstName" placeholder="First name" required class="box">
+            <input type="text" name="lastName" placeholder="Last name" required class="box">
+         </div>
+         <div class="row-container">
+            <input type="text" name="middleInitial" placeholder="M.I" required class="box">
+            <input type="text" name="username" placeholder="Username" required class="box">
+            <input type="email" name="email" placeholder="Email" required class="box">
+         </div>
+         <div class="row-container">
+            <input type="password" name="password" placeholder="Password" required class="box">
+            <input type="password" name="cpassword" placeholder="Confirm your password" required class="box">
+         </div>
+         <input type="number" name="age" placeholder="Age" required class="box">
+         <input type="text" name="address" placeholder="Address" required class="box">
+         <input type="file" name="pp" required class="box">
+         <input type="submit" name="submit" value="register now" class="btn">
+         <p>Already have an account? <a href="login.php">Login now</a></p>
+      </form>
+   </div>
 </body>
 </html>

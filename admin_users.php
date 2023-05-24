@@ -14,7 +14,7 @@ if(isset($_GET['delete'])){
    mysqli_query($conn, "DELETE FROM `users` WHERE id = '$delete_id'") or die('query failed');
    header('location:admin_users.php');
 }
-if(isset($_GET['delete'])){
+else if(isset($_GET['delete'])){
    $delete_id = $_GET['delete'];
    mysqli_query($conn, "DELETE FROM `admins` WHERE id = '$delete_id'") or die('query failed');
    header('location:admin_users.php');
@@ -53,6 +53,7 @@ if(isset($_GET['delete'])){
       <div class="box">
          <span><img src="<?php echo $fetch_users['pp']; ?>" class="profile-img"></span>
          <p>User ID: <span><?php echo $fetch_users['id']; ?></span> </p>
+         <p>Username: <span><?php echo $fetch_users['username']; ?></span> </p>
          <p>Email: <span><?php echo $fetch_users['email']; ?></span> </p>
          <p>User Type: <span style="color:<?php if($fetch_users['user_type'] == 'user'){ echo 'var(--orange)'; } ?>"><?php echo $fetch_users['user_type']; ?></span> </p>
 
@@ -79,6 +80,7 @@ if(isset($_GET['delete'])){
       <div class="box">
       <span><img src="<?php echo $fetch_admins['admin_pp']; ?>" class="profile-img"></span>
          <p>User ID: <span><?php echo $fetch_admins['id']; ?></span> </p>
+         <p>Username: <span><?php echo $fetch_admins['username']; ?></span> </p>
          <p>Email: <span><?php echo $fetch_admins['email']; ?></span> </p>
          <p>User Type: <span style="color:<?php if($fetch_admins['user_type'] == 'admin'){ echo 'var(--blue)'; } ?>"><?php echo $fetch_admins['user_type']; ?></span> </p>
          <p>Position: <span><?php echo $fetch_admins['position']; ?></span> </p>
