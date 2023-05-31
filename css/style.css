@@ -412,10 +412,12 @@ section{
    padding:2rem;
    text-align: center;
    position: relative;
+   width: 30rem; 
 }
 
 .products .box-container .box .image{
    height: 30rem;
+
 }
 
 .products .box-container .box .name{

@@ -48,8 +48,11 @@ if (!isset($_SESSION['user_id'])) {
 
       <div class="content">
          <h3>Why choose us?</h3>
-         <p>MakoTek is an IT shop that aims to provide high-quality computers and gaming peripherals at reasonable prices. Our goal is to cater to everyone's needs, from casual users to businesses requiring enterprise-level solutions. We take pride in our ability to build customized PC setups that are tailored to your budget and preferences.
-         <p>Our shop is located on the Ground Floor of LK Building, which is situated on 5 Rizal St in Gaston Park, Cagayan de Oro City. We have a team of knowledgeable and skilled technicians who are dedicated to providing the best solutions and services to our customers.</p>
+         <p>Welcome to MakoTek, the leading IT shop that caters to all your computing and gaming needs. We take pride in offering a diverse range of high-quality computers and gaming peripherals, ensuring that you stay ahead in the digital world. At MakoTek, we are dedicated to providing you with the best deals and affordable prices, making top-notch technology accessible to all.
+         <p>Conveniently located at Ground Floor, LK Building, 5 Rizal St, Gaston Park, Cagayan de Oro City, MakoTek invites you to step into our world of technology. Explore our showroom, experience the latest innovations, and immerse yourself in the possibilities of the digital realm. Our friendly staff will be delighted to assist you in finding the perfect solution that matches your needs and budget.
+         <p>"Name it and we make IT happen at MakoTek!"
+         <p>At MakoTek, we're not just a technology provider; we're your partner in unlocking the full potential of modern computing. Whether you're a professional, a gamer, or an enthusiast, we are committed to delivering unparalleled products and services that elevate your experience. Join us at MakoTek and let us empower you with the best in technology, affordability, and exceptional customer service.
+      </p>
          <a href="contact.php" class="btn">Contact us</a>
       </div>
 
@@ -98,6 +101,44 @@ if (!isset($_SESSION['user_id'])) {
          </div>
          <h3>Christian</h3>
       </div>
+
+      <div class="box">
+         <p>10/10 Super grateful to Makoyek Team for this affordable and superb PC Build</p>
+         <div class="stars">
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+         </div>
+         <h3>Nicole Bardilas</h3>
+         </div>
+
+         <div class="box">
+         <p>I just found their page at the same day I bought the set. Super sulit, computer performance wise,  bundle set wise, price is just right and has freebies. It's all in already.</p>
+         <div class="stars">
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+         </div>
+         <h3>Soon Yi</h3>
+         </div>
+
+         <div class="box">
+         <p>Very responsive to queries. Even accomodated my request to buy on a Sunday</p>
+         <div class="stars">
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+         </div>
+         <h3>Alex</h3>
+         </div>
+
+
 
    </div>
 
