@@ -13,16 +13,24 @@ if(isset($_POST['submit'])){
    $cpassword = mysqli_real_escape_string($conn, md5($_POST['cpassword']));
    $age = mysqli_real_escape_string($conn, $_POST['age']);
    $phoneNum = mysqli_real_escape_string($conn, $_POST['phoneNum']);
-
    $address = mysqli_real_escape_string($conn, $_POST['address']);
    $pp = $_FILES['pp'] ?? null;
+
+   $terms = isset($_POST['terms']) ? true : false; // Check if the "terms" checkbox is checked
+
+
    $select_users = mysqli_query($conn, "SELECT * FROM `users` WHERE email = '$email' AND password = '$password'") or die('query failed');
 
    if(mysqli_num_rows($select_users) > 0){
       $message[] = 'User already exists!';
+      
    }else{
       if($password != $cpassword){
          $message[] = 'Confirm password not matched!';
+      }else{
+         if(!$terms){ // Check if the user agreed to the terms and conditions
+            $message[] = 'Please agree to the Terms and Conditions!';    
+
       }else{
          // File upload
          if ($pp !== null && $pp['error'] === UPLOAD_ERR_OK && $pp['size'] > 0) {
@@ -50,9 +58,10 @@ if(isset($_POST['submit'])){
                   exit();
                } else {
                   $message[] = 'Error uploading the file. Please try again.';
-               }
-            }
-         } 
+                 }
+             }
+            } 
+        }
       }
    }
 }
@@ -109,6 +118,13 @@ if(isset($_POST['submit'])){
          </div>
          <input type="text" id="address" name="address" placeholder="Address" required class="box">
          <input type="file" id="pp" name="pp" required class="box">
+
+         <div class="terms-container">
+             <input type="checkbox" id="terms" name="terms" required>
+             <label for="terms">I agree to the <a href="terms.php" target="_blank">Terms and Conditions</a></label>
+         </div>
+
+
          <input type="submit" id="register" name="submit" value="register now" class="btn">
          <p>Already have an account? <a href="login.php">Login now</a></p>
       </form>

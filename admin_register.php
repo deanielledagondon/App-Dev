@@ -16,6 +16,10 @@ if(isset($_POST['submit'])){
    $password = mysqli_real_escape_string($conn, md5($_POST['password']));
    $cpassword = mysqli_real_escape_string($conn, md5($_POST['cpassword']));
    $admin_pp = $_FILES['admin_pp'] ?? null;
+
+   $terms = isset($_POST['terms']) ? true : false; // Check if the "terms" checkbox is checked
+
+
    $select_users = mysqli_query($conn, "SELECT * FROM `admins` WHERE email = '$email' AND password = '$password'") or die('query failed');
 
    if(mysqli_num_rows($select_users) > 0){
@@ -23,6 +27,9 @@ if(isset($_POST['submit'])){
    }else{
       if($password != $cpassword){
          $message[] = 'Confirm password not matched!';
+      }else{
+         if(!$terms){ // Check if the user agreed to the terms and conditions
+            $message[] = 'Please agree to the Terms and Conditions!'; 
       }else{
          // File upload
          if ($admin_pp !== null && $admin_pp['error'] === UPLOAD_ERR_OK && $admin_pp['size'] > 0) {
@@ -50,10 +57,11 @@ if(isset($_POST['submit'])){
                   exit();
                } else {
                   $message[] = 'Error uploading the file. Please try again.';
-               }
-            }
-         } 
-      }
+                }
+             }
+           } 
+        }
+     }
    }
 }
 ?>
@@ -111,7 +119,14 @@ if(isset($_POST['submit'])){
             <input type="text" name="position" placeholder="Position" required class="box">
             <input type="number" name="monthlySalary" placeholder="Monthly salary" required class="box">
          </div>
+         
          <input type="file" name="admin_pp" required class="box">
+
+         <div class="terms-container">
+             <input type="checkbox" id="terms" name="terms" required>
+             <label for="terms">I agree to the <a href="terms.php" target="_blank">Terms and Conditions</a></label>
+         </div>
+
          <input type="submit" name="submit" value="register now" class="btn">
          <p>Already have an account? <a href="admin_login.php">Login now</a></p>
       </form>
