@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 09, 2023 at 07:49 AM
+-- Generation Time: Jun 09, 2023 at 08:28 AM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.2.0
 
@@ -135,19 +135,19 @@ CREATE TABLE `users` (
   `phoneNum` varchar(50) NOT NULL,
   `address` varchar(100) NOT NULL,
   `user_type` varchar(20) NOT NULL DEFAULT 'user',
-  `pp` varchar(255) NOT NULL,
-  `terms` tinyint(1) NOT NULL DEFAULT 0
+  `pp` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`id`, `firstName`, `lastName`, `middleInitial`, `username`, `oldname`, `email`, `password`, `age`, `phoneNum`, `address`, `user_type`, `pp`, `terms`) VALUES
-(8, 'Angel Deanielle Dagondon', '', '', '0', '0', 'dean@gmail.com', '25d55ad283aa400af464c76d713c07ad', 0, '', '', 'user', 'uploads/defaultpp.png', 0),
-(10, 'Mark Bontia', '', '', '0', '0', 'mark@gmail.com', '25d55ad283aa400af464c76d713c07ad', 0, '', '', 'user', 'uploads/Untitled.png', 0),
-(11, 'KD ', '', '', '0', '0', 'kd@gmail.com', '87221652a79fc3c9b04cde0b335fdd5b', 0, '', '', 'user', 'uploads/anime-girl-fantasy-samurai-katana-pistol-4k-wallpaper-uhdpaper.com-408@0@h.jpg', 0),
-(12, 'A', 'B', 'C', 'ABC', '', 'abc@gmail.com', '900150983cd24fb0d6963f7d28e17f72', 23, '', 'abc', 'user', 'uploads/Screenshot (28).png', 0);
+INSERT INTO `users` (`id`, `firstName`, `lastName`, `middleInitial`, `username`, `oldname`, `email`, `password`, `age`, `phoneNum`, `address`, `user_type`, `pp`) VALUES
+(8, 'Angel Deanielle Dagondon', '', '', '0', '0', 'dean@gmail.com', '25d55ad283aa400af464c76d713c07ad', 0, '', '', 'user', 'uploads/defaultpp.png'),
+(10, 'Mark Bontia', '', '', '0', '0', 'mark@gmail.com', '25d55ad283aa400af464c76d713c07ad', 0, '', '', 'user', 'uploads/Untitled.png'),
+(11, 'KD ', '', '', '0', '0', 'kd@gmail.com', '87221652a79fc3c9b04cde0b335fdd5b', 0, '', '', 'user', 'uploads/anime-girl-fantasy-samurai-katana-pistol-4k-wallpaper-uhdpaper.com-408@0@h.jpg'),
+(12, 'A', 'B', 'C', 'ABC', '', 'abc@gmail.com', '900150983cd24fb0d6963f7d28e17f72', 23, '', 'abc', 'user', 'uploads/Screenshot (28).png'),
+(13, 'Devil', 'May', 'C', 'DevilMayCry', '', 'devil@gmail.com', 'e6c94a28c4e2f8890eedab2669785f73', 21, '', 'DevilMayCry', 'user', 'uploads/Screenshot (26).png');
 
 --
 -- Indexes for dumped tables
@@ -227,7 +227,7 @@ ALTER TABLE `products`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
