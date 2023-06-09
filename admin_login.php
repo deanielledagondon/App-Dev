@@ -7,6 +7,9 @@ if(isset($_POST['submit'])){
 
    $email = mysqli_real_escape_string($conn, $_POST['email']);
    $pass = mysqli_real_escape_string($conn, md5($_POST['password']));
+   
+   $remember = isset($_POST['remember']) ? true : false;
+
 
    $select_users = mysqli_query($conn, "SELECT * FROM `admins` WHERE email = '$email' AND password = '$pass'") or die('query failed');
 
@@ -20,9 +23,17 @@ if(isset($_POST['submit'])){
         $_SESSION['admin_email'] = $row['email'];
         $_SESSION['admin_id'] = $row['id'];
         $_SESSION['user_image'] = $row['admin_pp'];
-        header('location:admin_page.php');
 
-      }else {
+        if ($remember) {
+         $cookie_name = 'remember_admin';
+         $cookie_value = $row['id'];
+         setcookie($cookie_name, $cookie_value, time() + (86400 * 30), "/"); // Cookie will expire after 30 days
+      }
+
+      header('location:admin_page.php');
+
+   }
+      else {
         $message[] = 'You are not allowed to access this page.';
         header('location:login.php');
         exit();
@@ -72,6 +83,12 @@ if(isset($message)){
       <h3>login now</h3>
       <input type="email" name="email" placeholder="Enter your email" required class="box">
       <input type="password" name="password" placeholder="Enter your password" required class="box">
+
+      <div class="remember-container">
+      <input type="checkbox" name="remember" id="remember">
+      <label for="remember">Remember Me</label>
+      </div>
+
       <input type="submit" name="submit" value="login now" class="btn">
       <p>Don't have an account? <a href="admin_register.php">Register now</a></p>
    </form>

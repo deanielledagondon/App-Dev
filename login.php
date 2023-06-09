@@ -8,6 +8,8 @@ if(isset($_POST['submit'])){
    $email = mysqli_real_escape_string($conn, $_POST['email']);
    $pass = mysqli_real_escape_string($conn, md5($_POST['password']));
 
+   $remember = isset($_POST['remember']) ? true : false;
+
    $select_users = mysqli_query($conn, "SELECT * FROM `users` WHERE email = '$email' AND password = '$pass'") or die('query failed');
 
    if(mysqli_num_rows($select_users) > 0){
@@ -20,6 +22,12 @@ if(isset($_POST['submit'])){
          $_SESSION['user_email'] = $row['email'];
          $_SESSION['user_id'] = $row['id'];
          $_SESSION['user_image'] = $row['pp'];
+
+         if ($remember) {
+            $cookie_name = 'remember_user';
+            $cookie_value = $row['id'];
+            setcookie($cookie_name, $cookie_value, time() + (86400 * 30), "/"); // Cookie will expire after 30 days
+         }
 
          header('location:home.php');
 
@@ -83,6 +91,12 @@ if(isset($message)){
       <h3>login now</h3>
       <input type="email" name="email" placeholder="Enter your email" required class="box">
       <input type="password" name="password" placeholder="Enter your password" required class="box">
+      
+      <div class="remember-container">
+      <input type="checkbox" name="remember" id="remember">
+      <label for="remember">Remember Me</label>
+      </div>
+      
       <input type="submit" name="submit" value="login now" class="btn">
       <p><a href="home.php">Continue as a Guest</a></p>
       <br>

@@ -249,7 +249,21 @@ section{
    text-decoration: underline;
 }
 
-
+.remember-container {
+   display: flex;
+   align-items: center;
+   margin-bottom: 10px;
+ }
+ 
+ .remember-container input[type="checkbox"] {
+   margin-right: 5px;
+ }
+ 
+ .remember-container label {
+   font-size: 14px;
+   color: #555;
+ }
+ 
 .row-container {
    display: flex;
    gap: 10px;

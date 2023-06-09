@@ -95,7 +95,7 @@ if(isset($_POST['submit'])){
             <input type="text" id="lastName" name="lastName" placeholder="Last Name" required class="box">
             <input type="text" id="middleInitial" name="middleInitial" placeholder="M.I" required class="box">
          </div>
-                  <div class="row-container">
+         <div class="row-container">
             <input type="text" id="username" name="username" placeholder="Username" required class="box">
             <input type="email" id="email" name="email" placeholder="Email" required class="box">
          </div>
