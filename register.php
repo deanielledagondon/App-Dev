@@ -12,6 +12,8 @@ if(isset($_POST['submit'])){
    $password = mysqli_real_escape_string($conn, md5($_POST['password']));
    $cpassword = mysqli_real_escape_string($conn, md5($_POST['cpassword']));
    $age = mysqli_real_escape_string($conn, $_POST['age']);
+   $phoneNum = mysqli_real_escape_string($conn, $_POST['phoneNum']);
+
    $address = mysqli_real_escape_string($conn, $_POST['address']);
    $pp = $_FILES['pp'] ?? null;
    $select_users = mysqli_query($conn, "SELECT * FROM `users` WHERE email = '$email' AND password = '$password'") or die('query failed');
@@ -54,6 +56,7 @@ if(isset($_POST['submit'])){
       }
    }
 }
+
 ?>
 
 <!DOCTYPE html>
@@ -68,7 +71,7 @@ if(isset($_POST['submit'])){
    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 
    <!-- custom css file link  -->
-   <link rel="stylesheet" href="css/admin_style.css">
+   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
    <?php
@@ -88,22 +91,25 @@ if(isset($_POST['submit'])){
       <form action="" method="post" enctype="multipart/form-data">
          <h3>Register now</h3>
          <div class="row-container">
-            <input type="text" name="firstName" placeholder="First name" required class="box">
-            <input type="text" name="lastName" placeholder="Last name" required class="box">
+            <input type="text" id="firstName" name="firstName" placeholder="First Name" required class="box">
+            <input type="text" id="lastName" name="lastName" placeholder="Last Name" required class="box">
+            <input type="text" id="middleInitial" name="middleInitial" placeholder="M.I" required class="box">
+         </div>
+                  <div class="row-container">
+            <input type="text" id="username" name="username" placeholder="Username" required class="box">
+            <input type="email" id="email" name="email" placeholder="Email" required class="box">
          </div>
          <div class="row-container">
-            <input type="text" name="middleInitial" placeholder="M.I" required class="box">
-            <input type="text" name="username" placeholder="Username" required class="box">
-            <input type="email" name="email" placeholder="Email" required class="box">
+            <input type="password" id="password" name="password" placeholder="Password" required class="box">
+            <input type="password" id="cpassword" name="cpassword" placeholder="Confirm Password" required class="box">
          </div>
          <div class="row-container">
-            <input type="password" name="password" placeholder="Password" required class="box">
-            <input type="password" name="cpassword" placeholder="Confirm your password" required class="box">
+         <input type="number" id="age" name="age" placeholder="Age" required class="box">
+         <input type="tel" id="phoneNum" name="phoneNum" pattern="[+]{1}[0-9]{11,14}" placeholder="Phone No." required class="box">
          </div>
-         <input type="number" name="age" placeholder="Age" required class="box">
-         <input type="text" name="address" placeholder="Address" required class="box">
-         <input type="file" name="pp" required class="box">
-         <input type="submit" name="submit" value="register now" class="btn">
+         <input type="text" id="address" name="address" placeholder="Address" required class="box">
+         <input type="file" id="pp" name="pp" required class="box">
+         <input type="submit" id="register" name="submit" value="register now" class="btn">
          <p>Already have an account? <a href="login.php">Login now</a></p>
       </form>
    </div>

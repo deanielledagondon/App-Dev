@@ -90,19 +90,22 @@ if(isset($_POST['submit'])){
       <form action="" method="post" enctype="multipart/form-data">
          <h3>Register now</h3>
          <div class="row-container">
-            <input type="text" name="firstName" placeholder="First name" required class="box">
-            <input type="text" name="lastName" placeholder="Last name" required class="box">
+            <input type="text" name="firstName" placeholder="First Name" required class="box">
+            <input type="text" name="lastName" placeholder="Last Name" required class="box">
+            <input type="text" name="middleInitial" placeholder="M.I" required class="box">
          </div>
          <div class="row-container">
-            <input type="text" name="middleInitial" placeholder="M.I" required class="box">
             <input type="text" name="username" placeholder="Username" required class="box">
             <input type="email" name="email" placeholder="Email" required class="box">
          </div>
          <div class="row-container">
             <input type="password" name="password" placeholder="Password" required class="box">
-            <input type="password" name="cpassword" placeholder="Confirm your password" required class="box">
+            <input type="password" name="cpassword" placeholder="Confirm Password" required class="box">
          </div>
+         <div class="row-container">
          <input type="number" name="age" placeholder="Age" required class="box">
+         <input type="number" name="phoneNum" placeholder="Phone No." required class="box">
+         </div>
          <input type="text" name="address" placeholder="Address" required class="box">
          <div class="row-container">
             <input type="text" name="position" placeholder="Position" required class="box">

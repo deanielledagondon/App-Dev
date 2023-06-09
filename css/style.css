@@ -249,6 +249,16 @@ section{
    text-decoration: underline;
 }
 
+
+.row-container {
+   display: flex;
+   gap: 10px;
+}
+
+.row-container .box {
+   flex: 1;
+}
+
 .header .header-1{
    background-color: var(--light-bg);
 }

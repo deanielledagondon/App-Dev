@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 24, 2023 at 10:38 AM
+-- Generation Time: Jun 09, 2023 at 05:45 AM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.2.0
 
@@ -18,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `id20767589_makotek`
+-- Database: `makotek`
 --
 
 -- --------------------------------------------------------
@@ -29,14 +29,16 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `admins` (
   `id` int(100) NOT NULL,
+  `username` varchar(100) NOT NULL,
+  `oldname` varchar(100) NOT NULL,
   `firstName` varchar(100) NOT NULL,
   `lastName` varchar(100) NOT NULL,
   `middleInitial` varchar(100) NOT NULL,
   `age` int(100) NOT NULL,
   `address` varchar(100) NOT NULL,
+  `phoneNum` varchar(50) NOT NULL,
   `position` varchar(100) NOT NULL,
   `monthlySalary` varchar(100) NOT NULL,
-  `username` varchar(255) NOT NULL,
   `email` varchar(100) NOT NULL,
   `password` varchar(100) NOT NULL,
   `user_type` varchar(20) NOT NULL DEFAULT 'admin',
@@ -47,8 +49,9 @@ CREATE TABLE `admins` (
 -- Dumping data for table `admins`
 --
 
-INSERT INTO `admins` (`id`, `firstName`, `lastName`, `middleInitial`, `age`, `address`, `position`, `monthlySalary`, `username`, `email`, `password`, `user_type`, `admin_pp`) VALUES
-(4, 'Nico', 'Pacuit', 'B.', 22, 'Patag', 'Manager', '20000', 'nicopacs1', 'nicopee21@gmail.com', 'd0970714757783e6cf17b26fb8e2298f', 'admin', 'uploads/ScreenShot-2023-2-5_23-58-26.png');
+INSERT INTO `admins` (`id`, `username`, `oldname`, `firstName`, `lastName`, `middleInitial`, `age`, `address`, `phoneNum`, `position`, `monthlySalary`, `email`, `password`, `user_type`, `admin_pp`) VALUES
+(5, '', '', 'Angel Deanielle Dagondon', '', '', 0, '', '', '', '', 'dean@gmail.com', '25d55ad283aa400af464c76d713c07ad', 'admin', 'uploads/PM02_20230302212124.png'),
+(6, 'username', '', 'KD ', '', '', 0, '', '', '', '', 'kd@gmail.com', '87221652a79fc3c9b04cde0b335fdd5b', 'admin', 'uploads/anime-girl-fantasy-samurai-katana-pistol-4k-wallpaper-uhdpaper.com-408@0@h.jpg');
 
 -- --------------------------------------------------------
 
@@ -124,10 +127,12 @@ CREATE TABLE `users` (
   `firstName` varchar(100) NOT NULL,
   `lastName` varchar(100) NOT NULL,
   `middleInitial` varchar(100) NOT NULL,
-  `username` varchar(255) NOT NULL,
+  `username` varchar(100) NOT NULL,
+  `oldname` varchar(100) NOT NULL,
   `email` varchar(100) NOT NULL,
   `password` varchar(100) NOT NULL,
   `age` int(100) NOT NULL,
+  `phoneNum` varchar(50) NOT NULL,
   `address` varchar(100) NOT NULL,
   `user_type` varchar(20) NOT NULL DEFAULT 'user',
   `pp` varchar(255) NOT NULL
@@ -137,8 +142,10 @@ CREATE TABLE `users` (
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`id`, `firstName`, `lastName`, `middleInitial`, `username`, `email`, `password`, `age`, `address`, `user_type`, `pp`) VALUES
-(6, 'Angel', 'Dagondon', 'E.', 'angelelalat', 'dean@gmail.com', 'd0970714757783e6cf17b26fb8e2298f', 22, 'Kauswagan', 'user', 'uploads/46g601.jpg');
+INSERT INTO `users` (`id`, `firstName`, `lastName`, `middleInitial`, `username`, `oldname`, `email`, `password`, `age`, `phoneNum`, `address`, `user_type`, `pp`) VALUES
+(8, 'Angel Deanielle Dagondon', '', '', '0', '0', 'dean@gmail.com', '25d55ad283aa400af464c76d713c07ad', 0, '', '', 'user', 'uploads/defaultpp.png'),
+(10, 'Mark Bontia', '', '', '0', '0', 'mark@gmail.com', '25d55ad283aa400af464c76d713c07ad', 0, '', '', 'user', 'uploads/Untitled.png'),
+(11, 'KD ', '', '', '0', '0', 'kd@gmail.com', '87221652a79fc3c9b04cde0b335fdd5b', 0, '', '', 'user', 'uploads/anime-girl-fantasy-samurai-katana-pistol-4k-wallpaper-uhdpaper.com-408@0@h.jpg');
 
 --
 -- Indexes for dumped tables
@@ -188,7 +195,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `admins`
 --
 ALTER TABLE `admins`
-  MODIFY `id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `cart`
@@ -218,7 +225,7 @@ ALTER TABLE `products`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
