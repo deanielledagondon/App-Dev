@@ -9,6 +9,7 @@ if(isset($_POST['submit'])){
    $middleInitial = mysqli_real_escape_string($conn, $_POST['middleInitial']);
    $age = mysqli_real_escape_string($conn, $_POST['age']);
    $address = mysqli_real_escape_string($conn, $_POST['address']);
+   $phoneNum = mysqli_real_escape_string($conn, $_POST['phoneNum']);
    $position = mysqli_real_escape_string($conn, $_POST['position']);
    $monthlySalary = mysqli_real_escape_string($conn, $_POST['monthlySalary']);
    $username = mysqli_real_escape_string($conn, $_POST['username']);
@@ -51,7 +52,7 @@ if(isset($_POST['submit'])){
 
                if (move_uploaded_file($file_tmp, $target_file)) {
                   $file_path = 'uploads/' . $file_name;
-                  mysqli_query($conn, "INSERT INTO `admins` (firstName, lastName, middleInitial, age, address, position, monthlySalary, username,  email, password, admin_pp) VALUES ('$firstName', '$lastName', '$middleInitial', '$age', '$address', '$position', '$monthlySalary', '$username', '$email', '$password', '$file_path')") or die('query failed');
+                  mysqli_query($conn, "INSERT INTO `admins` (firstName, lastName, middleInitial, age, address, phoneNum, position, monthlySalary, username,  email, password, admin_pp) VALUES ('$firstName', '$lastName', '$middleInitial', '$age', '$address', '$phoneNum', '$position', '$monthlySalary', '$username', '$email', '$password', '$file_path')") or die('query failed');
                   $message[] = 'Registered successfully!';
                   header('location: login.php');
                   exit();

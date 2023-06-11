@@ -12,8 +12,8 @@ if(isset($_POST['submit'])){
    $password = mysqli_real_escape_string($conn, md5($_POST['password']));
    $cpassword = mysqli_real_escape_string($conn, md5($_POST['cpassword']));
    $age = mysqli_real_escape_string($conn, $_POST['age']);
-   $phoneNum = mysqli_real_escape_string($conn, $_POST['phoneNum']);
    $address = mysqli_real_escape_string($conn, $_POST['address']);
+   $phoneNum = mysqli_real_escape_string($conn, $_POST['phoneNum']);
    $pp = $_FILES['pp'] ?? null;
 
    $terms = isset($_POST['terms']) ? true : false; // Check if the "terms" checkbox is checked
@@ -52,7 +52,7 @@ if(isset($_POST['submit'])){
 
                if (move_uploaded_file($file_tmp, $target_file)) {
                   $file_path = 'uploads/' . $file_name;
-                  mysqli_query($conn, "INSERT INTO `users` (firstName, lastName, middleInitial, username, email, password, age, address,  pp) VALUES ('$firstName', '$lastName', '$middleInitial',  '$username', '$email', '$password', '$age', '$address', '$file_path')") or die('query failed');
+                  mysqli_query($conn, "INSERT INTO `users` (firstName, lastName, middleInitial, username, email, password, age, address, phoneNum, pp) VALUES ('$firstName', '$lastName', '$middleInitial',  '$username', '$email', '$password', '$age', '$address', '$phoneNum', '$file_path')") or die('query failed');
                   $message[] = 'Registered successfully!';
                   header('location: login.php');
                   exit();
@@ -114,7 +114,7 @@ if(isset($_POST['submit'])){
          </div>
          <div class="row-container">
          <input type="number" id="age" name="age" placeholder="Age" required class="box">
-         <input type="tel" id="phoneNum" name="phoneNum" pattern="[+]{1}[0-9]{11,14}" placeholder="Phone No." required class="box">
+         <input type="tel" id="phoneNum" name="phoneNum" placeholder="Phone No." required class="box">
          </div>
          <input type="text" id="address" name="address" placeholder="Address" required class="box">
          <input type="file" id="pp" name="pp" required class="box">

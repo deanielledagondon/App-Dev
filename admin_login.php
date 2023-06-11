@@ -12,6 +12,7 @@ if(isset($_POST['submit'])){
       $row = mysqli_fetch_assoc($select_users);
       if($row['user_type'] == 'admin'){
         $_SESSION['admin_name'] = $row['name'];
+        $_SESSION['admin_username'] = $row['username'];
         $_SESSION['admin_email'] = $row['email'];
         $_SESSION['admin_id'] = $row['id'];
         $_SESSION['user_image'] = $row['admin_pp'];

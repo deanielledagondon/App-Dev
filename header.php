@@ -1,16 +1,3 @@
-<?php
-if(isset($message)){
-   foreach($message as $message){
-      echo '
-      <div class="message">
-         <span>'.$message.'</span>
-         <i class="fas fa-times" onclick="this.parentElement.remove();"></i>
-      </div>
-      ';
-   }
-}
-?>
-
 <header class="header">
 
    <div class="header-1">
@@ -21,7 +8,7 @@ if(isset($message)){
             <a href="#" class="fab fa-instagram"></a>
             <a href="#" class="fab fa-linkedin"></a>
          </div>
-         <p> <a href="login.php">Login</a> | <a href="register.php">Register</a> </p>
+        
       </div>
    </div>
 
@@ -29,9 +16,9 @@ if(isset($message)){
       <div class="flex">
          <div class="centered-box">
             <div class="box">
-                <a href="home.php"><img src="images/logo.PNG" alt="Admin Login"></a>
-       </div>
-   </div>
+               <a href="home.php"><img src="images/logo.PNG" alt="Admin Login"></a>
+            </div>
+         </div>
 
          <nav class="navbar">
             <a href="home.php">Home</a>
@@ -53,12 +40,12 @@ if(isset($message)){
          </div>
 
          <div class="user-box">
-            <?php if(isset($_SESSION['user_name']) && isset($_SESSION['user_email'])): ?>
-               <p>Username: <span><?php echo $_SESSION['user_name']; ?></span></p>
+            <?php if (isset($_SESSION['user_username']) && isset($_SESSION['user_email'])) : ?>
+               <p>Username: <span><?php echo $_SESSION['user_username']; ?></span></p>
                <p>Email: <span><?php echo $_SESSION['user_email']; ?></span></p>
                <a href="user_profile.php" class="view-btn">View Profile</a>
                <a href="logout.php" class="delete-btn">Logout</a>
-            <?php else: ?>
+            <?php else :?>
                <p>You are a guest user. Please <a href="login.php">Login</a> or <a href="register.php">Register</a> to access your profile.</p>
             <?php endif; ?>
          </div>
