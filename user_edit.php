@@ -28,6 +28,9 @@ if ($res = mysqli_fetch_array($findresult)) {
     die("Error: User not found.");
 }
 
+$successMessage = '';
+$errorMessage = '';
+
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $updatedFirstName = $_POST['firstName'];
     $updatedLastName = $_POST['lastName'];
@@ -38,7 +41,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $updatedAddress = $_POST['address'];
     $updatedPhoneNum = $_POST['phoneNum'];
 
-    $updatesMade = false; // bolean ni nga part
+    $updatesMade = false;
     if (
         $updatedFirstName !== $firstName ||
         $updatedLastName !== $lastName ||
@@ -49,11 +52,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $updatedAddress !== $address ||
         $updatedPhoneNum !== $phoneNum
     ) {
-        $updatesMade = true; // if true matic siya sa condition where e update na niya ang mga new data sa forms
+        $updatesMade = true;
     }
 
     if ($updatesMade) {
-        mysqli_query($conn, "UPDATE users SET 
+        if (mysqli_query($conn, "UPDATE users SET 
             firstName='$updatedFirstName', 
             lastName='$updatedLastName', 
             middleInitial='$updatedMiddleInitial', 
@@ -62,75 +65,104 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             age='$updatedAge', 
             address='$updatedAddress', 
             phoneNum='$updatedPhoneNum' 
-            WHERE email='$email'");
+            WHERE email='$email'")) {
+            
+            $_SESSION["user_firstName"] = $updatedFirstName;
+            $_SESSION["user_lastName"] = $updatedLastName;
+            $_SESSION["user_middleInitial"] = $updatedMiddleInitial;
+            $_SESSION["user_username"] = $updatedUsername;
+            $_SESSION["user_email"] = $updatedEmail;
+            $_SESSION["user_age"] = $updatedAge;
+            $_SESSION["user_address"] = $updatedAddress;
+            $_SESSION["user_phoneNum"] = $updatedPhoneNum;
 
-        $_SESSION["user_firstName"] = $updatedFirstName;
-        $_SESSION["user_lastName"] = $updatedLastName;
-        $_SESSION["user_middleInitial"] = $updatedMiddleInitial;
-        $_SESSION["user_username"] = $updatedUsername;
-        $_SESSION["user_email"] = $updatedEmail;
-        $_SESSION["user_age"] = $updatedAge;
-        $_SESSION["user_address"] = $updatedAddress;
-        $_SESSION["user_phoneNum"] = $updatedPhoneNum;
+            $firstName = $updatedFirstName;
+            $lastName = $updatedLastName;
+            $middleInitial = $updatedMiddleInitial;
+            $username = $updatedUsername;
+            $email = $updatedEmail;
+            $age = $updatedAge;
+            $address = $updatedAddress;
+            $phoneNum = $updatedPhoneNum;
 
-        $firstName = $updatedFirstName;
-        $lastName = $updatedLastName;
-        $middleInitial = $updatedMiddleInitial;
-        $username = $updatedUsername;
-        $email = $updatedEmail;
-        $age = $updatedAge;
-        $address = $updatedAddress;
-        $phoneNum = $updatedPhoneNum;
+            $successMessage = "Profile updated successfully.";
+        } else {
+            $errorMessage = "Error: Failed to update profile.";
+        }
     }
-   // dire dayun sa image nga part 
-    if ($_FILES['profileImage']['name'] != '') {
-        $tmpFilePath = $_FILES['profileImage']['tmp_name'];
-        $uploadPath = 'uploads/' . $_FILES['profileImage']['name'];
+
+    if ($_FILES['admin_profileImage']['name'] != '') {
+        $tmpFilePath = $_FILES['admin_profileImage']['tmp_name'];
+        $uploadPath = 'uploads/' . $_FILES['admin_profileImage']['name'];
 
         if (move_uploaded_file($tmpFilePath, $uploadPath)) {
-            mysqli_query($conn, "UPDATE users SET pp='$uploadPath' WHERE email='$email'");
-            $pp = $uploadPath; 
+            if (mysqli_query($conn, "UPDATE users SET pp='$uploadPath' WHERE email='$email'")) {
+                $pp = $uploadPath;
+                $successMessage = "Profile image uploaded successfully.";
+            } else {
+                $errorMessage = "Error: Failed to upload the profile image.";
+            }
         } else {
-            die("Error: Failed to upload the profile image.");
+            $errorMessage = "Error: Failed to upload the profile image.";
         }
     }
 }
 ?>
 
+
 <!DOCTYPE html>
 <html>
 
 <head>
-    <title>My Account</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css">
-    <link rel="stylesheet" href="style.css">
+<meta charset="UTF-8">
+   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Edit User Profile</title>
+
+   <!-- font awesome cdn link  -->
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+   <!-- custom css file link  -->
+   <link rel="stylesheet" href="css/style.css">
 </head>
 
 <body>
     <div class="container">
         <div class="row">
-            <div class="col-sm-3">
+              <div class="col-sm-3">
             </div>
             <div class="col-sm-6">
                 <div class="login_form">
+                     <?php if ($successMessage): ?>
+                                <div class="alert alert-success"><?php echo $successMessage; ?></div>
+                            <?php endif; ?>
+
+                            <?php if ($errorMessage): ?>
+                                <div class="alert alert-danger"><?php echo $errorMessage; ?></div>
+                            <?php endif; ?>
+
                     <div class="row">
                         <div class="col"></div>
                         <div class="col-6">
                             <center>
-                                <p> Welcome! <span style="color:#33CC00"><?php echo $username; ?></span> </p>
                                 <span><img src="<?php echo $pp; ?>" class="profile-img"></span>
 
                                 <form method="post" enctype="multipart/form-data">
                                     <div class="form-group">
-                                        <label for="profileImage">Profile Image:</label>
-                                        <input type="file" class="form-control-file" id="profileImage" name="profileImage">
+                                      <div class="row"> 
+                                          <div class="col">
+                                        <label for="admin_profileImage">Profile Image:</label>
+                                        </div>
+                                           <input type="file" class="form-control" id="admin_profileImage" name="admin_profileImage">
+                                        </div>
                                     </div>
+                                </div>                                    
                                     <div class="form-group">
                                         <label for="firstName">First Name:</label>
                                         <input type="text" class="form-control" id="firstName" name="firstName" value="<?php echo $firstName; ?>">
                                     </div>
-                                    <div class="form-group">
+                                </div>
+                                <div class="form-group">
                                         <label for="lastName">Last Name:</label>
                                         <input type="text" class="form-control" id="lastName" name="lastName" value="<?php echo $lastName; ?>">
                                     </div>
@@ -159,10 +191,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                         <input type="text" class="form-control" id="phoneNum" name="phoneNum" minlength="1" maxlength="11" value="<?php echo $phoneNum; ?>">
                                     </div>
                                     <div class="form-group">
-                                        <input type="submit" class="btn btn-primary" value="Save Profile">
+                                        <input type="submit" class="update-btn" value="Save Profile">
                                     </div>
                                     <div class="form-group">
-                                        <a href="user_profile.php" class="btn btn-primary">Back</a>
+                                        <a href="home.php" class="btn">Back</a>
                                     </div>
                                 </form>
                             </center>
