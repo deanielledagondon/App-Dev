@@ -48,6 +48,81 @@
    margin-top: 50px;
    margin-bottom: 0;
  }
+
+ .container {
+   margin-top: 20px;
+ }
+ 
+ .login_form {
+   background-color: #f8f8f8;
+   padding: 20px;
+   border-radius: 5px;
+   max-width: 400px; /* Adjust the max-width as needed */
+   margin: 0 auto; /* Center the form horizontally */
+ }
+ 
+ .alert {
+   padding: 10px;
+   margin-bottom: 10px;
+ }
+ 
+ .alert-success {
+   background-color: #dff0d8;
+   color: #3c763d;
+ }
+ 
+ .alert-danger {
+   background-color: #f2dede;
+   color: #a94442;
+ }
+ 
+ 
+ .login_form img {
+   height: 80px;
+   width: auto;
+   border-radius: 50%;
+ }
+ 
+ .form-group {
+   margin-bottom: 20px;
+ }
+ 
+ .form-group label {
+   font-weight: bold;
+   font-size: 16px; /* Adjust the font size as needed */
+ }
+ 
+ .form-control {
+   width: 100%;
+   padding: 10px;
+   border-radius: 5px;
+   border: 1px solid #ccc;
+ }
+ 
+ .btn-success {
+   background-color: #28a745;
+   color: #fff;
+   border: none;
+   padding: 10px 20px;
+   border-radius: 5px;
+   cursor: pointer;
+ }
+ 
+ .btn-success:hover {
+   background-color: #218838;
+ }
+ 
+
+ 
+ .errmsg {
+   color: red;
+   margin-bottom: 10px;
+ }
+ 
+
+
+
+
  body {
    background-image: url("images\background_image.png");
    background-repeat: no-repeat;
@@ -338,6 +413,14 @@ section{
    display: inline-block;
 }
 
+
+.profile-img {
+   width: 100px; 
+   height: 100px; 
+   border-radius: 50%;
+   box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); 
+   margin-bottom: 20px;
+ }
 
 .header .header-1{
    background-color: var(--light-bg);

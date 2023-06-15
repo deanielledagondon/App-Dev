@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 09, 2023 at 08:28 AM
+-- Generation Time: Jun 13, 2023 at 05:15 AM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.2.0
 
@@ -30,7 +30,6 @@ SET time_zone = "+00:00";
 CREATE TABLE `admins` (
   `id` int(100) NOT NULL,
   `username` varchar(100) NOT NULL,
-  `oldname` varchar(100) NOT NULL,
   `firstName` varchar(100) NOT NULL,
   `lastName` varchar(100) NOT NULL,
   `middleInitial` varchar(100) NOT NULL,
@@ -49,9 +48,9 @@ CREATE TABLE `admins` (
 -- Dumping data for table `admins`
 --
 
-INSERT INTO `admins` (`id`, `username`, `oldname`, `firstName`, `lastName`, `middleInitial`, `age`, `address`, `phoneNum`, `position`, `monthlySalary`, `email`, `password`, `user_type`, `admin_pp`) VALUES
-(5, '', '', 'Angel Deanielle Dagondon', '', '', 0, '', '', '', '', 'dean@gmail.com', '25d55ad283aa400af464c76d713c07ad', 'admin', 'uploads/PM02_20230302212124.png'),
-(6, 'username', '', 'KD ', '', '', 0, '', '', '', '', 'kd@gmail.com', '87221652a79fc3c9b04cde0b335fdd5b', 'admin', 'uploads/anime-girl-fantasy-samurai-katana-pistol-4k-wallpaper-uhdpaper.com-408@0@h.jpg');
+INSERT INTO `admins` (`id`, `username`, `firstName`, `lastName`, `middleInitial`, `age`, `address`, `phoneNum`, `position`, `monthlySalary`, `email`, `password`, `user_type`, `admin_pp`) VALUES
+(5, '', 'Angel Deanielle Dagondon', '', '', 0, '', '', '', '', 'dean@gmail.com', '25d55ad283aa400af464c76d713c07ad', 'admin', 'uploads/PM02_20230302212124.png'),
+(6, 'username', 'KD ', '', '', 0, '', '', '', '', 'kd@gmail.com', '87221652a79fc3c9b04cde0b335fdd5b', 'admin', 'uploads/anime-girl-fantasy-samurai-katana-pistol-4k-wallpaper-uhdpaper.com-408@0@h.jpg');
 
 -- --------------------------------------------------------
 
@@ -128,7 +127,6 @@ CREATE TABLE `users` (
   `lastName` varchar(100) NOT NULL,
   `middleInitial` varchar(100) NOT NULL,
   `username` varchar(100) NOT NULL,
-  `oldname` varchar(100) NOT NULL,
   `email` varchar(100) NOT NULL,
   `password` varchar(100) NOT NULL,
   `age` int(100) NOT NULL,
@@ -142,12 +140,13 @@ CREATE TABLE `users` (
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`id`, `firstName`, `lastName`, `middleInitial`, `username`, `oldname`, `email`, `password`, `age`, `phoneNum`, `address`, `user_type`, `pp`) VALUES
-(8, 'Angel Deanielle Dagondon', '', '', '0', '0', 'dean@gmail.com', '25d55ad283aa400af464c76d713c07ad', 0, '', '', 'user', 'uploads/defaultpp.png'),
-(10, 'Mark Bontia', '', '', '0', '0', 'mark@gmail.com', '25d55ad283aa400af464c76d713c07ad', 0, '', '', 'user', 'uploads/Untitled.png'),
-(11, 'KD ', '', '', '0', '0', 'kd@gmail.com', '87221652a79fc3c9b04cde0b335fdd5b', 0, '', '', 'user', 'uploads/anime-girl-fantasy-samurai-katana-pistol-4k-wallpaper-uhdpaper.com-408@0@h.jpg'),
-(12, 'A', 'B', 'C', 'ABC', '', 'abc@gmail.com', '900150983cd24fb0d6963f7d28e17f72', 23, '', 'abc', 'user', 'uploads/Screenshot (28).png'),
-(13, 'Devil', 'May', 'C', 'DevilMayCry', '', 'devil@gmail.com', 'e6c94a28c4e2f8890eedab2669785f73', 21, '', 'DevilMayCry', 'user', 'uploads/Screenshot (26).png');
+INSERT INTO `users` (`id`, `firstName`, `lastName`, `middleInitial`, `username`, `email`, `password`, `age`, `phoneNum`, `address`, `user_type`, `pp`) VALUES
+(8, 'Angel Deanielle Dagondon', '', '', '0', 'dean@gmail.com', '25d55ad283aa400af464c76d713c07ad', 0, '', '', 'user', 'uploads/defaultpp.png'),
+(10, 'Mark Bontia', '', '', '0', 'mark@gmail.com', '25d55ad283aa400af464c76d713c07ad', 0, '', '', 'user', 'uploads/Untitled.png'),
+(11, 'KD aaaa', 'aaa', 'a', 'username', 'kd@gmail.com', '87221652a79fc3c9b04cde0b335fdd5b', 0, '', 'aaa', 'user', 'uploads/user.png'),
+(12, 'A', 'B', 'C', 'ABC', 'abc@gmail.com', '900150983cd24fb0d6963f7d28e17f72', 23, '', 'abc', 'user', 'uploads/Screenshot (28).png'),
+(13, 'Devil', 'May', 'C', 'DevilMayCry', 'devil@gmail.com', 'e6c94a28c4e2f8890eedab2669785f73', 21, '', 'DevilMayCry', 'user', 'uploads/Screenshot (26).png'),
+(14, 'Daot', 'Mani', 'O', 'daot', 'daot@gmail.com', '16205c4e1ade5a7a9e360312568aefec', 36, '', 'daot', 'user', 'uploads/Screenshot (25).png');
 
 --
 -- Indexes for dumped tables
@@ -227,7 +226,7 @@ ALTER TABLE `products`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
