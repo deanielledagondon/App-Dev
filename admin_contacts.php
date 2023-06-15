@@ -13,6 +13,9 @@ if(!isset($admin_id)){
 if(isset($_GET['delete'])){
    $delete_id = $_GET['delete'];
    mysqli_query($conn, "DELETE FROM `message` WHERE id = '$delete_id'") or die('query failed');
+   mysqli_query($conn, "SET @num := 0");
+   mysqli_query($conn, "UPDATE users SET id = @num := (@num+1)");
+   mysqli_query($conn, "ALTER TABLE users AUTO_INCREMENT = 1");
    header('location:admin_contacts.php');
 }
 
