@@ -42,7 +42,7 @@ if(isset($_POST['submit'])){
 <!DOCTYPE html>
 <html lang="en">
 <head>
-
+  
    <meta charset="UTF-8">
    <meta http-equiv="X-UA-Compatible" content="IE=edge">
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -53,9 +53,27 @@ if(isset($_POST['submit'])){
 
    <!-- custom css file link  -->
    <link rel="stylesheet" href="css/style.css">
-
+   
+   <style>
+   #bg_vid {
+      width: 100vw;
+      height: 100vh;
+      object-fit: cover;
+      position: fixed;
+      left: 0;
+      right: 0;
+      top: 0;
+      bottom: 0;
+      z-index: -1;
+ }
+      </style>
 </head>
 <body>
+<video autoplay muted loop id = "bg_vid">
+<source src  ="makotek_bg.mp4" type = "video/mp4">
+</video>
+
+
 
 <?php
 if(isset($message)){
