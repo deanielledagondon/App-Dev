@@ -16,6 +16,7 @@ if(isset($_POST['add_to_cart'])){
 
    $product_name = $_POST['product_name'];
    $product_price = $_POST['product_price'];
+   $description = mysqli_real_escape_string($conn, $_POST['description']);
    $product_image = $_POST['product_image'];
    $product_quantity = $_POST['product_quantity'];
 
@@ -56,6 +57,8 @@ if(isset($_POST['add_to_cart'])){
    <p> <a href="home.php">Home</a> / Shop </p>
 </div>
 
+
+<section class="show-products">
 <section class="products">
 
    <h1 class="title">Latest Products</h1>
@@ -68,12 +71,14 @@ if(isset($_POST['add_to_cart'])){
             while($fetch_products = mysqli_fetch_assoc($select_products)){
       ?>
      <form action="" method="post" class="box">
+     <a href="viewshop.php?id=<?php echo $fetch_products['id']; ?>">
       <img class="image" src="uploaded_img/<?php echo $fetch_products['image']; ?>" alt="" height="100" width="260">
       <div class="name"><?php echo $fetch_products['name']; ?></div>
       <div class="price">₱<?php echo $fetch_products['price']; ?></div>
       <input type="number" min="1" name="product_quantity" value="1" class="qty">
       <input type="hidden" name="product_name" value="<?php echo $fetch_products['name']; ?>">
       <input type="hidden" name="product_price" value="<?php echo $fetch_products['price']; ?>">
+      <input type="name" name="description" value="<?php echo $fetch_products['description']; ?>">
       <input type="hidden" name="product_image" value="<?php echo $fetch_products['image']; ?>">
       <input type="submit" value="add to cart" name="add_to_cart" class="btn">
      </form>
@@ -86,14 +91,7 @@ if(isset($_POST['add_to_cart'])){
    </div>
 
 </section>
-
-
-
-
-
-
-
-
+</section>
 <?php include 'footer.php'; ?>
 
 <!-- custom js file link  -->

@@ -68,7 +68,7 @@
  
  .alert-success {
    background-color: #dff0d8;
-   color: #3c763d;
+   color: #8e44ad;
  }
  
  .alert-danger {
@@ -100,7 +100,7 @@
  }
  
  .btn-success {
-   background-color: #28a745;
+   background-color: #8e44ad;
    color: #fff;
    border: none;
    padding: 10px 20px;
@@ -109,7 +109,7 @@
  }
  
  .btn-success:hover {
-   background-color: #218838;
+   background-color: #8e44ad;
  }
  
 
@@ -821,6 +821,13 @@ section{
    height: 20rem;
    resize: none;
 }
+.btn {
+   background-color: #8e44ad;
+   color: #fff;
+   border: none;
+   padding: 10px 20px;
+   cursor: pointer;
+}
 
 .shopping-cart .box-container{
    max-width: 1200px;
@@ -1114,7 +1121,14 @@ section{
    color:var(--purple);
 }
 
-
+.products .box-container .box .qty {
+   width: 100%;
+   padding: 1.2vw 1.4rem;
+   border-radius: .5pc;
+   border: var(--border);
+   margin: 1rem 0;
+   font-size: 2rem;
+}
 
 
 
