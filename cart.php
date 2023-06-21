@@ -6,9 +6,13 @@ session_start();
 
 $user_id = $_SESSION['user_id'];
 
-if(!isset($user_id)){
-   header('location:login.php');
+if (!isset($_SESSION['user_id'])) {
+   // If not, log them in using the guest user account
+   $guest_user_id = 0; // Set the guest user ID
+   $_SESSION['user_id'] = $guest_user_id; // Set the session user ID
 }
+
+
 
 if(isset($_POST['update_cart'])){
    $cart_id = $_POST['cart_id'];

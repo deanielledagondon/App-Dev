@@ -5,7 +5,7 @@ include 'config.php';
 session_start();
 
 
-
+$user_id = $_SESSION['user_id'];
 // Check if the user is attempting to access a protected page or feature
 if (!isset($_SESSION['user_id'])) {
    // If not, log them in using the guest user account
@@ -13,7 +13,7 @@ if (!isset($_SESSION['user_id'])) {
    $_SESSION['user_id'] = $guest_user_id; // Set the session user ID
 }
 
-$user_id = $_SESSION['user_id'];
+
 
 // Allow the user to access the page
 
@@ -81,7 +81,6 @@ if(isset($_POST['add_to_cart'])){
       <img class="image" src="uploaded_img/<?php echo $fetch_products['image']; ?>" alt="">
       <div class="name"><?php echo $fetch_products['name']; ?></div>
       <div class="price">₱<?php echo $fetch_products['price']; ?></div>
-      <input type="number" min="1" name="product_quantity" value="1" class="qty">
       <input type="hidden" name="product_name" value="<?php echo $fetch_products['name']; ?>">
       <input type="hidden" name="product_price" value="<?php echo $fetch_products['price']; ?>">
       <input type="hidden" name="product_image" value="<?php echo $fetch_products['image']; ?>">

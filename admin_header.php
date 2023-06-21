@@ -34,7 +34,6 @@ if(isset($message)){
          <p> Username: <span><?php echo $_SESSION['admin_username']; ?></span></p>
          <p> Email: <span><?php echo $_SESSION['admin_email']; ?></span></p>
          <a href="logout.php" class="delete-btn">logout</a>
-         <div><a href="admin_login.php">Login</a> | <a href="admin_register.php">Register</a></div>
       </div>
 
    </div>

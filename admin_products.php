@@ -53,8 +53,9 @@ if (isset($_POST['update_product'])) {
    $update_p_id = $_POST['update_p_id'];
    $update_name = $_POST['update_name'];
    $update_price = $_POST['update_price'];
+   $update_description = $_POST['update_description'];
 
-   mysqli_query($conn, "UPDATE `products` SET name = '$update_name', price = '$update_price' WHERE id = '$update_p_id'") or die('query failed');
+   mysqli_query($conn, "UPDATE `products` SET name = '$update_name', price = '$update_price', description = '$update_description' WHERE id = '$update_p_id'") or die('query failed');
 
    $update_image = $_FILES['update_image']['name'];
    $update_image_tmp_name = $_FILES['update_image']['tmp_name'];
@@ -120,9 +121,8 @@ if (isset($_POST['update_product'])) {
             while ($fetch_products = mysqli_fetch_assoc($select_products)) {
          ?>
                <div class="box">
-                  <a href="product_details.php?id=<?php echo $fetch_products['id']; ?>">
-                     <img src="uploaded_img/<?php echo $fetch_products['image']; ?>" alt="" height="100" width="260">
-                  </a>
+                  
+                  <img src="uploaded_img/<?php echo $fetch_products['image']; ?>" alt="" height="100" width="260">
                   <div class="name"><?php echo $fetch_products['name']; ?></div>
                   <div class="price">₱<?php echo $fetch_products['price']; ?>/-</div>
                   <div class="description"><?php echo $fetch_products['description']; ?></div>
@@ -154,6 +154,7 @@ if (isset($_GET['update'])) {
             <img src="uploaded_img/<?php echo $fetch_update['image']; ?>" alt="" height="100" width="260">
             <input type="text" name="update_name" value="<?php echo $fetch_update['name']; ?>" class="box" required placeholder="Enter product name">
             <input type="number" name="update_price" value="<?php echo $fetch_update['price']; ?>" min="0" class="box" required placeholder="Enter product price">
+            <input type="text" name="update_description" value="<?php echo $fetch_update['description']; ?>" class="box" required placeholder="Enter product description">
             <input type="file" class="box" name="update_image" accept="image/jpg, image/jpeg, image/png">
             <input type="submit" value="update" name="update_product" class="btn">
             <input type="reset" value="cancel" id="close-update" class="option-btn">
@@ -165,11 +166,7 @@ if (isset($_GET['update'])) {
    echo '<script>document.querySelector(".edit-product-form").style.display = "None";</script>';
 }
 ?>
-      else {
-         echo '<script>document.querySelector(".edit-product-form").style.display = "none";</script>';
-      }
-      ?>
-
+    
    </section>
 
 

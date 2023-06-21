@@ -24,6 +24,10 @@ if (isset($_GET['id'])) {
    header('Location: admin_products.php');
    exit();
 }
+if (isset($_POST['back'])) {
+   header('Location: shop.php');
+   exit();
+}
 ?>
 
 <!DOCTYPE html>
@@ -59,11 +63,11 @@ if (isset($_GET['id'])) {
                <div class="product-description"><?php echo $product_description; ?></div>
                <div class="product-actions">
                   <form action="" method="post" class="box">
-                     <input type="number" min="1" name="product_quantity" value="1" class="qty">
                      <input type="hidden" name="product_name" value="<?php echo $product_name; ?>">
                      <input type="hidden" name="product_price" value="<?php echo $product_price; ?>">
                      <input type="hidden" name="product_image" value="<?php echo $product_image; ?>">
-                     <input type="submit" value="Add to Cart" name="add_to_cart" class="btn">
+                     <input type="submit" value="Add to Cart" name="add_to_cart" a href = "shop.php" class="btn">
+                     <button type= "submit" name = "back" class="btn btn-primary"  a href = "shop.php">Back</button>
                   </form>
                </div>
             </div>
@@ -86,9 +90,7 @@ if (isset($_GET['id'])) {
                   </a>
                   <div class="name"><?php echo $fetch_products['name']; ?></div>
                   <div class="price">₱<?php echo $fetch_products['price']; ?></div>
-                  <input type="number" min="1" name="product_quantity" value="1" class="qty">
                   <input type="hidden" name="product_name" value="<?php echo $fetch_products['name']; ?>">
-
                   <input type="hidden" name="product_price" value="<?php echo $fetch_products['price']; ?>">
                   <input type="hidden" name="product_image" value="<?php echo $fetch_products['image']; ?>">
                   <input type="submit" value="Add to Cart" name="add_to_cart" class="btn">
