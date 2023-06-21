@@ -71,6 +71,8 @@ if (isset($_GET['id'])) {
       </div>
    </div>
 
+   <h2 style="text-align: center; margin-top: 2rem;"><br>--------YOU MAY ALSO LIKE-------- <br><br><br></h2>
+
    <section class="show-products">
       <div class="box-container">
          <?php
