@@ -497,10 +497,19 @@ section{
    padding: 5px;
    margin-bottom: 10px;
 }
+.products .box-container .box .qty{
+   width: 100%;
+   padding:1.2vw 1.4rem;
+   border-radius: .5pc;
+   border: 1px solid black;
+   border:var(--border);
+   margin:1rem 0;
+   font-size: 2rem;
+}
 
 .btn {
    padding: 10px 20px;
-   background-color: #4caf50;
+   background-color: #8e44ad;
    color: white;
    border: none;
    border-radius: 5px;

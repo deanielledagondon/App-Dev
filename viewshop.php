@@ -41,7 +41,7 @@ if (isset($_GET['id'])) {
    <link rel="stylesheet" href="css/admin_product.css">
 </head>
 <body>
-   <?php include 'admin_header.php'; ?>
+<?php include 'header_viewshop.php'; ?>
 
    <div class="product-container">
       <div class="product-container-image">
