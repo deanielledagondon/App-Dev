@@ -53,15 +53,13 @@ if(isset($_POST['add_to_cart'])){
 <?php include 'header.php'; ?>
 
 <div class="heading">
-   <h3>Our Shop</h3>
+   <h3>Latest Products</h3>
    <p> <a href="home.php">Home</a> / Shop </p>
 </div>
 
 
 <section class="show-products">
 <section class="products">
-
-   <h1 class="title">Latest Products</h1>
 
    <div class="box-container">
 

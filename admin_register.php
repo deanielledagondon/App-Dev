@@ -54,7 +54,7 @@ if(isset($_POST['submit'])){
                   $file_path = 'uploads/' . $file_name;
                   mysqli_query($conn, "INSERT INTO `admins` (firstName, lastName, middleInitial, age, address, phoneNum, position, monthlySalary, username,  email, password, admin_pp) VALUES ('$firstName', '$lastName', '$middleInitial', '$age', '$address', '$phoneNum', '$position', '$monthlySalary', '$username', '$email', '$password', '$file_path')") or die('query failed');
                   $message[] = 'Registered successfully!';
-                  header('location: login.php');
+                  header('location: admin_login.php');
                   exit();
                } else {
                   $message[] = 'Error uploading the file. Please try again.';
@@ -128,7 +128,7 @@ if(isset($_POST['submit'])){
              <label for="terms">I agree to the <a href="terms.php" target="_blank">Terms and Conditions</a></label>
          </div>
 
-         <input type="submit" name="submit" value="register now" class="btn">
+         <input type="submit" name="submit" value="register" class="btn">
          <p>Already have an account? <a href="admin_login.php">Login now</a></p>
       </form>
    </div>

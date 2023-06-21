@@ -88,7 +88,7 @@ if(isset($message)){
       <h3>login now</h3>
       <input type="email" name="email" placeholder="Enter your email" required class="box">
       <input type="password" name="password" placeholder="Enter your password" required class="box">
-      <input type="submit" name="submit" value="login now" class="btn">
+      <input type="submit" name="submit" value="login" class="btn">
       <p><a href="home.php">Continue as a Guest</a></p>
       <br>
       <p>Don't have an account? <a href="register.php">Register now</a></p>

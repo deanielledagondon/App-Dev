@@ -124,11 +124,11 @@ if(isset($_POST['order_btn'])){
          </div>
          <div class="inputBox">
             <span>Flat #:</span>
-            <input type="number" min="0" name="flat" required placeholder="e.g. Flat no.">
+            <input type="number" min="0" name="flat" required placeholder="e.g. 121">
          </div>
          <div class="inputBox">
             <span>Address :</span>
-            <input type="text" name="street" required placeholder="e.g. Street Name">
+            <input type="text" name="street" required placeholder="e.g. Bayabas">
          </div>
          <div class="inputBox">
             <span>City:</span>
@@ -143,7 +143,7 @@ if(isset($_POST['order_btn'])){
             <input type="text" name="country" required placeholder="e.g. Philippines">
          </div>
          <div class="inputBox">
-            <span>Pin code:</span>
+            <span>Area code:</span>
             <input type="number" min="0" name="pin_code" required placeholder="e.g. 123456">
          </div>
       </div>

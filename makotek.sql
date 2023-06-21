@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 13, 2023 at 05:15 AM
+-- Generation Time: Jun 21, 2023 at 06:22 AM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.2.0
 
@@ -50,7 +50,9 @@ CREATE TABLE `admins` (
 
 INSERT INTO `admins` (`id`, `username`, `firstName`, `lastName`, `middleInitial`, `age`, `address`, `phoneNum`, `position`, `monthlySalary`, `email`, `password`, `user_type`, `admin_pp`) VALUES
 (5, '', 'Angel Deanielle Dagondon', '', '', 0, '', '', '', '', 'dean@gmail.com', '25d55ad283aa400af464c76d713c07ad', 'admin', 'uploads/PM02_20230302212124.png'),
-(6, 'username', 'KD ', '', '', 0, '', '', '', '', 'kd@gmail.com', '87221652a79fc3c9b04cde0b335fdd5b', 'admin', 'uploads/anime-girl-fantasy-samurai-katana-pistol-4k-wallpaper-uhdpaper.com-408@0@h.jpg');
+(6, 'username', 'KD ', '', '', 0, '', '', '', '', 'kd@gmail.com', '87221652a79fc3c9b04cde0b335fdd5b', 'admin', 'uploads/anime-girl-fantasy-samurai-katana-pistol-4k-wallpaper-uhdpaper.com-408@0@h.jpg'),
+(7, 'abc', 'A', 'B', 'C', 12, 'aaa', '11111111', 'aaa', '11111', 'abc@gmail.com', '900150983cd24fb0d6963f7d28e17f72', 'admin', 'uploads/University_of_Science_and_Technology_of_Southern_Philippines.png'),
+(8, 'AAA', 'A', 'A', 'A', 20, 'aaaa', '121212121', 'aaa', '121212', 'aaa@gmail.com', '47bce5c74f589f4867dbd57e9ca9f808', 'admin', 'uploads/University_of_Science_and_Technology_of_Southern_Philippines.png');
 
 -- --------------------------------------------------------
 
@@ -82,6 +84,13 @@ CREATE TABLE `message` (
   `message` varchar(500) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Dumping data for table `message`
+--
+
+INSERT INTO `message` (`id`, `user_id`, `name`, `email`, `number`, `message`) VALUES
+(1, 5, 'daot', 'daot@gmail.com', '1212121', 'hi');
+
 -- --------------------------------------------------------
 
 --
@@ -112,6 +121,7 @@ CREATE TABLE `products` (
   `id` int(100) NOT NULL,
   `name` varchar(100) NOT NULL,
   `price` int(255) NOT NULL,
+  `description` varchar(500) NOT NULL,
   `image` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -141,12 +151,11 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `firstName`, `lastName`, `middleInitial`, `username`, `email`, `password`, `age`, `phoneNum`, `address`, `user_type`, `pp`) VALUES
-(8, 'Angel Deanielle Dagondon', '', '', '0', 'dean@gmail.com', '25d55ad283aa400af464c76d713c07ad', 0, '', '', 'user', 'uploads/defaultpp.png'),
-(10, 'Mark Bontia', '', '', '0', 'mark@gmail.com', '25d55ad283aa400af464c76d713c07ad', 0, '', '', 'user', 'uploads/Untitled.png'),
-(11, 'KD aaaa', 'aaa', 'a', 'username', 'kd@gmail.com', '87221652a79fc3c9b04cde0b335fdd5b', 0, '', 'aaa', 'user', 'uploads/user.png'),
-(12, 'A', 'B', 'C', 'ABC', 'abc@gmail.com', '900150983cd24fb0d6963f7d28e17f72', 23, '', 'abc', 'user', 'uploads/Screenshot (28).png'),
-(13, 'Devil', 'May', 'C', 'DevilMayCry', 'devil@gmail.com', 'e6c94a28c4e2f8890eedab2669785f73', 21, '', 'DevilMayCry', 'user', 'uploads/Screenshot (26).png'),
-(14, 'Daot', 'Mani', 'O', 'daot', 'daot@gmail.com', '16205c4e1ade5a7a9e360312568aefec', 36, '', 'daot', 'user', 'uploads/Screenshot (25).png');
+(1, 'Angel Deanielle Dagondon', '', '', '0', 'dean@gmail.com', '25d55ad283aa400af464c76d713c07ad', 0, '', '', 'user', 'uploads/defaultpp.png'),
+(2, 'Mark Bontia', '', '', '0', 'mark@gmail.com', '25d55ad283aa400af464c76d713c07ad', 0, '', '', 'user', 'uploads/Untitled.png'),
+(3, 'A', 'B', 'C', 'ABC', 'abc@gmail.com', '900150983cd24fb0d6963f7d28e17f72', 23, '', 'abc', 'user', 'uploads/Screenshot (28).png'),
+(4, 'Devil', 'May', 'C', 'DevilMayCry', 'devil@gmail.com', 'e6c94a28c4e2f8890eedab2669785f73', 21, '', 'DevilMayCry', 'user', 'uploads/Screenshot (26).png'),
+(5, 'Daot', 'Mani', 'O', 'daot', 'daot@gmail.com', '16205c4e1ade5a7a9e360312568aefec', 36, '', 'daot', 'user', 'uploads/Screenshot (25).png');
 
 --
 -- Indexes for dumped tables
@@ -196,7 +205,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `admins`
 --
 ALTER TABLE `admins`
-  MODIFY `id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `cart`
@@ -208,7 +217,7 @@ ALTER TABLE `cart`
 -- AUTO_INCREMENT for table `message`
 --
 ALTER TABLE `message`
-  MODIFY `id` int(100) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `orders`
@@ -226,7 +235,7 @@ ALTER TABLE `products`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
