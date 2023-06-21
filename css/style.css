@@ -1188,3 +1188,157 @@ section{
    }
    
 }
+
+@media (max-width:450px){
+
+   html{
+      font-size: 50%;
+   }
+
+   .title{
+      font-size: 3rem;
+   }
+
+}
+.product-container {
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   margin-top: 70px;
+   width: 50%;
+   margin-left: auto;
+   margin-right: auto;
+}
+
+.product-container-details {
+   flex: 1;
+   margin-right: 20px;
+}
+
+.product-image {
+   text-align: center;
+}
+
+.product-image img {
+   max-width: 400px;
+   height: auto;
+}
+
+
+.product-container-details {
+   background-color: #f2f2f2;
+   padding: 20px;
+   border-radius: 5px;
+}
+
+.product-details {
+   display: flex;
+   flex-direction: column;
+}
+
+.product-box {
+   margin-bottom: 20px;
+}
+
+.product-name {
+   font-size: 24px;
+   font-weight: bold;
+   margin-bottom: 10px;
+   font-weight: bold;
+}
+
+.product-price {
+   font-size: 18px;
+   margin-bottom: 10px;
+}
+
+.product-description {
+   margin-bottom: 10px;
+}
+
+.qty {
+   width: 50px;
+   padding: 5px;
+   margin-bottom: 10px;
+}
+.products .box-container .box .qty{
+   width: 100%;
+   padding:1.2vw 1.4rem;
+   border-radius: .5pc;
+   border: 1px solid black;
+   border:var(--border);
+   margin:1rem 0;
+   font-size: 2rem;
+}
+
+.btn {
+   padding: 10px 20px;
+   background-color: #8e44ad;
+   color: white;
+   border: none;
+   border-radius: 5px;
+   cursor: pointer;
+   font-weight: bold;
+}
+
+
+/*added*/
+
+.product-container {
+   display: flex;
+   align-items: center;
+   justify-content: space-between;
+   padding: 20px;
+ }
+ 
+ .product-container-image {
+   flex: 1;
+   text-align: right;
+ }
+ 
+ .product-image {
+   max-width: 100%;
+ }
+ 
+ .product-container-details {
+   flex: 1;
+   margin-left: 20px;
+ }
+ 
+ .product-name {
+   font-size: 20px;
+   font-weight: bold;
+ }
+ 
+ .product-price {
+   margin-top: 10px;
+   font-size: 18px;
+ }
+ 
+ .product-description {
+   margin-top: 10px;
+   font-size: 16px;
+ }
+ 
+ .review {
+   margin-top: 10px;
+   font-size: 16px;
+ }
+ 
+ .product-actions {
+   margin-top: 20px;
+ }
+ 
+ .qty {
+   width: 50px;
+ }
+ 
+ .btn {
+   margin-top: 10px;
+   padding: 10px 20px;
+   background-color:#8e44ad;
+   color: white;
+   border: none;
+   cursor: pointer;
+ }
+ 
