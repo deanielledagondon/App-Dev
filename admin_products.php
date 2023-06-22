@@ -124,7 +124,7 @@ if (isset($_POST['update_product'])) {
                   
                   <img src="uploaded_img/<?php echo $fetch_products['image']; ?>" alt="" height="100" width="260">
                   <div class="name"><?php echo $fetch_products['name']; ?></div>
-                  <div class="price">₱<?php echo $fetch_products['price']; ?>/-</div>
+                  <div class="price">₱<?php echo $fetch_products['price']; ?></div>
                   <div class="description"><?php echo $fetch_products['description']; ?></div>
                   <a href="admin_products.php?update=<?php echo $fetch_products['id']; ?>" class="option-btn">update</a>
                   <a href="admin_products.php?delete=<?php echo $fetch_products['id']; ?>" class="delete-btn" onclick="return confirm('delete this product?');">delete</a>
