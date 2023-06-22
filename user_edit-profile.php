@@ -2,16 +2,12 @@
 include 'config.php';
 session_start();
 
-if (!isset($_SESSION["admin_id"])) {
-    header("location:admin_login.php");
-    exit();
-}
+$user_id = $_SESSION['user_id'];
 
 
-$id = $_GET['id'];
 
 // Fetch the user's information from the database based on the user ID
-$findresult = mysqli_query($conn, "SELECT * FROM `users` WHERE id='$id'");
+$findresult = mysqli_query($conn, "SELECT * FROM `users` WHERE id='$user_id'");
 
 if (!$findresult) {
     die("Error: " . mysqli_error($conn));

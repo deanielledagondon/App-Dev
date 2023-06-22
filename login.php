@@ -76,7 +76,7 @@ if(isset($message)){
 
    <div class="centered-box">
        <div class="box">
-           <a href="admin_login.php"><img src="images/logo.png" alt="Admin Login"></a>
+       <a href="admin_login.php"><img src="images/logoo.PNG" alt="Admin Login"></a>
        </div>
    </div>
 

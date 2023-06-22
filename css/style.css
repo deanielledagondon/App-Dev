@@ -49,6 +49,8 @@
    margin-bottom: 0;
  }
 
+
+
  .container {
    margin-top: 20px;
  }
@@ -451,7 +453,7 @@ section{
    display: flex;
    align-items: center;
    justify-content: space-between;
-   max-width: 1200px;
+   max-width: 1100px;
    margin:0 auto;
    position: relative;
 }
@@ -1059,15 +1061,6 @@ section{
    background-color: var(--light-bg);
    border-radius: .5rem;
 }
-
-
-
-
-
-
-
-
- 
 
 .footer{
    background-color: var(--light-bg);
