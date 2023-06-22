@@ -14,6 +14,7 @@ if (isset($_GET['id'])) {
       $product_price = $fetch_product['price'];
       $product_image = $fetch_product['image'];
       $product_description = $fetch_product['description'];
+      $product_review = $fetch_product['review'];
    } else {
       // Product not found, redirect or display an error message
       header('Location: admin_products.php');
@@ -60,6 +61,10 @@ if (isset($_GET['id'])) {
                <div class="product-actions">
                   <a href="admin_products.php?update=<?php echo $product_id; ?>" class="update-btn">Update</a>
                   <a href="admin_products.php?delete=<?php echo $product_id; ?>" class="delete-btn" onclick="return confirm('Delete this product?');">Delete</a>
+               </div>
+               <div class="reviews"><br>
+                <h3> Reviews:</h3>
+                  <div class="product-review"><?php echo $product_review; ?></div>
                </div>
             </div>
          </div>
