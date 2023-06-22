@@ -121,7 +121,7 @@ if (isset($_POST['update_product'])) {
             while ($fetch_products = mysqli_fetch_assoc($select_products)) {
          ?>
                <div class="box">
-                  
+               <a href="product_details.php?id=<?php echo $fetch_products['id']; ?>">
                   <img src="uploaded_img/<?php echo $fetch_products['image']; ?>" alt="" height="100" width="260">
                   <div class="name"><?php echo $fetch_products['name']; ?></div>
                   <div class="price">₱<?php echo $fetch_products['price']; ?></div>

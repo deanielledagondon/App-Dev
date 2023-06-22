@@ -26,7 +26,6 @@ if (isset($_GET['id'])) {
    header('Location: admin_products.php');
    exit();
 }
-<<<<<<< HEAD
 
 if(isset($_POST['add_to_cart'])){
    $product_name = $_POST['product_name'];
@@ -56,11 +55,6 @@ if(isset($_POST['submit_review'])){
 
    mysqli_query($conn, "UPDATE `products` SET review = CONCAT(IFNULL(review,''), '$updated_review') WHERE id = '$product_id'") or die('query failed');
    $product_review = $product_review . $updated_review;
-=======
-if (isset($_POST['back'])) {
-   header('Location: shop.php');
-   exit();
->>>>>>> 9f91c7c525bb5fd9ac18cc3927a6a50b12b047b0
 }
 ?>
 
@@ -97,34 +91,36 @@ if (isset($_POST['back'])) {
             <div class="product-name"><?php echo $product_name; ?></div>
             <div class="product-price">Price: ₱<?php echo $product_price; ?></div>
             <div class="product-description"><?php echo $product_description; ?></div>
-            <div class="product-review-section">
-               <h3>Add a Review</h3>
-               <form action="" method="post">
-                  <textarea name="review" rows="4" cols="50"></textarea>
-                  <input type="submit" value="Submit" name="submit_review" class="btn">
-               </form>
-               <?php if (!empty($product_review)) { ?>
-               <div class="review-section">
-                  <h3>Reviews</h3>
-                  <?php
-                  $reviews = explode("\n", $product_review);
-                  foreach ($reviews as $review) {
-                     echo '<p>' . nl2br($review) . '</p>';
-                  }
-                  ?>
-               </div>
-               <?php } ?>
-            </div>
             <div class="product-actions">
-               <form action="" method="post" class="box">
-                  <input type="number" min="1" name="product_quantity" value="1" class="qty">
-                  <input type="hidden" name="product_name" value="<?php echo $product_name; ?>">
-                  <input type="hidden" name="product_price" value="<?php echo $product_price; ?>">
-                  <input type="hidden" name="description" value="<?php echo $product_description; ?>">
-                  <input type="hidden" name="product_image" value="<?php echo $product_image; ?>">
-                  <input type="submit" value="Add to Cart" name="add_to_cart" class="btn">
-               </form>
-            </div>
+   <form action="" method="post" class="box">
+      <input type="number" min="1" name="product_quantity" value="1" class="qty">
+      <input type="hidden" name="product_name" value="<?php echo $product_name; ?>">
+      <input type="hidden" name="product_price" value="<?php echo $product_price; ?>">
+      <input type="hidden" name="description" value="<?php echo $product_description; ?>">
+      <input type="hidden" name="product_image" value="<?php echo $product_image; ?>">
+      <input type="submit" value="Add to Cart" name="add_to_cart" class="btn">
+   </form>
+</div>
+<div class="product-review-section" style="margin-top: 20px;">
+   <h3>Add a Review</h3>
+   <form action="" method="post">
+      <textarea name="review" rows="4" cols="50"></textarea>
+      <input type="submit" value="Submit" name="submit_review" class="btn">
+   </form>
+   <?php if (!empty($product_review)) { ?>
+   <div class="review-section" style="margin-top: 20px;">
+      <h3>Reviews</h3>
+      <?php
+      $reviews = explode("\n", $product_review);
+      foreach ($reviews as $review) {
+         echo '<p>' . nl2br($review) . '</p>';
+      }
+      ?>
+   </div>
+   <?php } ?>
+</div>
+
+
          </div>
       </div>
    </div>
