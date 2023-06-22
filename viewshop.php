@@ -47,13 +47,13 @@ if(isset($_POST['add_to_cart'])){
 if(isset($_POST['submit_review'])){
    $review = $_POST['review'];
 
-   $user_query = mysqli_query($conn, "SELECT username FROM `users` WHERE id = '$user_id'") or die('query failed');
+   $user_query = mysqli_query($conn, "SELECT username FROM `user_reviews` WHERE id = '$user_id'") or die('query failed');
    $user_data = mysqli_fetch_assoc($user_query);
    $username = $user_data['username'];
 
-   $updated_review = "[$username] " . $review;
+   $updated_review = "$username: " . $review; // Added colon after the username
 
-   mysqli_query($conn, "UPDATE `products` SET review = CONCAT(IFNULL(review,''), '$updated_review') WHERE id = '$product_id'") or die('query failed');
+   mysqli_query($conn, "UPDATE `user_reviews` SET review = CONCAT(IFNULL(review,''), '$updated_review\n') WHERE product_id = '$product_id'") or die('query failed'); // Added a new line after each review
    $product_review = $product_review . $updated_review;
 }
 ?>
@@ -101,15 +101,27 @@ if(isset($_POST['submit_review'])){
       <input type="submit" value="Add to Cart" name="add_to_cart" class="btn">
    </form>
 </div>
-<div class="product-review-section" style="margin-top: 20px;">
-   <h3>Add a Review</h3>
+<div class="product-review">
+   <h3>Leave a Review</h3>
    <form action="" method="post">
-      <textarea name="review" rows="4" cols="50"></textarea>
-      <input type="submit" value="Submit" name="submit_review" class="btn">
+      <textarea name="review" rows="4" cols="50" maxlength="500" style="border: 1px solid black; resize: none;" oninput="checkCharacterLimit(this)"></textarea>
+      <div>
+         <span id="character-count">500</span> characters remaining
+         <input type="submit" value="Submit" name="submit_review" class="btn" style="margin-left: 100px;">
+      </div>
    </form>
-   <?php if (!empty($product_review)) { ?>
-   <div class="review-section" style="margin-top: 20px;">
-      <h3>Reviews</h3>
+
+      <script>
+      function checkCharacterLimit(element) {
+         var maxLength = 500;
+         var remainingCharacters = maxLength - element.value.length;
+         document.getElementById("character-count").textContent = remainingCharacters;
+      }
+   </script>
+
+<?php if (!empty($product_review)) { ?>
+   <div class="user-reviews" style="margin-top: 80px;">
+      <h3>User Reviews</h3>
       <?php
       $reviews = explode("\n", $product_review);
       foreach ($reviews as $review) {
@@ -146,22 +158,15 @@ if(isset($_POST['submit_review'])){
                <input type="hidden" name="product_price" value="<?php echo $fetch_products['price']; ?>">
                <input type="hidden" name="description" value="<?php echo $fetch_products['description']; ?>">
                <input type="hidden" name="product_image" value="<?php echo $fetch_products['image']; ?>">
-               <input type="submit" value="add to cart" name="add_to_cart" class="btn">
+               <input type="submit" value="Add to Cart" name="add_to_cart" class="btn">
             </a>
          </form>
-         <?php
-               }
-            } else {
-               echo '<p class="empty">No products added yet!</p>';
-            }
-         ?>
+         <?php }} ?>
       </div>
    </section>
 </section>
 
-<?php include 'footer.php'; ?>
 
-<!-- custom admin js file link  -->
-<script src="js/admin_script.js"></script>
+<script src="js/main.js"></script>
 </body>
 </html>
