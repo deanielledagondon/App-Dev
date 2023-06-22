@@ -2,13 +2,9 @@
 include 'config.php';
 session_start();
 
-if (!isset($_SESSION["user_id"])) {
-    header("location:login.php");
-    exit();
-}
 
 $email = $_SESSION["user_email"];
-$findresult = mysqli_query($conn, "SELECT * FROM users WHERE email='$email'");
+$findresult = mysqli_query($conn, "SELECT * FROM `users` WHERE email='$email'");
 
 if (!$findresult) {
     die("Error: " . mysqli_error($conn));

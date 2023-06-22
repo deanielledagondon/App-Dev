@@ -26,6 +26,7 @@ if (isset($_GET['id'])) {
    header('Location: admin_products.php');
    exit();
 }
+<<<<<<< HEAD
 
 if(isset($_POST['add_to_cart'])){
    $product_name = $_POST['product_name'];
@@ -55,6 +56,11 @@ if(isset($_POST['submit_review'])){
 
    mysqli_query($conn, "UPDATE `products` SET review = CONCAT(IFNULL(review,''), '$updated_review') WHERE id = '$product_id'") or die('query failed');
    $product_review = $product_review . $updated_review;
+=======
+if (isset($_POST['back'])) {
+   header('Location: shop.php');
+   exit();
+>>>>>>> 9f91c7c525bb5fd9ac18cc3927a6a50b12b047b0
 }
 ?>
 

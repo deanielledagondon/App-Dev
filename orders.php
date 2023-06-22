@@ -4,13 +4,14 @@ include 'config.php';
 
 session_start();
 
-$user_id = $_SESSION['user_id'];
+
 
 if (!isset($_SESSION['user_id'])) {
    // If not, log them in using the guest user account
    $guest_user_id = 0; // Set the guest user ID
    $_SESSION['user_id'] = $guest_user_id; // Set the session user ID
 }
+$user_id = $_SESSION['user_id'];
 ?>
 
 <!DOCTYPE html>

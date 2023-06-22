@@ -8,7 +8,7 @@ if (!isset($_SESSION["admin_id"])) {
 }
 
 $email = $_SESSION["admin_email"];
-$findresult = mysqli_query($conn, "SELECT * FROM admins WHERE email='$email'");
+$findresult = mysqli_query($conn, "SELECT * FROM `admins` WHERE email='$email'");
 
 if (!$findresult) {
     die("Error: " . mysqli_error($conn));
@@ -62,7 +62,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 
     if ($updatesMade) {
-        if (mysqli_query($conn, "UPDATE admins SET 
+        if (mysqli_query($conn, "UPDATE `admins` SET 
             firstName='$updatedFirstName', 
             lastName='$updatedLastName', 
             middleInitial='$updatedMiddleInitial', 
@@ -109,7 +109,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $uploadPath = 'uploads/' . $_FILES['profileImage']['name'];
 
         if (move_uploaded_file($tmpFilePath, $uploadPath)) {
-            if (mysqli_query($conn, "UPDATE admins SET pp='$uploadPath' WHERE email='$email'")) {
+            if (mysqli_query($conn, "UPDATE `admins` SET admin_pp='$uploadPath' WHERE email='$email'")) {
                 $pp = $uploadPath;
                 $successMessage = "Profile image uploaded successfully.";
             } else {

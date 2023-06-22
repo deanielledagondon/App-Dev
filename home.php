@@ -19,6 +19,10 @@ $user_id = $_SESSION['user_id'];
 
 
 if(isset($_POST['add_to_cart'])){
+    if ($user_id == 0) {
+        // Guest user attempting to add a product to cart
+        echo "<script>alert('Please login first to add the product to cart!');</script>";
+     } else {
 
    $product_name = $_POST['product_name'];
    $product_price = $_POST['product_price'];
@@ -33,7 +37,7 @@ if(isset($_POST['add_to_cart'])){
       mysqli_query($conn, "INSERT INTO `cart`(user_id, name, price, quantity, image) VALUES('$user_id', '$product_name', '$product_price', '$product_quantity', '$product_image')") or die('query failed');
       $message[] = 'Product added to cart!';
    }
-
+    }
 }
 
 ?>
@@ -109,11 +113,20 @@ if(isset($_POST['add_to_cart'])){
          <img src="images/about-img.webp" alt="">
       </div>
 
+
+
+
       <div class="content">
+
          <h3>About Us</h3>
+
          <p>MakoTek provides reliable and efficient technology products and services to help customers achieve their goals. Our extensive range of products, from desktops and laptops to gaming peripherals and accessories, caters to all needs. Our company's motto "Name it and we make IT happen at MakoTek!" reflects our dedication to fulfilling customer needs. We constantly improves our products and services to ensure the best possible experience for our customers.</p>
+
          <a href="about.php" class="btn">Read more</a>
+
       </div>
+
+
 
    </div>
 
