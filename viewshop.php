@@ -2,7 +2,6 @@
 include 'config.php';
 
 session_start();
-
 $user_id = $_SESSION['user_id'];
 
 if (isset($_GET['id'])) {
@@ -26,6 +25,36 @@ if (isset($_GET['id'])) {
    // No product ID provided, redirect or display an error message
    header('Location: admin_products.php');
    exit();
+}
+
+if(isset($_POST['add_to_cart'])){
+   $product_name = $_POST['product_name'];
+   $product_price = $_POST['product_price'];
+   $product_description = $_POST['description'];
+   $product_image = $_POST['product_image'];
+   $product_quantity = $_POST['product_quantity'];
+
+   $check_cart_numbers = mysqli_query($conn, "SELECT * FROM `cart` WHERE name = '$product_name' AND user_id = '$user_id'") or die('query failed');
+
+   if(mysqli_num_rows($check_cart_numbers) > 0){
+      $message[] = 'Already added to cart!';
+   } else {
+      mysqli_query($conn, "INSERT INTO `cart` (user_id, name, price, quantity, image) VALUES ('$user_id', '$product_name', '$product_price', '$product_quantity', '$product_image')") or die('query failed');
+      $message[] = 'Product added to cart!';
+   }
+}
+
+if(isset($_POST['submit_review'])){
+   $review = $_POST['review'];
+
+   $user_query = mysqli_query($conn, "SELECT username FROM `users` WHERE id = '$user_id'") or die('query failed');
+   $user_data = mysqli_fetch_assoc($user_query);
+   $username = $user_data['username'];
+
+   $updated_review = "[$username] " . $review;
+
+   mysqli_query($conn, "UPDATE `products` SET review = CONCAT(IFNULL(review,''), '$updated_review') WHERE id = '$product_id'") or die('query failed');
+   $product_review = $product_review . $updated_review;
 }
 ?>
 
@@ -62,14 +91,30 @@ if (isset($_GET['id'])) {
             <div class="product-name"><?php echo $product_name; ?></div>
             <div class="product-price">Price: ₱<?php echo $product_price; ?></div>
             <div class="product-description"><?php echo $product_description; ?></div>
-            <div class="product-review">
-               <?php echo $product_review; ?>
+            <div class="product-review-section">
+               <h3>Add a Review</h3>
+               <form action="" method="post">
+                  <textarea name="review" rows="4" cols="50"></textarea>
+                  <input type="submit" value="Submit" name="submit_review" class="btn">
+               </form>
+               <?php if (!empty($product_review)) { ?>
+               <div class="review-section">
+                  <h3>Reviews</h3>
+                  <?php
+                  $reviews = explode("\n", $product_review);
+                  foreach ($reviews as $review) {
+                     echo '<p>' . nl2br($review) . '</p>';
+                  }
+                  ?>
+               </div>
+               <?php } ?>
             </div>
             <div class="product-actions">
                <form action="" method="post" class="box">
                   <input type="number" min="1" name="product_quantity" value="1" class="qty">
                   <input type="hidden" name="product_name" value="<?php echo $product_name; ?>">
                   <input type="hidden" name="product_price" value="<?php echo $product_price; ?>">
+                  <input type="hidden" name="description" value="<?php echo $product_description; ?>">
                   <input type="hidden" name="product_image" value="<?php echo $product_image; ?>">
                   <input type="submit" value="Add to Cart" name="add_to_cart" class="btn">
                </form>
