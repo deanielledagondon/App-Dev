@@ -2,9 +2,16 @@
 include 'config.php';
 session_start();
 
+if (!isset($_SESSION["admin_id"])) {
+    header("location:admin_login.php");
+    exit();
+}
 
-$email = $_SESSION["user_email"];
-$findresult = mysqli_query($conn, "SELECT * FROM `users` WHERE email='$email'");
+
+$id = $_GET['id'];
+
+// Fetch the user's information from the database based on the user ID
+$findresult = mysqli_query($conn, "SELECT * FROM `users` WHERE id='$id'");
 
 if (!$findresult) {
     die("Error: " . mysqli_error($conn));
@@ -141,8 +148,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         <div class="col"></div>
                         <div class="col-6">
                             <center>
-                                <span><img src="<?php echo $pp; ?>" class="profile-img"></span>
-
+                            <span>
+                                <img src="<?php echo $pp; ?>" class="profile-img">
+                                </span>
                                 <form method="post" enctype="multipart/form-data">
                                     <div class="form-group">
                                       <div class="row"> 
@@ -190,8 +198,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                         <input type="submit" class="update-btn" value="Save Profile">
                                     </div>
                                     <div class="form-group">
+                                    <?php if (isset($_SESSION["admin_id"])): ?>
+                                        <a href="admin_users.php" class="btn">Back</a>
+                                    <?php else: ?>
                                         <a href="home.php" class="btn">Back</a>
-                                    </div>
+                                    <?php endif; ?>
+                                </div>
                                 </form>
                             </center>
                         </div>

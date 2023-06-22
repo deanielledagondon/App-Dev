@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 22, 2023 at 01:33 AM
+-- Generation Time: Jun 22, 2023 at 02:16 AM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.2.0
 
@@ -69,6 +69,13 @@ CREATE TABLE `cart` (
   `image` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Dumping data for table `cart`
+--
+
+INSERT INTO `cart` (`id`, `user_id`, `name`, `price`, `quantity`, `image`) VALUES
+(2, 3, 'AAA', 120, 0, 'University_of_Science_and_Technology_of_Southern_Philippines.png');
+
 -- --------------------------------------------------------
 
 --
@@ -119,6 +126,7 @@ CREATE TABLE `orders` (
 
 CREATE TABLE `products` (
   `id` int(100) NOT NULL,
+  `user_id` int(11) NOT NULL,
   `name` varchar(100) NOT NULL,
   `price` int(255) NOT NULL,
   `description` varchar(500) NOT NULL,
@@ -130,8 +138,8 @@ CREATE TABLE `products` (
 -- Dumping data for table `products`
 --
 
-INSERT INTO `products` (`id`, `name`, `price`, `description`, `image`, `review`) VALUES
-(1, 'AAA', 120, 'AAA', 'University_of_Science_and_Technology_of_Southern_Philippines.png', '');
+INSERT INTO `products` (`id`, `user_id`, `name`, `price`, `description`, `image`, `review`) VALUES
+(1, 0, 'AAA', 120, 'AAA', 'University_of_Science_and_Technology_of_Southern_Philippines.png', '');
 
 -- --------------------------------------------------------
 
@@ -219,7 +227,7 @@ ALTER TABLE `admins`
 -- AUTO_INCREMENT for table `cart`
 --
 ALTER TABLE `cart`
-  MODIFY `id` int(100) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `message`

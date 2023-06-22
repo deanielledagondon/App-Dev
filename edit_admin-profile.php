@@ -8,7 +8,11 @@ if (!isset($_SESSION["admin_id"])) {
 }
 
 $email = $_SESSION["admin_email"];
-$findresult = mysqli_query($conn, "SELECT * FROM `admins` WHERE email='$email'");
+
+$id = $_GET['id'];
+
+// Fetch the user's information from the database based on the user ID
+$findresult = mysqli_query($conn, "SELECT * FROM `admins` WHERE id='$id'");
 
 if (!$findresult) {
     die("Error: " . mysqli_error($conn));
@@ -110,7 +114,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         if (move_uploaded_file($tmpFilePath, $uploadPath)) {
             if (mysqli_query($conn, "UPDATE `admins` SET admin_pp='$uploadPath' WHERE email='$email'")) {
-                $pp = $uploadPath;
+                $admin_pp = $uploadPath;
                 $successMessage = "Profile image uploaded successfully.";
             } else {
                 $errorMessage = "Error: Failed to upload the profile image.";
@@ -158,7 +162,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         <div class="col"></div>
                         <div class="col-6">
                             <center>
-                                <span><img src="<?php echo $pp; ?>" class="profile-img"></span>
+                                <span>
+                                    <img src="<?php echo $admin_pp; ?>" class="profile-img">
+                                </span>
 
                                 <form method="post" enctype="multipart/form-data">
                                     <div class="form-group">

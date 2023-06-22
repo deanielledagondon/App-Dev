@@ -31,7 +31,7 @@
             <?php if (isset($_SESSION['user_username']) && isset($_SESSION['user_email'])) : ?>
                <p>Username: <span><?php echo $_SESSION['user_username']; ?></span></p>
                <p>Email: <span><?php echo $_SESSION['user_email']; ?></span></p>
-               <a href="user_edit.php" class="view-btn">View Profile</a>
+               <a href="user_edit-profile.php" class="view-btn">View Profile</a>
                <a href="logout.php" class="delete-btn">Logout</a>
             <?php else :?>
                <p>You are a guest user. Please <a href="login.php">Login</a> or <a href="register.php">Register</a> to access your profile.</p>
