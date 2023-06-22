@@ -20,13 +20,11 @@
 
       <div class="box">
          <h3>Contact info</h3>
-         <p> <i class="fas fa-phone"></i> +63 88 859 2110 </p>
-         <p> <i class="fas fa-phone"></i> +63 968 366 7648 </p>
-         <p> <i class="fas fa-phone"></i> +63 995 634 8480 </p>
-         <p> <i class="fas fa-envelope"></i> help@makotekcomputers.com </p>
-         <p> <i class="fas fa-envelope"></i> customercare@makotekcomputers.com </p>
-         <p> <i class="fas fa-map-marker-alt"></i> G/F LK Bldg, 5 Rizal St.
-                                                   Gaston Park Circle
+         <p> <i class="fas fa-phone"></i> +63-928-555-3686 </p>
+         <p> <i class="fas fa-phone"></i> +63-928-555-6148 </p>
+         <p> <i class="fas fa-phone"></i> +63-280-555-3443 </p>
+         <p> <i class="fas fa-envelope"></i> customercare@gmail.com </p>
+         <p> <i class="fas fa-map-marker-alt"></i> C.L. Fule Arcade, M. Basa Street
                                                    Cagayan de Oro City
                                                    Philippines 9000 </p>
       </div>

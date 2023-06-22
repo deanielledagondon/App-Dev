@@ -120,7 +120,7 @@ if(isset($_POST['add_to_cart'])){
 
          <h3>About Us</h3>
 
-         <p>MakoTek provides reliable and efficient technology products and services to help customers achieve their goals. Our extensive range of products, from desktops and laptops to gaming peripherals and accessories, caters to all needs. Our company's motto "Name it and we make IT happen at MakoTek!" reflects our dedication to fulfilling customer needs. We constantly improves our products and services to ensure the best possible experience for our customers.</p>
+         <p>MakoTek provides reliable and efficient technology products and services to help customers achieve their goals. Our extensive range of products, from desktops and laptops to gaming peripherals and accessories, caters to all needs. We constantly improves our products and services to ensure the best possible experience for our customers.</p>
 
          <a href="about.php" class="btn">Read more</a>
 

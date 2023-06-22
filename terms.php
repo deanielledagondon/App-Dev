@@ -1,31 +1,25 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Terms and Conditions</title>
+  <title>Disclaimer</title>
 </head>
 <body>
-  <h1>Terms and Conditions</h1>
+  <h1>Warning! THIS IS A STUDENT PROJECT! THIS IS NOT A REAL COMPUTER STORE!</h1>
   
-  <h2>OVERVIEW</h2>
-  <p>This website is operated by MakoTek. Throughout the site, the terms “we”, “us” and “our” refer to MakoTek. MakoTek offers this website, including all information, tools and services available from this site to you, the user, conditioned upon your acceptance of all terms, conditions, policies and notices stated here.</p>
-  
-  <p>By visiting our site and/or purchasing something from us, you engage in our “Service” and agree to be bound by the following terms and conditions (“Terms of Service”, “Terms”), including those additional terms and conditions and policies referenced herein and/or available by hyperlink. These Terms of Service apply to all users of the site, including without limitation users who are browsers, vendors, customers, merchants, and/or contributors of content.</p>
-  
-  <p>Please read these Terms of Service carefully before accessing or using our website. By accessing or using any part of the site, you agree to be bound by these Terms of Service. If you do not agree to all the terms and conditions of this agreement, then you may not access the website or use any services. If these Terms of Service are considered an offer, acceptance is expressly limited to these Terms of Service.</p>
-  
-  <p>Any new features or tools which are added to the current store shall also be subject to the Terms of Service. You can review the most current version of the Terms of Service at any time on this page. We reserve the right to update, change or replace any part of these Terms of Service by posting updates and/or changes to our website. It is your responsibility to check this page periodically for changes. Your continued use of or access to the website following the posting of any changes constitutes acceptance of those changes.</p>
-  
-  <p>Our store is hosted on Shopify Inc. They provide us with the online e-commerce platform that allows us to sell our products and services to you.</p>
-  
-  <h2>SECTION 1 - ONLINE STORE TERMS</h2>
-  <p>By agreeing to these Terms of Service, you represent that you are at least the age of majority in your state or province of residence, or that you are the age of majority in your state or province of residence and you have given us your consent to allow any of your minor dependents to use this site.</p>
-  
-  <p>You may not use our products for any illegal or unauthorized purpose nor may you, in the use of the Service, violate any laws in your jurisdiction (including but not limited to copyright laws).</p>
-  
-  <p>You must not transmit any worms or viruses or any code of a destructive nature.</p>
-  
-  <p>A breach or violation of any of the Terms will result in an immediate termination of your Services.</p>
-  
- 
+  <p> This website is a student project created for educational purposes and does not intend to engage in any form of copyright infringement or misrepresentation. The content and name used on this website may bear similarities to existing domains or trademarks, but it is purely coincidental and unintentional.</p>
+
+  <p> We respect intellectual property rights and encourage originality and creativity. If you believe that any aspect of this website infringes upon your intellectual property rights or creates confusion with a similar domain or trademark, please contact us immediately. We will investigate the matter promptly and take appropriate action to address any legitimate concerns.</p>
+
+  <p> We are conducting this project as part of our academic curriculum and aim to learn and develop our skills in a practical setting. The content, design, and functionality of this website are primarily focused on fulfilling the requirements of our coursework and demonstrating our understanding of the subject matter.</p>
+
+  <p> Please note that any information, data, or findings presented on this website are based on our research and analysis for educational purposes. The conclusions drawn from this project should not be considered as official or authoritative, and we encourage users to consult verified sources for comprehensive and reliable information.</p>
+  <p> Please note that this website is not affiliated with or endorsed by any organization, brand, or entity mentioned within its content. Any references made to existing products, services, or companies are purely for informational purposes and do not imply any association or endorsement.</p>
+
+  <p> While we strive to provide accurate and up-to-date information, this website may contain errors or omissions. We do not guarantee the completeness, reliability, or accuracy of the content provided. Users are encouraged to verify any information independently and use it at their own discretion.</p>
+
+  <p> By using this website, you acknowledge and agree that the creators of this student project are not liable for any direct, indirect, or consequential damages arising from its use or the inability to use it. You also agree to release the creators from any claims, demands, or liabilities related to the content or functionality of this website.</p>
+
+  <p> Thank you for understanding the nature of this student project. If you have any questions or concerns, please contact us at kallitatheo@gmail.com.</p>
+
 </body>
 </html>

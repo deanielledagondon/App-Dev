@@ -48,10 +48,9 @@ if (!isset($_SESSION['user_id'])) {
 
       <div class="content">
          <h3>Why choose us?</h3>
-         <p>Welcome to MakoTek, the leading IT shop that caters to all your computing and gaming needs. We take pride in offering a diverse range of high-quality computers and gaming peripherals, ensuring that you stay ahead in the digital world. At MakoTek, we are dedicated to providing you with the best deals and affordable prices, making top-notch technology accessible to all.
-         <p>Conveniently located at Ground Floor, LK Building, 5 Rizal St, Gaston Park, Cagayan de Oro City, MakoTek invites you to step into our world of technology. Explore our showroom, experience the latest innovations, and immerse yourself in the possibilities of the digital realm. Our friendly staff will be delighted to assist you in finding the perfect solution that matches your needs and budget.
-         <p>"Name it and we make IT happen at MakoTek!"
-         <p>At MakoTek, we're not just a technology provider; we're your partner in unlocking the full potential of modern computing. Whether you're a professional, a gamer, or an enthusiast, we are committed to delivering unparalleled products and services that elevate your experience. Join us at MakoTek and let us empower you with the best in technology, affordability, and exceptional customer service.
+         <p>Welcome to MakoTek, the leading IT shop that caters to all your computing and gaming needs. At MakoTek, we are dedicated to providing you with the best deals and affordable prices, making top-notch technology accessible to all.
+         <p>Conveniently located at C.L. Fule Arcade, M. Basa Street, Cagayan de Oro City, Makotek invites you to step into our world of technology. Explore our showroom, experience the latest innovations, and immerse yourself in the possibilities of the digital realm. 
+         <p>Join us at MakoTek and let us empower you with the best in technology, affordability, and exceptional customer service.
       </p>
          <a href="contact.php" class="btn">Contact us</a>
       </div>
@@ -67,7 +66,7 @@ if (!isset($_SESSION['user_id'])) {
    <div class="box-container">
 
       <div class="box">
-         <p>Thank you Makotek I just bought my computer set na sulit kaayo ang price plus grabe ka accomodating. So happy Excellent customer service. Highly recommend gyud.</p>
+         <p>I highly recommend Makotek for their exceptional customer service and top-notch quality products</p>
          <div class="stars">
             <i class="fas fa-star"></i>
             <i class="fas fa-star"></i>
@@ -75,11 +74,11 @@ if (!isset($_SESSION['user_id'])) {
             <i class="fas fa-star"></i>
             <i class="fas fa-star"></i>
          </div>
-         <h3>Sandra</h3>
+         <h3>Lisa Smith</h3>
       </div>
 
       <div class="box">
-         <p>Thank you kaayo sa pag build up computer mga boss solid kaayo akong money thank you.</p>
+         <p>As a tech enthusiast, I was thrilled with the wide range of computer peripherals available at MegaGear, and their knowledgeable staff helped me find the perfect components</p>
          <div class="stars">
             <i class="fas fa-star"></i>
             <i class="fas fa-star"></i>
@@ -87,11 +86,11 @@ if (!isset($_SESSION['user_id'])) {
             <i class="fas fa-star"></i>
             <i class="fas fa-star"></i>
          </div>
-         <h3>Benidick</h3>
+         <h3>Michael Johnson</h3>
       </div>
 
       <div class="box">
-         <p>Thank you Makotek! Very responsive and accomodating team Sulit pa build diri</p>
+         <p>GadgetWorld exceeded my expectations with their speedy delivery and competitive prices, making them my go-to store for computer accessories</p>
          <div class="stars">
             <i class="fas fa-star"></i>
             <i class="fas fa-star"></i>
@@ -99,11 +98,11 @@ if (!isset($_SESSION['user_id'])) {
             <i class="fas fa-star"></i>
             <i class="fas fa-star"></i>
          </div>
-         <h3>Christian</h3>
+         <h3>Sarah Thompson</h3>
       </div>
 
       <div class="box">
-         <p>10/10 Super grateful to Makoyek Team for this affordable and superb PC Build</p>
+         <p>The professionalism and expertise demonstrated by the team at ByteBazaar made my shopping experience for computer peripherals both enjoyable and informative</p>
          <div class="stars">
             <i class="fas fa-star"></i>
             <i class="fas fa-star"></i>
@@ -111,11 +110,11 @@ if (!isset($_SESSION['user_id'])) {
             <i class="fas fa-star"></i>
             <i class="fas fa-star"></i>
          </div>
-         <h3>Nicole Bardilas</h3>
+         <h3>David Wilson</h3>
          </div>
 
          <div class="box">
-         <p>I just found their page at the same day I bought the set. Super sulit, computer performance wise,  bundle set wise, price is just right and has freebies. It's all in already.</p>
+         <p>With their user-friendly website and impressive selection, PC Haven is definitely the ultimate destination for anyone in need of reliable computer peripherals</p>
          <div class="stars">
             <i class="fas fa-star"></i>
             <i class="fas fa-star"></i>
@@ -123,11 +122,11 @@ if (!isset($_SESSION['user_id'])) {
             <i class="fas fa-star"></i>
             <i class="fas fa-star"></i>
          </div>
-         <h3>Soon Yi</h3>
+         <h3>Emily Brown</h3>
          </div>
 
          <div class="box">
-         <p>Very responsive to queries. Even accomodated my request to buy on a Sunday</p>
+         <p>I've never been disappointed with the quality and durability of the products I purchased from ByteTech, making them my trusted choice for computer peripherals</p>
          <div class="stars">
             <i class="fas fa-star"></i>
             <i class="fas fa-star"></i>
@@ -135,7 +134,7 @@ if (!isset($_SESSION['user_id'])) {
             <i class="fas fa-star"></i>
             <i class="fas fa-star"></i>
          </div>
-         <h3>Alex</h3>
+         <h3>Robert Davis</h3>
          </div>
 
 
