@@ -58,10 +58,13 @@ if (isset($_GET['id'])) {
                <div class="product-name"><?php echo $product_name; ?></div>
                <div class="product-price">Price: ₱<?php echo $product_price; ?></div>
                <div class="product-description"><?php echo $product_description; ?></div>
-               <div class="product-review"><?php echo $product_review; ?></div>
                <div class="product-actions">
                   <a href="admin_products.php?update=<?php echo $product_id; ?>" class="update-btn">Update</a>
                   <a href="admin_products.php?delete=<?php echo $product_id; ?>" class="delete-btn" onclick="return confirm('Delete this product?');">Delete</a>
+               </div>
+               <div class="reviews"><br>
+                <h3> Reviews:</h3>
+                  <div class="product-review"><?php echo $product_review; ?></div>
                </div>
             </div>
          </div>
