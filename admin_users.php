@@ -65,7 +65,7 @@ if (isset($_GET['delete']) && isset($_GET['table'])) {
             <p>Email: <span><?php echo $fetch_users['email']; ?></span> </p>
             <p>User Type: <span style="color:<?php if ($fetch_users['user_type'] == 'user') {echo 'var(--orange)';} ?>"><?php echo $fetch_users['user_type']; ?></span> </p>
 
-            <a href="user_edit-profile.php?id=<?php echo $fetch_users['id']; ?>" onclick="return confirm('Update information?');" class="btn btn-primary">Update user</a>
+            <a href="user_edit-profile.php?" onclick="return confirm('Update information?');" class="btn btn-primary">Update user</a>
             <a href="admin_users.php?delete=<?php echo $fetch_users['id']; ?>&table=users" onclick="return confirm('Delete this user?');" class="delete-btn">Delete user</a>
          </div>
          <?php
