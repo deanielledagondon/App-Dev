@@ -87,7 +87,8 @@ if (!isset($_SESSION['user_id'])) {
    </div>
 </section>
 </section>
-<?php include 'footer.php'; ?>
+
+
 <!-- custom js file link  -->
 <script src="js/script.js"></script>
 </body>
