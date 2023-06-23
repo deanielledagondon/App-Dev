@@ -1,3 +1,18 @@
+<?php
+include 'config.php';
+
+session_start();
+
+$user_id = ''; // Initialize the variable
+
+if (isset($_SESSION['user_id'])) {
+   $user_id = $_SESSION['user_id'];
+}
+
+$select_cart_number = mysqli_query($conn, "SELECT * FROM `cart` WHERE user_id = '$user_id'") or die('query failed');
+$cart_rows_number = mysqli_num_rows($select_cart_number); 
+?>
+
 <header class="header">
 
    <div class="header-2">
