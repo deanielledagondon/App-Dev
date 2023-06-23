@@ -488,6 +488,13 @@ section{
    margin-bottom: 10px;
 }
 
+.products .box-container .box .description{
+   padding:1rem 0;
+   font-size: 2rem;
+   color:var(--black);
+}
+
+
 .product-description {
    margin-bottom: 10px;
 }
