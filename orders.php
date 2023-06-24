@@ -4,14 +4,19 @@ include 'config.php';
 
 session_start();
 
-
-
 if (!isset($_SESSION['user_id'])) {
    // If not, log them in using the guest user account
    $guest_user_id = 0; // Set the guest user ID
    $_SESSION['user_id'] = $guest_user_id; // Set the session user ID
 }
 $user_id = $_SESSION['user_id'];
+
+if (isset($_GET['cancel_order'])) {
+   $cancel_order_id = $_GET['cancel_order'];
+   mysqli_query($conn, "UPDATE `orders` SET payment_status = 'Cancelled' WHERE id = '$cancel_order_id'") or die('query failed');
+   $message[] = 'Order has been cancelled!';
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -59,23 +64,18 @@ $user_id = $_SESSION['user_id'];
          <p> Your orders: <span><?php echo $fetch_orders['total_products']; ?></span> </p>
          <p> Total price: <span>₱<?php echo $fetch_orders['total_price']; ?></span> </p>
          <p> Payment status: <span style="color:<?php if($fetch_orders['payment_status'] == 'Pending'){ echo 'red'; }else{ echo 'green'; } ?>;"><?php echo $fetch_orders['payment_status']; ?></span> </p>
-         </div>
+         <?php if ($fetch_orders['payment_status'] != 'Cancelled') { ?>
+            <a href="?cancel_order=<?php echo $fetch_orders['id']; ?>" class="option-btn">Cancel Order</a>
+         <?php } ?>
+      </div>
       <?php
-       }
-      }else{
+         }
+      } else {
          echo '<p class="empty">No orders placed yet!</p>';
       }
       ?>
    </div>
-
 </section>
-
-
-
-
-
-
-
 
 <?php include 'footer.php'; ?>
 
