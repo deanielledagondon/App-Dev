@@ -174,5 +174,4 @@ if (isset($_GET['update'])) {
    <script src="js/admin_script.js"></script>
 
 </body>
-
 </html>
