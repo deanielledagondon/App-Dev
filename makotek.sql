@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.0
+-- version 5.1.1
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 22, 2023 at 06:15 PM
--- Server version: 10.4.27-MariaDB
--- PHP Version: 8.2.0
+-- Generation Time: Jun 24, 2023 at 02:13 PM
+-- Server version: 10.4.22-MariaDB
+-- PHP Version: 8.1.1
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -42,17 +42,16 @@ CREATE TABLE `admins` (
   `password` varchar(100) NOT NULL,
   `user_type` varchar(20) NOT NULL DEFAULT 'admin',
   `admin_pp` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `admins`
 --
 
 INSERT INTO `admins` (`id`, `username`, `firstName`, `lastName`, `middleInitial`, `age`, `address`, `phoneNum`, `position`, `monthlySalary`, `email`, `password`, `user_type`, `admin_pp`) VALUES
-(5, '', 'Angel Deanielle Dagondon', '', '', 0, '', '', '', '', 'dean@gmail.com', '25d55ad283aa400af464c76d713c07ad', 'admin', 'uploads/PM02_20230302212124.png'),
-(6, 'username', 'rar', '', '', 0, '', '', '', '', 'rar@gmail.com', '87221652a79fc3c9b04cde0b335fdd5b', 'admin', 'uploads/University_of_Science_and_Technology_of_Southern_Philippines.png'),
-(7, 'abc', 'A', 'B', 'C', 12, 'aaa', '11111111', 'aaa', '11111', 'abc@gmail.com', '900150983cd24fb0d6963f7d28e17f72', 'admin', 'uploads/University_of_Science_and_Technology_of_Southern_Philippines.png'),
-(8, 'AAA', 'A', 'A', 'A', 20, 'aaaa', '121212121', 'aaa', '121212', 'aaa@gmail.com', '47bce5c74f589f4867dbd57e9ca9f808', 'admin', 'uploads/University_of_Science_and_Technology_of_Southern_Philippines.png');
+(1, 'dean', 'Angel Deanielle ', 'Dagondon', 'R.', 21, 'Address', '09111111111', 'Developer', '10000', 'dean@gmail.com', '25d55ad283aa400af464c76d713c07ad', 'admin', 'uploads/pic-3.jpg'),
+(2, 'llane', 'Llane Graceza', 'Benting', 'B.', 22, 'Address', '09111111111', 'Developer', '10000', 'llane@gmail.com', '87221652a79fc3c9b04cde0b335fdd5b', 'admin', 'uploads/pic-2.jpg'),
+(4, 'markB', 'Mark', 'Bontia', 'R.', 21, 'Address', '09111111111', 'Manager', '30000', 'markB@gmail.com', 'a38dc7d7a349d2d0d4a8dd0894dea1ee', 'admin', 'uploads/author-5.jpg');
 
 -- --------------------------------------------------------
 
@@ -63,18 +62,19 @@ INSERT INTO `admins` (`id`, `username`, `firstName`, `lastName`, `middleInitial`
 CREATE TABLE `cart` (
   `id` int(100) NOT NULL,
   `user_id` int(100) NOT NULL,
-  `name` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  `name` varchar(100) CHARACTER SET utf8 NOT NULL,
   `price` int(100) NOT NULL,
   `quantity` int(100) NOT NULL,
+  `description` varchar(100) NOT NULL,
   `image` varchar(100) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `cart`
 --
 
-INSERT INTO `cart` (`id`, `user_id`, `name`, `price`, `quantity`, `image`) VALUES
-(2, 3, 'AAA', 120, 0, 'University_of_Science_and_Technology_of_Southern_Philippines.png');
+INSERT INTO `cart` (`id`, `user_id`, `name`, `price`, `quantity`, `description`, `image`) VALUES
+(10, 4, 'AMD RYZEN 3 3200G PC PACKAGE', 18702, 1, '', 'AMD-RYZEN-3-3200G-PC-PACKAGE_720x.webp');
 
 -- --------------------------------------------------------
 
@@ -89,14 +89,14 @@ CREATE TABLE `message` (
   `email` varchar(100) NOT NULL,
   `number` varchar(12) NOT NULL,
   `message` varchar(500) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `message`
 --
 
 INSERT INTO `message` (`id`, `user_id`, `name`, `email`, `number`, `message`) VALUES
-(1, 5, 'daot', 'daot@gmail.com', '1212121', 'hi');
+(2, 3, 'wawa', 'wawa@gmail.com', '111', 'hi');
 
 -- --------------------------------------------------------
 
@@ -116,7 +116,18 @@ CREATE TABLE `orders` (
   `total_price` int(100) NOT NULL,
   `placed_on` varchar(50) NOT NULL,
   `payment_status` varchar(20) NOT NULL DEFAULT 'Pending'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `orders`
+--
+
+INSERT INTO `orders` (`id`, `user_id`, `name`, `number`, `email`, `method`, `address`, `total_products`, `total_price`, `placed_on`, `payment_status`) VALUES
+(1, '2', 'Mark Gaje', '111111', 'markG@gmail.com', 'cash on delivery', 'flat no. 121, Bayabas, CDO, Philippines - 8706', ', AMD RYZEN 3 3200G PC PACKAGE (1) ', 18700, '23-Jun-2023', 'Pending'),
+(2, '3', 'Llane Amh', '09551938918', '2232323@gmail.com', 'cash on delivery', 'flat no. 2323232, 23232, Libona, Philippines - 8706', ', INTEL CORE i3-10100 PC PACKAGE (2) , AMD RYZEN 3 3200G PC PACKAGE (1) ', 56102, '24-Jun-2023', 'Pending'),
+(3, '4', 'Nico B. Pacuit', '09551938918', 'nicopee21@gmail.com', 'cash on delivery', 'flat no. 322, Zone 9, Libona, Philippines - 8706', ', AMD RYZEN 3 3200G PC PACKAGE (2) , AMD ATHLON 200GE SYSTEM UNIT PACKAGE (1) ', 52886, '24-Jun-2023', 'Cancelled'),
+(4, '3', 'Nico', '232323232', '1212121@gmail.com', 'cash on delivery', 'flat no. 231231231, Address, Cagayan, Philippines - 23223', ', AMD RYZEN 3 3200G PC PACKAGE (1) ', 18702, '24-Jun-2023', 'Pending'),
+(5, '3', 'wawa', '11', 'wawa@gmail.com', 'cash on delivery', 'flat no. 12, Address, cdo, Philippines - 23223', ', AMD RYZEN 3 3200G PC PACKAGE (2) ', 37404, '24-Jun-2023', 'Completed');
 
 -- --------------------------------------------------------
 
@@ -130,18 +141,25 @@ CREATE TABLE `products` (
   `name` varchar(100) NOT NULL,
   `price` int(255) NOT NULL,
   `description` varchar(500) NOT NULL,
+  `stock_status` varchar(30) NOT NULL,
   `image` varchar(100) NOT NULL,
   `review` varchar(500) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `products`
 --
 
-INSERT INTO `products` (`id`, `user_id`, `name`, `price`, `description`, `image`, `review`) VALUES
-(1, 0, 'AAA', 120, 'AAA', 'University_of_Science_and_Technology_of_Southern_Philippines.png', ''),
-(2, 0, 'aaaa', 12000, 'aaa', 'cdn_shopify_com-INTEL-CORE-I5-10400-SYSTEM-UNIT-PACKAGE_1024x1024@2x.jpg', '[] sasdasdasdasaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa'),
-(3, 0, 'cccccd', 3200, 'cd', 'logoo.png', '');
+INSERT INTO `products` (`id`, `user_id`, `name`, `price`, `description`, `stock_status`, `image`, `review`) VALUES
+(5, 0, 'INTEL CORE i3-10100 PC PACKAGE', 18700, 'This SYSTEM UNIT is powered by INTEL CORE i3-10100  with integrated graphics that power you through the day, for work from home, online class and gaming', '', 'INTEL-CORE-i3-10100-PC-PACKAGE_720x.webp', ''),
+(6, 0, 'AMD RYZEN 3 3200G PC PACKAGE', 18702, 'This SYSTEM UNIT is powered by AMD RYZEN 3 3200G  with integrated graphics that power you through the day, for work from home, online class and gaming', '', 'AMD-RYZEN-3-3200G-PC-PACKAGE_720x.webp', 'nicopacs: \nnicopacs: \nnicopacs: Hi\nnicopacs: He\nwawa: hehe\nwawa: hello world\nwawa: hello world\nwawa: hello world\nwawa: hello world\nwawa: eweweew\nwawa: hi\nwawa: heheh\n'),
+(7, 0, 'AMD A12 PC PACKAGE', 14700, 'This SYSTEM UNIT is powered by AMD A12 8800E with integrated graphics that power you through the day, for work from home, online class and gaming', '', 'AMD-A12-PC-PACKAGE_720x.webp', ''),
+(8, 0, 'AMD RYZEN 3 4350G SYSTEM UNIT PACKAGE', 27578, 'This SYSTEM UNIT is powered by AMD RYZEN 3 4350G  with integrated graphics that power you through the day, for work from home, online class and gaming', '', 'AMD-RYZEN-3-4350G-SYSTEM-UNIT-PACKAGE_720x.webp', ''),
+(9, 0, 'AMD ATHLON 200GE SYSTEM UNIT PACKAGE', 15482, 'MD ATHLON 200GE 3.2GHz (5MB CACHE 2-CORES 4-THREADS 35W) WITH VEGA 3 GRAPHICS AM4 PROCESSOR', '', 'AMD-ATHLON-200GE-SYSTEM-UNIT-PACKAGE_720x.webp', ''),
+(10, 0, 'RYZEN 3 4350G PC BUNDLE PROMO PACKAGE', 24466, 'This Desktop PC is powered by RYZEN 3 4350G with integrated graphics that power you through the day, for work from home, online class and gaming', '', 'RYZEN-3-4350G-PC-BUNDLE-PROMO-PACKAGE_720x.webp', ''),
+(11, 0, 'AMD RYZEN 5 PRO 4650G PC BUNDLE PROMO PACKAGE', 31199, 'This Desktop PC is powered by AMD RYZEN 5 PRO 4650G with integrated graphics that power you through the day, for work from home, online class and gaming', '', 'AMD-RYZEN-5-PRO-4650G-PC-BUNDLE-PROMO-PACKAGE_720x.webp', ''),
+(12, 0, 'AMD RYZEN 5 PRO 5650G CHRISTMAS BUNDLE PROMO (PC PACKAGE)', 49779, 'This Desktop PC is powered by AMD RYZEN 5 PRO 5650G SERIES, the latest generation processor by AMD  that can power you through the day, for work from home, online class and gaming', '', 'AMD-RYZEN-5-PRO-5650G-CHRISTMAS-BUNDLE-PROMO-PC-PACKAGE_720x.webp', ''),
+(13, 0, 'AMD RYZEN 3 3200G WITH VEGA 8 GRAPHICS DESKTOP BUNDLE (PACKAGE)', 31257, 'This Desktop PC is powered by AMD Ryzen 3 3200G with integrated graphics that power you through the day, for work from home, online class and gaming', '', 'AMD-RYZEN-3-3200G-WITH-VEGA-8-GRAPHICS-DESKTOP-BUNDLE-PACKAGE_720x.webp', '');
 
 -- --------------------------------------------------------
 
@@ -162,19 +180,18 @@ CREATE TABLE `users` (
   `address` varchar(100) NOT NULL,
   `user_type` varchar(20) NOT NULL DEFAULT 'user',
   `pp` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `users`
 --
 
 INSERT INTO `users` (`id`, `firstName`, `lastName`, `middleInitial`, `username`, `email`, `password`, `age`, `phoneNum`, `address`, `user_type`, `pp`) VALUES
-(1, 'Angel Deanielle Dagondon', '', '', '0', 'dean@gmail.com', '25d55ad283aa400af464c76d713c07ad', 0, '', '', 'user', 'uploads/defaultpp.png'),
-(2, 'Mark Bontia', '', '', '0', 'mark@gmail.com', '25d55ad283aa400af464c76d713c07ad', 0, '', '', 'user', 'uploads/Untitled.png'),
-(3, 'Devil', 'May', 'C', 'DevilMayCry', 'devil@gmail.com', 'e6c94a28c4e2f8890eedab2669785f73', 21, '', 'DevilMayCry', 'user', 'uploads/University_of_Science_and_Technology_of_Southern_Philippines.png'),
-(4, 'Daot', 'Mani', 'O', 'daot', 'daot@gmail.com', '16205c4e1ade5a7a9e360312568aefec', 36, '', 'daot', 'user', 'uploads/University_of_Science_and_Technology_of_Southern_Philippines.png'),
-(5, 'H', 'M', 'M', 'hmm', 'hmm@gmail.com', 'a5175faf6dc24adc7eda4f9cfc721b47', 12, '1111111', 'aaa', 'user', 'uploads/author-1.jpg'),
-(6, 'a', 'a', 'a', 'aaaaa', 'a1@gmail.com', '8a8bb7cd343aa2ad99b7d762030857a2', 12, '3333', 'aaaa', 'user', 'uploads/logoo.png');
+(1, 'Mark Bontia', '', '', '0', 'mark@gmail.com', '25d55ad283aa400af464c76d713c07ad', 0, '', '', 'user', 'uploads/Untitled.png'),
+(2, 'Makurui', 'Bontia', 'C.', 'makurui', 'makurui@gmail.com', '719b8cbe31cdb39eea400b2bd543869e', 21, '111111111', 'Address', 'user', 'uploads/author-4.jpg'),
+(3, 'Joshua', 'Bracho', 'R.', 'wawa', 'wawa@gmail.com', '892a9944cf14665375630c06a1902152', 21, '111111111', 'Address', 'user', 'uploads/author-5.jpg'),
+(4, 'Nico', 'Pacuit', 'B.', 'nicopacs', 'nico1@gmail.com', 'd0970714757783e6cf17b26fb8e2298f', 21, '09551938918', 'Libona ', 'user', 'uploads/author-1.jpg'),
+(5, 'Llane', 'Benting', 'D', 'llane', 'llane@gmail.com', 'e10adc3949ba59abbe56e057f20f883e', 22, '09551938918', 'osmena', 'user', 'uploads/451675.image0.jpg');
 
 -- --------------------------------------------------------
 
@@ -193,7 +210,25 @@ CREATE TABLE `user_reviews` (
   `product_qty` int(100) NOT NULL,
   `review` varchar(500) NOT NULL,
   `image` varchar(100) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `user_reviews`
+--
+
+INSERT INTO `user_reviews` (`id`, `user_id`, `username`, `email`, `product_id`, `product_name`, `product_price`, `product_qty`, `review`, `image`) VALUES
+(1, 4, 'nicopacs', 'nico1@gmail.com', 6, 'AMD RYZEN 3 3200G PC PACKAGE', 18702, 0, '', 'AMD-RYZEN-3-3200G-PC-PACKAGE_720x.webp'),
+(2, 4, 'nicopacs', 'nico1@gmail.com', 6, 'AMD RYZEN 3 3200G PC PACKAGE', 18702, 0, '', 'AMD-RYZEN-3-3200G-PC-PACKAGE_720x.webp'),
+(3, 4, 'nicopacs', 'nico1@gmail.com', 6, 'AMD RYZEN 3 3200G PC PACKAGE', 18702, 0, 'Hi', 'AMD-RYZEN-3-3200G-PC-PACKAGE_720x.webp'),
+(4, 4, 'nicopacs', 'nico1@gmail.com', 6, 'AMD RYZEN 3 3200G PC PACKAGE', 18702, 0, 'He', 'AMD-RYZEN-3-3200G-PC-PACKAGE_720x.webp'),
+(5, 3, 'wawa', 'wawa@gmail.com', 6, 'AMD RYZEN 3 3200G PC PACKAGE', 18702, 0, 'hehe', 'AMD-RYZEN-3-3200G-PC-PACKAGE_720x.webp'),
+(6, 3, 'wawa', 'wawa@gmail.com', 6, 'AMD RYZEN 3 3200G PC PACKAGE', 18702, 0, 'hello world', 'AMD-RYZEN-3-3200G-PC-PACKAGE_720x.webp'),
+(7, 3, 'wawa', 'wawa@gmail.com', 6, 'AMD RYZEN 3 3200G PC PACKAGE', 18702, 0, 'hello world', 'AMD-RYZEN-3-3200G-PC-PACKAGE_720x.webp'),
+(8, 3, 'wawa', 'wawa@gmail.com', 6, 'AMD RYZEN 3 3200G PC PACKAGE', 18702, 0, 'hello world', 'AMD-RYZEN-3-3200G-PC-PACKAGE_720x.webp'),
+(9, 3, 'wawa', 'wawa@gmail.com', 6, 'AMD RYZEN 3 3200G PC PACKAGE', 18702, 0, 'hello world', 'AMD-RYZEN-3-3200G-PC-PACKAGE_720x.webp'),
+(10, 3, 'wawa', 'wawa@gmail.com', 6, 'AMD RYZEN 3 3200G PC PACKAGE', 18702, 0, 'eweweew', 'AMD-RYZEN-3-3200G-PC-PACKAGE_720x.webp'),
+(11, 3, 'wawa', 'wawa@gmail.com', 6, 'AMD RYZEN 3 3200G PC PACKAGE', 18702, 0, 'hi', 'AMD-RYZEN-3-3200G-PC-PACKAGE_720x.webp'),
+(12, 3, 'wawa', 'wawa@gmail.com', 6, 'AMD RYZEN 3 3200G PC PACKAGE', 18702, 0, 'heheh', 'AMD-RYZEN-3-3200G-PC-PACKAGE_720x.webp');
 
 --
 -- Indexes for dumped tables
@@ -249,43 +284,43 @@ ALTER TABLE `user_reviews`
 -- AUTO_INCREMENT for table `admins`
 --
 ALTER TABLE `admins`
-  MODIFY `id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `cart`
 --
 ALTER TABLE `cart`
-  MODIFY `id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 
 --
 -- AUTO_INCREMENT for table `message`
 --
 ALTER TABLE `message`
-  MODIFY `id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `id` int(100) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `products`
 --
 ALTER TABLE `products`
-  MODIFY `id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `user_reviews`
 --
 ALTER TABLE `user_reviews`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

@@ -40,49 +40,7 @@ if (mysqli_num_rows($select_orders) > 0) {
 
    <style>
       /* Styles for the orders table */
-      .orders .status-section {
-         margin-bottom: 30px;
-      }
 
-      .orders .status-section h2 {
-         margin-bottom: 10px;
-      }
-
-      .orders .status-section .box-container {
-         display: flex;
-         flex-wrap: wrap;
-         margin-top: 20px;
-      }
-
-      .orders .status-section .table {
-         width: 100%;
-         border-collapse: collapse;
-         margin-bottom: 20px;
-      }
-
-      .orders .status-section .table td,
-      .orders .status-section .table th {
-         border: 1px solid #ddd;
-         padding: 8px;
-         font-size: 16px; /* Adjust the font size as desired */
-
-      }
-
-      .orders .status-section .table tr:nth-child(even) {
-         background-color: #f2f2f2;
-      }
-
-      .orders .status-section .table tr:hover {
-         background-color: #ddd;
-      }
-
-      .orders .status-section .table th {
-         padding-top: 12px;
-         padding-bottom: 12px;
-         text-align: left;
-         background-color: #04AA6D;
-         color: white;
-      }
 
       /* Additional styles for the overall layout */
       /* ... */
