@@ -17,6 +17,12 @@ if (isset($_GET['cancel_order'])) {
    $message[] = 'Order has been cancelled!';
 }
 
+if(isset($_GET['completed_order'])) {
+   $completed_order_id = $_GET['completed_order'];
+   mysqli_query ($conn, "UPDATE `orders` SET payment_status = 'Completed' WHERE id = '$completed_order_id'") or die('query failed');
+   $message[] = 'Order has been delivered!';
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -64,9 +70,22 @@ if (isset($_GET['cancel_order'])) {
          <p> Your orders: <span><?php echo $fetch_orders['total_products']; ?></span> </p>
          <p> Total price: <span>₱<?php echo $fetch_orders['total_price']; ?></span> </p>
          <p> Payment status: <span style="color:<?php if($fetch_orders['payment_status'] == 'Pending'){ echo 'red'; }else{ echo 'green'; } ?>;"><?php echo $fetch_orders['payment_status']; ?></span> </p>
-         <?php if ($fetch_orders['payment_status'] != 'Cancelled') { ?>
-            <a href="?cancel_order=<?php echo $fetch_orders['id']; ?>" class="option-btn">Cancel Order</a>
-         <?php } ?>
+         <?php
+         if ($fetch_orders['payment_status'] != 'Cancelled') {
+            if ($fetch_orders['payment_status'] == 'Completed') {
+               $buttonLabel = 'Completed';
+               $link = "?completed_order=" . $fetch_orders['id'];
+               $onclick = "return false";
+            } else {
+               $buttonLabel = 'Cancel Order';
+               $link = "?cancel_order=" . $fetch_orders['id'];
+               $onclick = "";
+            }
+         ?>
+         <a href="<?php echo $link; ?>" class="option-btn" onclick="<?php echo $onclick; ?>"><?php echo $buttonLabel; ?></a>
+<?php } ?>
+
+         
       </div>
       <?php
          }

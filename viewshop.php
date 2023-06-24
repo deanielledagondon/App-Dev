@@ -28,14 +28,13 @@ if(isset($_POST['add_to_cart'])){
    $product_price = $_POST['product_price'];
    $product_description = $_POST['description'];
    $product_image = $_POST['product_image'];
-   $product_quantity = $_POST['product_quantity'];
 
    $check_cart_numbers = mysqli_query($conn, "SELECT * FROM `cart` WHERE name = '$product_name' AND user_id = '$user_id'") or die('query failed');
 
    if(mysqli_num_rows($check_cart_numbers) > 0){
       $message[] = 'Already added to cart!';
    } else {
-      mysqli_query($conn, "INSERT INTO `cart` (user_id, name, price, quantity, image) VALUES ('$user_id', '$product_name', '$product_price', '$product_quantity', '$product_image')") or die('query failed');
+      mysqli_query($conn, "INSERT INTO `cart` (user_id, name, price, image) VALUES ('$user_id', '$product_name', '$product_price', '$product_image')") or die('query failed');
       $message[] = 'Product added to cart!';
    }
 }
@@ -54,7 +53,7 @@ if(isset($_POST['submit_review'])){
       $user_reviews_id = $user_data['id'];
 
       $insert_review_query = "INSERT INTO `user_reviews` (user_id, username, email, product_id, product_name, product_price, product_qty, review, image)
-      VALUES ('$user_id', '$username', '$email', '$product_id', '$product_name', '$product_price', '$product_qty', '$review', '$product_image')";
+      VALUES ('$user_id', '$username', '$email', '$product_id', '$product_name', '$product_price', '$review', '$product_image')";
       mysqli_query($conn, $insert_review_query) or die('query failed');
 
       $updated_review = "$username: " . $review; // Added colon after the username
@@ -98,7 +97,6 @@ if(isset($_POST['submit_review'])){
             <div class="product-description"><?php echo $product_description; ?></div>
             <div class="product-actions">
                <form action="" method="post" class="box">
-                  <input type="number" min="1" name="product_quantity" value="1" class="qty">
                   <input type="hidden" name="product_name" value="<?php echo $product_name; ?>">
                   <input type="hidden" name="product_price" value="<?php echo $product_price; ?>">
                   <input type="hidden" name="description" value="<?php echo $product_description; ?>">
@@ -159,7 +157,6 @@ if(isset($_POST['submit_review'])){
                <img class="image" src="uploaded_img/<?php echo $fetch_products['image']; ?>" alt="" height="100" width="260">
                <div class="name"><?php echo $fetch_products['name']; ?></div>
                <div class="price">₱<?php echo $fetch_products['price']; ?></div>
-               <input type="number" min="1" name="product_quantity" value="1" class="qty">
                <input type="hidden" name="product_name" value="<?php echo $fetch_products['name']; ?>">
                <input type="hidden" name="product_price" value="<?php echo $fetch_products['price']; ?>">
                <input type="hidden" name="description" value="<?php echo $fetch_products['description']; ?>">

@@ -604,47 +604,48 @@ section{
    width: 100%;
 }
 
-.orders .box-container{
-   display: grid;
-   grid-template-columns: repeat(auto-fit, 30rem);
-   justify-content: center;
-   gap:1.5rem;
-   max-width: 1200px;
-   margin:0 auto;
-   align-items: flex-start;
+.orders .status-section {
+   margin-bottom: 30px;
 }
 
-.orders .box-container .box{
-   background-color: var(--white);
-   padding:2rem;
-   border:var(--border);
-   box-shadow: var(--box-shadow);
-   border-radius: .5rem;
+.orders .status-section h2 {
+   margin-bottom: 10px;
 }
 
-.orders .box-container .box p{
-   padding-bottom: 1rem;
-   font-size: 2rem;
-   color:var(--light-color);
+.orders .status-section .box-container {
+   display: flex;
+   flex-wrap: wrap;
+   margin-top: 20px;
 }
 
-.orders .box-container .box p span{
-   color:var(--purple);
-}
-
-.orders .box-container .box form{
-   text-align: center;
-}
-
-.orders .box-container .box form select{
-   border-radius: .5rem;
-   margin:.5rem 0;
+.orders .status-section .table {
    width: 100%;
-   background-color: var(--light-bg);
-   border:var(--border);
-   padding:1.2rem 1.4rem;
-   font-size: 1.8rem;
-   color:var(--black);
+   border-collapse: collapse;
+   margin-bottom: 20px;
+}
+
+.orders .status-section .table td,
+.orders .status-section .table th {
+   border: 1px solid #ddd;
+   padding: 8px;
+   font-size: 16px; /* Adjust the font size as desired */
+
+}
+
+.orders .status-section .table tr:nth-child(even) {
+   background-color: #f2f2f2;
+}
+
+.orders .status-section .table tr:hover {
+   background-color: #ddd;
+}
+
+.orders .status-section .table th {
+   padding-top: 12px;
+   padding-bottom: 12px;
+   text-align: left;
+   background-color: #04AA6D;
+   color: white;
 }
 
 .users .box-container{
