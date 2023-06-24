@@ -2,7 +2,7 @@
 include 'config.php';
 session_start();
 
-$id = $_SESSION['user_id'];
+$id = $_GET['id'];
 
 // Fetch the user's information from the database based on the user ID
 $findresult = mysqli_query($conn, "SELECT * FROM `users` WHERE id='$id'");
@@ -88,9 +88,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         }
     }
 
-    if ($_FILES['profileImage']['name'] != '') {
-        $tmpFilePath = $_FILES['profileImage']['tmp_name'];
-        $uploadPath = 'uploads/' . $_FILES['profileImage']['name'];
+    if ($_FILES['admin_profileImage']['name'] != '') {
+        $tmpFilePath = $_FILES['admin_profileImage']['tmp_name'];
+        $uploadPath = 'uploads/' . $_FILES['admin_profileImage']['name'];
 
         if (move_uploaded_file($tmpFilePath, $uploadPath)) {
             if (mysqli_query($conn, "UPDATE users SET pp='$uploadPath' WHERE email='$email'")) {
@@ -149,9 +149,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                     <div class="form-group">
                                       <div class="row"> 
                                           <div class="col">
-                                        <label for="profileImage">Profile Image:</label>
+                                        <label for="admin_profileImage">Profile Image:</label>
                                         </div>
-                                           <input type="file" class="form-control" id="profileImage" name="profileImage">
+                                           <input type="file" class="form-control" id="admin_profileImage" name="admin_profileImage">
                                         </div>
                                     </div>
                                 </div>                                    
@@ -192,7 +192,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                         <input type="submit" class="update-btn" value="Save Profile">
                                     </div>
                                     <div class="form-group">
+                                    <?php if (isset($_SESSION["admin_id"])): ?>
+                                        <a href="admin_users.php" class="btn">Back</a>
+                                    <?php else: ?>
                                         <a href="home.php" class="btn">Back</a>
+                                    <?php endif; ?>
                                 </div>
                                 </form>
                             </center>
