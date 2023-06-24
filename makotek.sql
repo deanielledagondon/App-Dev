@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.1.1
+-- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 24, 2023 at 02:13 PM
--- Server version: 10.4.22-MariaDB
--- PHP Version: 8.1.1
+-- Generation Time: Jun 24, 2023 at 03:17 PM
+-- Server version: 10.4.27-MariaDB
+-- PHP Version: 8.2.0
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -42,7 +42,7 @@ CREATE TABLE `admins` (
   `password` varchar(100) NOT NULL,
   `user_type` varchar(20) NOT NULL DEFAULT 'admin',
   `admin_pp` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `admins`
@@ -62,12 +62,12 @@ INSERT INTO `admins` (`id`, `username`, `firstName`, `lastName`, `middleInitial`
 CREATE TABLE `cart` (
   `id` int(100) NOT NULL,
   `user_id` int(100) NOT NULL,
-  `name` varchar(100) CHARACTER SET utf8 NOT NULL,
+  `name` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
   `price` int(100) NOT NULL,
   `quantity` int(100) NOT NULL,
   `description` varchar(100) NOT NULL,
   `image` varchar(100) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `cart`
@@ -89,7 +89,7 @@ CREATE TABLE `message` (
   `email` varchar(100) NOT NULL,
   `number` varchar(12) NOT NULL,
   `message` varchar(500) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `message`
@@ -115,19 +115,20 @@ CREATE TABLE `orders` (
   `total_products` varchar(1000) NOT NULL,
   `total_price` int(100) NOT NULL,
   `placed_on` varchar(50) NOT NULL,
-  `payment_status` varchar(20) NOT NULL DEFAULT 'Pending'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+  `payment_status` varchar(20) NOT NULL DEFAULT 'Pending',
+  `delivery_status` varchar(20) NOT NULL DEFAULT 'Pending'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `orders`
 --
 
-INSERT INTO `orders` (`id`, `user_id`, `name`, `number`, `email`, `method`, `address`, `total_products`, `total_price`, `placed_on`, `payment_status`) VALUES
-(1, '2', 'Mark Gaje', '111111', 'markG@gmail.com', 'cash on delivery', 'flat no. 121, Bayabas, CDO, Philippines - 8706', ', AMD RYZEN 3 3200G PC PACKAGE (1) ', 18700, '23-Jun-2023', 'Pending'),
-(2, '3', 'Llane Amh', '09551938918', '2232323@gmail.com', 'cash on delivery', 'flat no. 2323232, 23232, Libona, Philippines - 8706', ', INTEL CORE i3-10100 PC PACKAGE (2) , AMD RYZEN 3 3200G PC PACKAGE (1) ', 56102, '24-Jun-2023', 'Pending'),
-(3, '4', 'Nico B. Pacuit', '09551938918', 'nicopee21@gmail.com', 'cash on delivery', 'flat no. 322, Zone 9, Libona, Philippines - 8706', ', AMD RYZEN 3 3200G PC PACKAGE (2) , AMD ATHLON 200GE SYSTEM UNIT PACKAGE (1) ', 52886, '24-Jun-2023', 'Cancelled'),
-(4, '3', 'Nico', '232323232', '1212121@gmail.com', 'cash on delivery', 'flat no. 231231231, Address, Cagayan, Philippines - 23223', ', AMD RYZEN 3 3200G PC PACKAGE (1) ', 18702, '24-Jun-2023', 'Pending'),
-(5, '3', 'wawa', '11', 'wawa@gmail.com', 'cash on delivery', 'flat no. 12, Address, cdo, Philippines - 23223', ', AMD RYZEN 3 3200G PC PACKAGE (2) ', 37404, '24-Jun-2023', 'Completed');
+INSERT INTO `orders` (`id`, `user_id`, `name`, `number`, `email`, `method`, `address`, `total_products`, `total_price`, `placed_on`, `payment_status`, `delivery_status`) VALUES
+(1, '2', 'Mark Gaje', '111111', 'markG@gmail.com', 'cash on delivery', 'flat no. 121, Bayabas, CDO, Philippines - 8706', ', AMD RYZEN 3 3200G PC PACKAGE (1) ', 18700, '23-Jun-2023', 'Pending', 'Pending'),
+(2, '3', 'Llane Amh', '09551938918', '2232323@gmail.com', 'cash on delivery', 'flat no. 2323232, 23232, Libona, Philippines - 8706', ', INTEL CORE i3-10100 PC PACKAGE (2) , AMD RYZEN 3 3200G PC PACKAGE (1) ', 56102, '24-Jun-2023', 'Pending', 'Pending'),
+(3, '4', 'Nico B. Pacuit', '09551938918', 'nicopee21@gmail.com', 'cash on delivery', 'flat no. 322, Zone 9, Libona, Philippines - 8706', ', AMD RYZEN 3 3200G PC PACKAGE (2) , AMD ATHLON 200GE SYSTEM UNIT PACKAGE (1) ', 52886, '24-Jun-2023', 'Cancelled', 'Pending'),
+(4, '3', 'Nico', '232323232', '1212121@gmail.com', 'cash on delivery', 'flat no. 231231231, Address, Cagayan, Philippines - 23223', ', AMD RYZEN 3 3200G PC PACKAGE (1) ', 18702, '24-Jun-2023', 'Pending', 'Pending'),
+(5, '3', 'wawa', '11', 'wawa@gmail.com', 'cash on delivery', 'flat no. 12, Address, cdo, Philippines - 23223', ', AMD RYZEN 3 3200G PC PACKAGE (2) ', 37404, '24-Jun-2023', 'Completed', 'Pending');
 
 -- --------------------------------------------------------
 
@@ -144,7 +145,7 @@ CREATE TABLE `products` (
   `stock_status` varchar(30) NOT NULL,
   `image` varchar(100) NOT NULL,
   `review` varchar(500) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `products`
@@ -180,7 +181,7 @@ CREATE TABLE `users` (
   `address` varchar(100) NOT NULL,
   `user_type` varchar(20) NOT NULL DEFAULT 'user',
   `pp` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `users`
@@ -210,7 +211,7 @@ CREATE TABLE `user_reviews` (
   `product_qty` int(100) NOT NULL,
   `review` varchar(500) NOT NULL,
   `image` varchar(100) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `user_reviews`

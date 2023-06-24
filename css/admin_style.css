@@ -134,10 +134,14 @@ section{
 
 .update-btn{
    background-color: var(--green);
+   padding: 1rem 2rem; /* Adjust the padding as needed */
+
 }
 
 .delete-btn{
    background-color: var(--red);
+   padding: 1rem 2rem; /* Adjust the padding as needed */
+
 }
 
 .white-btn:hover{
@@ -199,6 +203,120 @@ section{
 .header .flex .icons div:hover{
    color:var(--purple);
 }
+
+
+
+.users {
+   padding: 20px;
+}
+
+.users .title {
+   font-size: 24px;
+   margin-bottom: 20px;
+}
+
+.table {
+   width: 100%;
+   border-collapse: collapse;
+   margin-bottom: 20px;
+}
+
+.table th,
+.table td {
+   border: 1px solid #ddd;
+   padding: 8px;
+   font-size: 16px;
+}
+
+.table thead th {
+   background-color: #04AA6D;
+   color: white;
+}
+
+.table tbody tr:nth-child(even) {
+   background-color: #f2f2f2;
+}
+
+.table tbody tr:hover {
+   background-color: #ddd;
+}
+
+.btn {
+   display: inline-block;
+   padding: 8px 16px;
+   font-size: 14px;
+   border: none;
+   border-radius: 4px;
+   cursor: pointer;
+   transition: background-color 0.3s;
+}
+
+.btn-primary {
+   background-color: #04AA6D;
+   color: white;
+}
+
+.delete-btn {
+   background-color: #DC3545;
+   color: white;
+   margin-left: 10px;
+}
+
+.delete-btn:hover {
+   background-color: #BB2D3B;
+}
+
+
+.dropdown {
+   position: relative;
+   display: inline-block;
+   color:var(--black);
+   background-color: white;
+
+
+}
+
+.dropbtn {
+   padding: 8px;
+   border: none;
+   cursor: pointer;
+   font-size: 2rem;
+   background-color: white;
+   color:var(--black);
+}
+
+.dropdown-content {
+   display: none;
+   position: absolute;
+   color:var(--black);
+
+   background-color: white;
+   min-width: 160px;
+   box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+   z-index: 1;
+}
+
+.dropdown-content a {
+   background-color: white;
+
+   color:var(--black);
+   padding: 12px 16px;
+   text-decoration: none;
+   display: block;
+}
+
+.dropdown-content a:hover {
+   color:var(--purple);
+}
+
+.dropdown:hover .dropdown-content {
+   display: block;
+   background-color: white;
+   color:var(--black);
+
+
+}
+
 
 .header .flex .account-box{
    position: absolute;

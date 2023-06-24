@@ -81,7 +81,8 @@ if (mysqli_num_rows($select_orders) > 0) {
                            <th>Total Products</th>
                            <th>Total Price</th>
                            <th>Payment Method</th>
-                           <th>Status</th>
+                           <th>Payment Status</th>
+                           <th>Delivery Status</th>
                         </tr>
                      </thead>
                      <tbody>
@@ -97,6 +98,8 @@ if (mysqli_num_rows($select_orders) > 0) {
                               <td>₱<?php echo $order['total_price']; ?></td>
                               <td><?php echo $order['method']; ?></td>
                               <td><?php echo $order['payment_status']; ?></td>
+                              <td><?php echo $order['delivery_status']; ?></td>
+
                            </tr>
                         <?php } ?>
                      </tbody>
