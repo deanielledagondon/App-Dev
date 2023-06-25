@@ -50,23 +50,6 @@ $category_filters = isset($_GET['products_category']) ? $_GET['products_category
     <!-- custom css file link  -->
     <link rel="stylesheet" href="css/style.css">
 </head>
-<!-- partial nga css paki improve ko-->
-<style>
-    
-    .sidebar {
-        width: 20%;
-        float: left;
-        background-color: #f5f5f5;
-        padding: 20px;
-    }
-
-    .main-content {
-        width: 80%;
-        float: right;
-        padding: 20px;
-    }
-</style>
-
 <body>
 
     <?php include 'header.php'; ?>
@@ -75,7 +58,6 @@ $category_filters = isset($_GET['products_category']) ? $_GET['products_category
         <h3>Filters</h3>
         <br>
         <h4>Categories</h4>
-        <!-- diri ang ui sa sidebar nga naay checkbox-->
         <form method="GET">
             <label><input type="checkbox" name="products_category[]" value="Computer Package" <?php if (in_array("Computer Package", $category_filters)) echo "checked"; ?>> Computer Package</label><br>
             <label><input type="checkbox" name="products_category[]" value="Monitor" <?php if (in_array("Monitor", $category_filters)) echo "checked"; ?>> Monitor</label><br>

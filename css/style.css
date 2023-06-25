@@ -15,6 +15,56 @@
    --box-shadow:0 .5rem 1rem rgba(0,0,0,.1);
 }
 
+    
+.sidebar {
+   width: 15%;
+   margin-left: 10px;
+   margin-right: 10px;
+
+   float: left;
+   background-color: #f5f5f5;
+   padding: 20px;
+   font-size: 20px; /* Example font size */
+}
+
+.main-content {
+   width: 80%;
+   float: right;
+   padding: 20px;
+   font-size: 20px; /* Example font size */
+}
+
+.input-group-mb3 {
+   display: flex;
+   align-items: center;
+ }
+ 
+ .input-group-mb3 input[type="text"] {
+   flex: 1;
+   width: 50rem;
+   padding: 10px;
+   font-size: 16px;
+   border: 1px solid #ccc;
+   border-radius: 4px;
+ }
+ 
+ .input-group-mb3 button {
+   padding: 10px 20px;
+   font-size: 16px;
+   background-color: #8e44ad;
+   color: #fff;
+   border: none;
+   border-radius: 4px;
+   cursor: pointer;
+ }
+ 
+ .input-group-mb3 button:hover {
+   background-color: #8e44ad;
+ }
+ 
+ 
+
+
 *{
    font-family: 'Rubik', sans-serif;
    margin:0; padding:0;
