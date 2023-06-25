@@ -41,6 +41,6 @@
    </div>
 
    
-   <p class="credit"> &copy; Makotek Computer Sales Inc <?php echo date('Y'); ?> All rights reserved. </p>
+   <p class="credit"> &copy; Makotek Shopping Cart System <?php echo date('Y'); ?> All rights reserved. </p>
    
 </section>

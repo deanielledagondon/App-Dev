@@ -65,7 +65,6 @@ CREATE TABLE `cart` (
   `name` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
   `price` int(100) NOT NULL,
   `quantity` int(100) NOT NULL,
-  `description` varchar(100) NOT NULL,
   `image` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -138,7 +137,6 @@ CREATE TABLE `products` (
   `name` varchar(100) NOT NULL,
   `price` int(255) NOT NULL,
   `description` varchar(500) NOT NULL,
-  `stock_status` varchar(30) NOT NULL,
   `image` varchar(100) NOT NULL,
   `review` varchar(500) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
