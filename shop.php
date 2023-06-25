@@ -7,85 +7,93 @@ if (!isset($_SESSION['user_id'])) {
     // If not, log them in using the guest user account
     $guest_user_id = 0; // Set the guest user ID
     $_SESSION['user_id'] = $guest_user_id; // Set the session user ID
- }
- 
- $user_id = $_SESSION['user_id'];
- 
- if (isset($_POST['add_to_cart'])) {
- 
-    if ($user_id == 0) {
-       // Guest user attempting to add a product to cart
-       echo "<script>alert('Please login first to add the product to cart!');</script>";
-    } else {
- 
-   $product_name = $_POST['product_name'];
-   $product_price = $_POST ['product_price'];
-   $product_image = $_POST['product_image'];
-   $product_quantity = $_POST['product_quantity'];
-   $check_cart_numbers = mysqli_query($conn, "SELECT * FROM `cart` WHERE name = '$product_name' AND user_id = '$user_id'") or die('query failed');
-   if(mysqli_num_rows($check_cart_numbers) > 0){
-      $message[] = 'Already added to cart!';
-   }else{
-      mysqli_query($conn, "INSERT INTO `cart`(user_id, name, price, quantity, image) VALUES('$user_id', '$product_name', '$product_price', '$product_quantity', '$product_image')") or die('query failed');
-      $message[] = 'Product added to cart!';
-   }
 }
- }
  
+$user_id = $_SESSION['user_id'];
+
+if (isset($_POST['add_to_cart'])) {
+    if ($user_id == 0) {
+        // Guest user attempting to add a product to cart
+        echo "<script>alert('Please login first to add the product to cart!');</script>";
+    } else {
+        $product_name = $_POST['product_name'];
+        $product_price = $_POST['product_price'];
+        $product_image = $_POST['product_image'];
+        $product_quantity = $_POST['product_quantity'];
+
+        $check_cart_numbers = mysqli_query($conn, "SELECT * FROM `cart` WHERE name = '$product_name' AND user_id = '$user_id'") or die('query failed');
+        if (mysqli_num_rows($check_cart_numbers) > 0) {
+            $message[] = 'Already added to cart!';
+        } else {
+            mysqli_query($conn, "INSERT INTO `cart`(user_id, name, price, quantity, image) VALUES('$user_id', '$product_name', '$product_price', '$product_quantity', '$product_image')") or die('query failed');
+            $message[] = 'Product added to cart!';
+        }
+    }
+}
+
+$search = isset($_GET['search']) ? $_GET['search'] : ''; // diri nako gi construct ang query sa search params
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
-   <meta charset="UTF-8">
-   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-   <title>Shop</title>
-   <!-- font awesome cdn link  -->
-   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-   <!-- custom css file link  -->
-   <link rel="stylesheet" href="css/style.css">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shop</title>
+    <!-- font awesome cdn link  -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <!-- custom css file link  -->
+    <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
    
 <?php include 'header.php'; ?>
 
 <div class="heading">
-   <h3>Latest Products</h3>
-   <p> <a href="home.php">Home</a> / Shop </p>
+    <h3>Featured Products</h3>
+    <p><a href="home.php">Home</a> / Shop</p>
+
+   <!-- diri ang ui sa search product-->
+    <form method="GET" class="input-group-mb3">
+        <input type="text" name="search" value="<?php echo $search; ?>" placeholder="Search Products"> 
+        <button type="submit" class="btn btn-primary">Find</button>
+    </form>
 </div>
 
 
 <section class="show-products">
-<section class="products">
+    <section class="products">
+        <div class="box-container">
 
-   <div class="box-container">
-
-      <?php  
-         $select_products = mysqli_query($conn, "SELECT * FROM `products`") or die('query failed');
-         if(mysqli_num_rows($select_products) > 0){
-            while($fetch_products = mysqli_fetch_assoc($select_products)){
-      ?>
-     <form action="" method="post" class="box">
-     <a href="viewshop.php?id=<?php echo $fetch_products['id']; ?>">
-      <img class="image" src="uploaded_img/<?php echo $fetch_products['image']; ?>" alt="" height="100" width="260">
-      <div class="name"><?php echo $fetch_products['name']; ?></div>
-      <div class="price">₱<?php echo $fetch_products['price']; ?></div>
-      <input type="number" min="1" name="product_quantity" value="1" class="qty">
-      <input type="hidden" name="product_name" value="<?php echo $fetch_products['name']; ?>">
-      <input type="hidden" name="product_price" value="<?php echo $fetch_products['price']; ?>">
-      <input type="hidden" name="product_image" value="<?php echo $fetch_products['image']; ?>">
-      <input type="submit" value="add to cart" name="add_to_cart" class="btn">
-     </form>
-      <?php
-         }
-      }else{
-         echo '<p class="empty">No products added yet!</p>';
-      }
-      ?>
-   </div>
+        <?php
+        // diri ang filtering  
+        $where_clause = !empty($search) ? "WHERE name LIKE '%$search%'" : "";
+        $select_products = mysqli_query($conn, "SELECT * FROM `products` $where_clause") or die('query failed');
+        if (mysqli_num_rows($select_products) > 0) {
+            while ($fetch_products = mysqli_fetch_assoc($select_products)) {
+        ?>
+            <form action="" method="post" class="box">
+                <a href="viewshop.php?id=<?php echo $fetch_products['id']; ?>">
+                    <img class="image" src="uploaded_img/<?php echo $fetch_products['image']; ?>" alt="" height="100" width="260">
+                    <div class="name"><?php echo $fetch_products['name']; ?></div>
+                    <div class="price">₱<?php echo $fetch_products['price']; ?></div>
+                    <input type="number" min="1" name="product_quantity" value="1" class="qty">
+                    <input type="hidden" name="product_name" value="<?php echo $fetch_products['name']; ?>">
+                    <input type="hidden" name="product_price" value="<?php echo $fetch_products['price']; ?>">
+                    <input type="hidden" name="product_image" value="<?php echo $fetch_products['image']; ?>">
+                    <input type="submit" value="add to cart" name="add_to_cart" class="btn">
+                </a>
+            </form>
+        <?php
+            }
+        } else {
+            echo '<p class="empty">No products added yet!</p>';
+        }
+        ?>
+        </div>
+    </section>
 </section>
-</section>
-
 
 <!-- custom js file link  -->
 <script src="js/script.js"></script>
