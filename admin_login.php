@@ -15,7 +15,7 @@ if(isset($_POST['submit'])){
         $_SESSION['admin_username'] = $row['username'];
         $_SESSION['admin_email'] = $row['email'];
         $_SESSION['admin_id'] = $row['id'];
-        $_SESSION['user_image'] = $row['admin_pp'];
+        $_SESSION['admin_pp'] = $row['admin_pp'];
         header('location:admin_page.php');
 
       }else {
@@ -56,7 +56,7 @@ if(isset($message)){
    
 <div class="form-container">
    <form action="" method="post">
-      <h3>login now</h3>
+      <h3>Admin Login</h3>
       <input type="email" name="email" placeholder="Enter your email" required class="box">
       <input type="password" name="password" placeholder="Enter your password" required class="box">
       <input type="submit" name="submit" value="login" class="btn">

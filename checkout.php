@@ -16,7 +16,7 @@ if(isset($_POST['order_btn'])){
    $number = $_POST['number'];
    $email = mysqli_real_escape_string($conn, $_POST['email']);
    $method = mysqli_real_escape_string($conn, $_POST['method']);
-   $address = mysqli_real_escape_string($conn, 'flat no. '. $_POST['flat'].', '. $_POST['street'].', '. $_POST['city'].', '. $_POST['country'].' - '. $_POST['pin_code']);
+   $address = mysqli_real_escape_string($conn, $_POST['address']);
    $placed_on = date('d-M-Y');
 
    $cart_total = 0;
@@ -44,6 +44,9 @@ if(isset($_POST['order_btn'])){
          mysqli_query($conn, "INSERT INTO `orders`(user_id, name, number, email, method, address, total_products, total_price, placed_on) VALUES('$user_id', '$name', '$number', '$email', '$method', '$address', '$total_products', '$cart_total', '$placed_on')") or die('query failed');
          $message[] = 'Order placed successfully!';
          mysqli_query($conn, "DELETE FROM `cart` WHERE user_id = '$user_id'") or die('query failed');
+
+         echo '<script>alert("Successful Checkout");</script>';
+
       }
    }
    
@@ -85,7 +88,7 @@ if(isset($_POST['order_btn'])){
             $total_price = ($fetch_cart['price'] * $fetch_cart['quantity']);
             $grand_total += $total_price;
    ?>
-   <p> <?php echo $fetch_cart['name']; ?> <span>(<?php echo '₱'.$fetch_cart['price'].' x '. $fetch_cart['quantity']; ?>)</span> </p>
+   <p> <?php echo $fetch_cart['name']; ?> <span><?php echo ' ( '. $fetch_cart['quantity'].' ) '; ?></span> </p>
    <?php
       }
    }else{
@@ -99,71 +102,62 @@ if(isset($_POST['order_btn'])){
 <section class="checkout">
 
    <form action="" method="post">
+   <?php
+         $user_query = mysqli_query($conn, "SELECT firstName, middleInitial, lastName, phoneNum, email, address FROM users WHERE id = '$user_id'") or die('query failed');
+         $user_info = mysqli_fetch_assoc($user_query);
+         $fullName = $user_info['firstName'] . ' ' . $user_info['middleInitial'] . ' ' . $user_info['lastName'];
+         $phoneNum = $user_info['phoneNum'];
+         $email = $user_info['email'];
+         $address = $user_info['address'];
+
+      ?>
       <h3>Place your order</h3>
       <div class="flex">
          <div class="inputBox">
-            <span>Your name:</span>
-            <input type="text" name="name" required placeholder="Enter your name">
+            <span>Fullname:</span>
+            <input type="text" name="name" value="<?php echo $fullName; ?>">
          </div>
          <div class="inputBox">
-            <span>Your number :</span>
-            <input type="number" name="number" required placeholder="Enter your number">
+            <span>Phone No:</span>
+            <input type="number" name="number" value="<?php echo $phoneNum; ?>">
          </div>
          <div class="inputBox">
-            <span>Your email :</span>
-            <input type="email" name="email" required placeholder="Enter your email">
+            <span>Email:</span>
+            <input type="email" name="email" value="<?php echo $email; ?>">
          </div>
          <div class="inputBox">
-            <span>Payment method :</span>
+            <span>Payment Method:</span>
             <select name="method">
-               <option value="cash on delivery">Cash on Delivery</option>
-               <option value="credit card">Credit Card</option>
-               <option value="paypal">PayPal</option>
-               <option value="paytm">Paytm</option>
+               <option value="Cash on Delivery">Cash on Delivery</option>
+               <option value="Credit Card">Credit Card</option>
+               <option value="GCash">GCash</option>
+               <option value="Maya">Maya</option>
             </select>
          </div>
          <div class="inputBox">
-            <span>Flat #:</span>
-            <input type="number" min="0" name="flat" required placeholder="e.g. 121">
+            <span>Address:</span>
+            <input type="text" name="address" value="<?php echo $address; ?>">
          </div>
          <div class="inputBox">
-            <span>Address :</span>
-            <input type="text" name="street" required placeholder="e.g. Bayabas">
-         </div>
-         <div class="inputBox">
-            <span>City:</span>
-            <input type="text" name="city" required placeholder="e.g. Cagayan de Oro">
-         </div>
-         <div class="inputBox">
-            <span>State:</span>
-            <input type="text" name="state" required placeholder="e.g. Misamis Oriental">
-         </div>
-         <div class="inputBox">
-            <span>Country:</span>
-            <input type="text" name="country" required placeholder="e.g. Philippines">
-         </div>
-         <div class="inputBox">
-            <span>Area code:</span>
-            <input type="number" min="0" name="pin_code" required placeholder="e.g. 123456">
-         </div>
+            <span>Zip Code:</span>
+            <input type="number" min="0" name="pin_code" required placeholder="e.g. 9000">
+            </div>
       </div>
-      <input type="submit" value="order now" class="btn" name="order_btn">
+         <input type="submit" value="Place Order" name="order_btn" class="btn">
+
+         <?php
+            if(isset($message)){
+               foreach($message as $msg){
+                  echo '<div class="alert">'.$msg.'</div>';
+               }
+            }
+         ?>
+
    </form>
 
 </section>
 
-
-
-
-
-
-
-
-
 <?php include 'footer.php'; ?>
-
-<!-- custom js file link  -->
-<script src="js/script.js"></script>
 
 </body>
 </html>

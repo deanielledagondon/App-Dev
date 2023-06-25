@@ -23,6 +23,13 @@ if (isset($_GET['delete']) && isset($_GET['table'])) {
    header('location: admin_users-table.php');
    exit();
 }
+
+// Check if the users table is empty
+$noUsers = true;
+$select_users = mysqli_query($conn, "SELECT * FROM `users` WHERE user_type = 'user'") or die('query failed');
+if (mysqli_num_rows($select_users) > 0) {
+   $noUsers = false;
+}
 ?>
 
 <!DOCTYPE html>
@@ -47,44 +54,49 @@ if (isset($_GET['delete']) && isset($_GET['table'])) {
 <section class="users">
    <h1 class="title">User Accounts</h1>
 
-   <table class="table">
-      <thead>
-         <tr>
-            <th>User ID</th>
-            <th>Fullname</th>
-            <th>Username</th>
-            <th>Email</th>
-            <th>Phone No.</th>
-            <th>Address</th>
-            <th>Actions</th>
-         </tr>
-      </thead>
-      <tbody>
-      <?php
-         $select_users = mysqli_query($conn, "SELECT * FROM `users`") or die('query failed');
-         while ($fetch_users = mysqli_fetch_assoc($select_users)) {
-            if ($fetch_users['user_type'] == 'user') {
+   <?php
+   if ($noUsers) {
+      echo '<p class="empty">There are no user accounts as of the moment.</p>';
+   } else {
+   ?>
+      <table class="table">
+         <thead>
+            <tr>
+               <th>User ID</th>
+               <th>Fullname</th>
+               <th>Username</th>
+               <th>Email</th>
+               <th>Phone No.</th>
+               <th>Address</th>
+               <th>Actions</th>
+            </tr>
+         </thead>
+         <tbody>
+            <?php
+            $select_users = mysqli_query($conn, "SELECT * FROM `users` WHERE user_type = 'user'") or die('query failed');
+            while ($fetch_users = mysqli_fetch_assoc($select_users)) {
                $fullname = $fetch_users['firstName'] . ' ' . $fetch_users['middleInitial'] . ' ' . $fetch_users['lastName'];
-               ?>
+            ?>
                <tr>
-                     <td><?php echo $fetch_users['id']; ?></td>
-                     <td><?php echo $fullname; ?></td>
-                     <td><?php echo $fetch_users['username']; ?></td>
-                     <td><?php echo $fetch_users['email']; ?></td>
-                     <td><?php echo $fetch_users['phoneNum']; ?></td>
-                     <td><?php echo $fetch_users['address']; ?></td>
-                     <td>
-                        <a href="admin-edit-user.php?id=<?php echo $fetch_users['id']; ?>" onclick="return confirm('Update information?');" class="update-btn">Update user</a>
-                        <a href="users_table.php?delete=<?php echo $fetch_users['id']; ?>&table=users" onclick="return confirm('Delete this user?');" class="delete-btn">Delete user</a>
-                     </td>
+                  <td><?php echo $fetch_users['id']; ?></td>
+                  <td><?php echo $fullname; ?></td>
+                  <td><?php echo $fetch_users['username']; ?></td>
+                  <td><?php echo $fetch_users['email']; ?></td>
+                  <td><?php echo $fetch_users['phoneNum']; ?></td>
+                  <td><?php echo $fetch_users['address']; ?></td>
+                  <td>
+                     <a href="admin-edit-user.php?id=<?php echo $fetch_users['id']; ?>" onclick="return confirm('Update information?');" class="update-btn">Update user</a>
+                     <a href="users_table.php?delete=<?php echo $fetch_users['id']; ?>&table=users" onclick="return confirm('Delete this user?');" class="delete-btn">Delete user</a>
+                  </td>
                </tr>
-               <?php
+            <?php
             }
-         }
-         ?>
-
-      </tbody>
-   </table>
+            ?>
+         </tbody>
+      </table>
+   <?php
+   }
+   ?>
 </section>
 
 <!-- custom admin js file link  -->
