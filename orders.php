@@ -17,9 +17,15 @@ if (isset($_GET['cancel_order'])) {
    $message[] = 'Order has been cancelled!';
 }
 
-if(isset($_GET['completed_order'])) {
-   $completed_order_id = $_GET['completed_order'];
-   mysqli_query ($conn, "UPDATE `orders` SET payment_status = 'Completed' WHERE id = '$completed_order_id'") or die('query failed');
+if (isset($_GET['confirm_payment'])) {
+    $confirm_payment_id = $_GET['confirm_payment'];
+    mysqli_query($conn, "UPDATE `orders` SET payment_status = 'Paid' WHERE id = '$confirm_payment_id'") or die('query failed');
+    $message[] = 'Payment has been confirmed!';
+ }
+
+if(isset($_GET['delivered_order'])) {
+   $completed_order_id = $_GET['delivered_order'];
+   mysqli_query ($conn, "UPDATE `orders` SET delivery_status = 'Delivered' WHERE id = '$delivered_order_id'") or die('query failed');
    $message[] = 'Order has been delivered!';
 }
 
@@ -66,26 +72,27 @@ if(isset($_GET['completed_order'])) {
          <p> Number: <span><?php echo $fetch_orders['number']; ?></span> </p>
          <p> Email: <span><?php echo $fetch_orders['email']; ?></span> </p>
          <p> Address: <span><?php echo $fetch_orders['address']; ?></span> </p>
-         <p> Payment method: <span><?php echo $fetch_orders['method']; ?></span> </p>
-         <p> Your orders: <span><?php echo $fetch_orders['total_products']; ?></span> </p>
-         <p> Total price: <span>₱<?php echo $fetch_orders['total_price']; ?></span> </p>
-         <p> Payment status: <span style="color:<?php if($fetch_orders['payment_status'] == 'Pending'){ echo 'red'; }else{ echo 'green'; } ?>;"><?php echo $fetch_orders['payment_status']; ?></span> </p>
+         <p> Payment Method: <span><?php echo $fetch_orders['method']; ?></span> </p>
+         <p> Orders: <span><?php echo $fetch_orders['total_products']; ?></span> </p>
+         <p> Total Price: <span>₱<?php echo $fetch_orders['total_price']; ?></span> </p>
+         <p> Order Status: <span style="color:<?php if($fetch_orders['payment_status'] == 'Pending'){ echo 'red'; }else{ echo 'green'; } ?>;"><?php echo $fetch_orders['payment_status']; ?></span> </p>
+         <p> Delivery Status: <span style="color:<?php if($fetch_orders['delivery_status'] == 'Pending'){ echo 'red'; }else{ echo 'green'; } ?>;"><?php echo $fetch_orders['delivery_status']; ?></span> </p>
          <?php
-         if ($fetch_orders['payment_status'] != 'Cancelled') {
-            if ($fetch_orders['payment_status'] == 'Completed') {
-               $buttonLabel = 'Completed';
-               $link = "?completed_order=" . $fetch_orders['id'];
-               $onclick = "return false";
-            } else {
-               $buttonLabel = 'Cancel Order';
-               $link = "?cancel_order=" . $fetch_orders['id'];
-               $onclick = "";
+            if ($fetch_orders['payment_status'] == 'Pending') {
+               $cancelLink = "?cancel_order=" . $fetch_orders['id'];
+               $confirmLink = "?confirm_payment=" . $fetch_orders['id'];
+         ?>
+            <a href="<?php echo $cancelLink; ?>" class="option-btn">Cancel Order</a>
+            <a href="<?php echo $confirmLink; ?>" class="option-btn">Confirm Payment</a>
+         <?php
+            } elseif ($fetch_orders['payment_status'] == 'Paid') {
+               $cancelLink = "?cancel_order=" . $fetch_orders['id'];
+         ?>
+            <a href="<?php echo $cancelLink; ?>" class="option-btn">Cancel Order</a>
+         <?php
             }
          ?>
-         <a href="<?php echo $link; ?>" class="option-btn" onclick="<?php echo $onclick; ?>"><?php echo $buttonLabel; ?></a>
-<?php } ?>
 
-         
       </div>
       <?php
          }

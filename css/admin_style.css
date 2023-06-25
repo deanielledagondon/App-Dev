@@ -130,6 +130,8 @@ section{
 
 .option-btn{
    background-color: var(--orange);
+   padding: 1rem 2rem; /* Adjust the padding as needed */
+
 }
 
 .update-btn{

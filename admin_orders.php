@@ -1,5 +1,4 @@
 <?php
-
 include 'config.php';
 
 session_start();
@@ -13,13 +12,14 @@ if (!isset($admin_id)) {
 if (isset($_POST['update_order'])) {
 
    $order_update_id = $_POST['order_id'];
-   $update_payment = $_POST['update_payment'];
-   
-   if (!empty($update_payment)) {
-      mysqli_query($conn, "UPDATE `orders` SET payment_status = '$update_payment' WHERE id = '$order_update_id'") or die('query failed');
-      $message[] = 'Payment status has been updated!';
-   }
 
+   if (isset($_POST['update_delivery_status'])) {
+      $update_delivery = $_POST['update_delivery_status'];
+      if (!empty($update_delivery)) {
+         mysqli_query($conn, "UPDATE `orders` SET delivery_status = '$update_delivery' WHERE id = '$order_update_id'") or die('query failed');
+         $message[] = 'Delivery status has been updated!';
+      }
+   }
 }
 
 if (isset($_GET['delete'])) {
@@ -28,6 +28,12 @@ if (isset($_GET['delete'])) {
    header('location:admin_orders.php');
 }
 
+// Check if there are no orders
+$noOrders = true;
+$select_orders = mysqli_query($conn, "SELECT * FROM `orders`") or die('query failed');
+if (mysqli_num_rows($select_orders) > 0) {
+   $noOrders = false;
+}
 ?>
 
 <!DOCTYPE html>
@@ -55,43 +61,92 @@ if (isset($_GET['delete'])) {
 
       <h1 class="title">Placed Orders</h1>
 
-      <div class="box-container">
-         <?php
+      <?php
+      if ($noOrders) {
+         echo '<p class="empty">There are no orders as of the moment.</p>';
+      } else {
          $select_orders = mysqli_query($conn, "SELECT * FROM `orders`") or die('query failed');
-         if (mysqli_num_rows($select_orders) > 0) {
-            while ($fetch_orders = mysqli_fetch_assoc($select_orders)) {
-         ?>
-               <div class="box">
-                  <p> User ID: <span><?php echo $fetch_orders['user_id']; ?></span> </p>
-                  <p> Placed on: <span><?php echo $fetch_orders['placed_on']; ?></span> </p>
-                  <p> Name: <span><?php echo $fetch_orders['name']; ?></span> </p>
-                  <p> Number: <span><?php echo $fetch_orders['number']; ?></span> </p>
-                  <p> Email: <span><?php echo $fetch_orders['email']; ?></span> </p>
-                  <p> Address: <span><?php echo $fetch_orders['address']; ?></span> </p>
-                  <p> Total Products: <span><?php echo $fetch_orders['total_products']; ?></span> </p>
-                  <p> Total Price: <span>₱<?php echo $fetch_orders['total_price']; ?>/-</span> </p>
-                  <p> Payment Method: <span><?php echo $fetch_orders['method']; ?></span> </p>
-                  <p> Status: <span><?php echo $fetch_orders['payment_status']; ?></span> </p>
-                  <form action="" method="post">
-                     <input type="hidden" name="order_id" value="<?php echo $fetch_orders['id']; ?>">
-                     <select name="update_payment">
-                        <option value="" selected disabled><?php echo $fetch_orders['payment_status']; ?></option>
-                        <option value="Pending">Pending</option>
-                        <option value="Completed">Completed</option>
-                        <option value="Cancelled">Cancelled</option>
-                     </select>
-                     <input type="submit" value="Update Order" name="update_order" class="option-btn">
+         $orders_by_payment = array();
 
-                     <a href="admin_orders.php?delete=<?php echo $fetch_orders['id']; ?>" onclick="return confirm('Delete this order?');" class="delete-btn">Delete</a>
-                  </form>
-               </div>
-         <?php
+         while ($fetch_orders = mysqli_fetch_assoc($select_orders)) {
+            $payment_status = $fetch_orders['payment_status'];
+            if (!isset($orders_by_payment[$payment_status])) {
+               $orders_by_payment[$payment_status] = array();
             }
-         } else {
-            echo '<p class="empty">No orders placed yet!</p>';
+            $orders_by_payment[$payment_status][] = $fetch_orders;
          }
-         ?>
-      </div>
+
+         foreach ($orders_by_payment as $payment_status => $orders) {
+      ?>
+
+            <table class="table">
+               <thead>
+                  <tr>
+                     <th>User ID</th>
+                     <th>Placed On</th>
+                     <th>Name</th>
+                     <th>Number</th>
+                     <th>Email</th>
+                     <th>Address</th>
+                     <th>Total Products</th>
+                     <th>Total Price</th>
+                     <th>Payment Method</th>
+                     <th>Payment Status</th>
+                     <th>Delivery Status</th>
+                     <th>Actions</th>
+                  </tr>
+               </thead>
+               <tbody>
+                  <?php
+                  foreach ($orders as $order) {
+                     $user_id = $order['user_id'];
+                     $placed_on = $order['placed_on'];
+                     $name = $order['name'];
+                     $number = $order['number'];
+                     $email = $order['email'];
+                     $address = $order['address'];
+                     $total_products = $order['total_products'];
+                     $total_price = $order['total_price'];
+                     $payment_method = $order['method'];
+                     $payment_status = $order['payment_status'];
+                     $delivery_status = $order['delivery_status'];
+                  ?>
+                     <tr>
+                        <td><?php echo $user_id; ?></td>
+                        <td><?php echo $placed_on; ?></td>
+                        <td><?php echo $name; ?></td>
+                        <td><?php echo $number; ?></td>
+                        <td><?php echo $email; ?></td>
+                        <td><?php echo $address; ?></td>
+                        <td><?php echo $total_products; ?></td>
+                        <td>₱<?php echo $total_price; ?>/-</td>
+                        <td><?php echo $payment_method; ?></td>
+                        <td><?php echo $payment_status; ?></td>
+                        <td>
+                           <form action="" method="post">
+                              <input type="hidden" name="order_id" value="<?php echo $order['id']; ?>">
+                              <select name="update_delivery_status">
+                                 <option value="Pending" <?php if ($delivery_status == 'Pending') echo 'selected'; ?>>Pending</option>
+                                 <option value="In Transit" <?php if ($delivery_status == 'In Transit') echo 'selected'; ?>>In Transit</option>
+                                 <option value="Delivered" <?php if ($delivery_status == 'Delivered') echo 'selected'; ?>>Delivered</option>
+                              </select>
+                              <input type="submit" value="Update" name="update_order" class="update-btn">
+                           </form>
+                        </td>
+                        <td>
+                           <a href="admin_orders.php?delete=<?php echo $order['id']; ?>" onclick="return confirm('Delete this order?');" class="delete-btn">Delete</a>
+                        </td>
+                     </tr>
+                  <?php
+                  }
+                  ?>
+               </tbody>
+            </table>
+
+      <?php
+         }
+      }
+      ?>
 
    </section>
 

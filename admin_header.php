@@ -13,7 +13,22 @@
             </div>
          </div>
          <a href="admin_contacts.php">Messages</a>
-         <a href="summary_report.php">Order Summary</a>
+         <div class="dropdown">
+            <button class="dropbtn">Payment</button>
+            <div class="dropdown-content">
+               <a href="pending_order.php?status=Pending">Pending</a>
+               <a href="paid_order.php?status=Paid">Paid</a>
+               <a href="cancelled_order.php?status=Cancelled">Cancelled</a>
+            </div>
+         </div>
+         <div class="dropdown">
+            <button class="dropbtn">Delivery</button>
+            <div class="dropdown-content">
+               <a href="pending_delivery.php?delivery=Pending">Pending</a>
+               <a href="in_transit-delivery.php?delivery=In Transit">In Transit</a>
+               <a href="completed_delivery.php?delivery=Delivered">Delivered</a>
+            </div>
+         </div>
       </nav>
       <div class="icons">
          <div id="menu-btn" class="fas fa-bars"></div>
