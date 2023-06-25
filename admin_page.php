@@ -42,7 +42,7 @@ if(!isset($admin_id)){
       <div class="box">
          <?php
             $total_pendings = 0;
-            $select_pending = mysqli_query($conn, "SELECT total_price FROM `orders` WHERE payment_status = 'pending'") or die('query failed');
+            $select_pending = mysqli_query($conn, "SELECT total_price FROM `orders` WHERE payment_status = 'Pending'") or die('query failed');
             if(mysqli_num_rows($select_pending) > 0){
                while($fetch_pendings = mysqli_fetch_assoc($select_pending)){
                   $total_price = $fetch_pendings['total_price'];
@@ -51,13 +51,13 @@ if(!isset($admin_id)){
             };
          ?>
          <h3>₱<?php echo $total_pendings; ?></h3>
-         <p>Total Pendings</p>
+         <p>Total Pending Orders</p>
       </div>
 
       <div class="box">
          <?php
             $total_completed = 0;
-            $select_completed = mysqli_query($conn, "SELECT total_price FROM `orders` WHERE payment_status = 'completed'") or die('query failed');
+            $select_completed = mysqli_query($conn, "SELECT total_price FROM `orders` WHERE payment_status = 'Paid'") or die('query failed');
             if(mysqli_num_rows($select_completed) > 0){
                while($fetch_completed = mysqli_fetch_assoc($select_completed)){
                   $total_price = $fetch_completed['total_price'];
@@ -67,6 +67,21 @@ if(!isset($admin_id)){
          ?>
          <h3>₱<?php echo $total_completed; ?></h3>
          <p>Completed Payments</p>
+      </div>
+
+      <div class="box">
+         <?php
+            $total_delivered = 0;
+            $select_delivered = mysqli_query($conn, "SELECT total_price FROM `orders` WHERE delivery_status = 'Delivered'") or die('query failed');
+            if(mysqli_num_rows($select_delivered) > 0){
+               while($fetch_delivered = mysqli_fetch_assoc($select_delivered)){
+                  $total_price = $fetch_delivered['total_price'];
+                  $total_delivered += $total_price;
+               };
+            };
+         ?>
+         <h3>₱<?php echo $total_delivered; ?></h3>
+         <p>Total Deliveries</p>
       </div>
 
       <div class="box">
