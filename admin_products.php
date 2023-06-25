@@ -14,6 +14,7 @@ if (isset($_POST['add_product'])) {
    $name = mysqli_real_escape_string($conn, $_POST['name']);
    $price = $_POST['price'];
    $description = mysqli_real_escape_string($conn, $_POST['description']);
+   $products_category = mysqli_real_escape_string($conn, $_POST['products_category']);
    $image = $_FILES['image']['name'];
    $image_size = $_FILES['image']['size'];
    $image_tmp_name = $_FILES['image']['tmp_name'];
@@ -24,7 +25,7 @@ if (isset($_POST['add_product'])) {
    if (mysqli_num_rows($select_product_name) > 0) {
       $message[] = 'Product name already added';
    } else {
-      $add_product_query = mysqli_query($conn, "INSERT INTO `products`(name, price, description, image) VALUES('$name', '$price', '$description', '$image')") or die('query failed');
+      $add_product_query = mysqli_query($conn, "INSERT INTO `products`(name, price, description, products_category, image) VALUES('$name', '$price', '$description', '$products_category', '$image')") or die('query failed');
 
       if ($add_product_query) {
          if ($image_size > 2000000) {
@@ -54,8 +55,9 @@ if (isset($_POST['update_product'])) {
    $update_name = $_POST['update_name'];
    $update_price = $_POST['update_price'];
    $update_description = $_POST['update_description'];
+   $update_products_category = $_POST['update_products_category'];
 
-   mysqli_query($conn, "UPDATE `products` SET name = '$update_name', price = '$update_price', description = '$update_description' WHERE id = '$update_p_id'") or die('query failed');
+   mysqli_query($conn, "UPDATE `products` SET name = '$update_name', price = '$update_price', description = '$update_description', products_category = '$update_products_category' WHERE id = '$update_p_id'") or die('query failed');
 
    $update_image = $_FILES['update_image']['name'];
    $update_image_tmp_name = $_FILES['update_image']['tmp_name'];
@@ -107,6 +109,7 @@ if (isset($_POST['update_product'])) {
          <input type="text" name="name" class="box" placeholder="Enter product name" required>
          <input type="number" min="0" name="price" class="box" placeholder="Enter product price" required>
          <input type="text" name="description" class="box" placeholder="Enter product description" required>
+         <input type="text" name="products_category" class="box" placeholder="Enter product category" required>
          <input type="file" name="image" accept="image/jpg, image/jpeg, image/png" class="box" required>
          <input type="submit" value="add product" name="add_product" class="btn">
       </form>
@@ -126,6 +129,7 @@ if (isset($_POST['update_product'])) {
                   <div class="name"><?php echo $fetch_products['name']; ?></div>
                   <div class="price">₱<?php echo $fetch_products['price']; ?></div>
                   <div class="description"><?php echo $fetch_products['description']; ?></div>
+                  <div class="products_category"><?php echo $fetch_products['products_category']; ?></div>
                   <a href="admin_products.php?update=<?php echo $fetch_products['id']; ?>" class="option-btn">update</a>
                   <a href="admin_products.php?delete=<?php echo $fetch_products['id']; ?>" class="delete-btn" onclick="return confirm('delete this product?');">delete</a>
                </div>
@@ -155,6 +159,7 @@ if (isset($_GET['update'])) {
             <input type="text" name="update_name" value="<?php echo $fetch_update['name']; ?>" class="box" required placeholder="Enter product name">
             <input type="number" name="update_price" value="<?php echo $fetch_update['price']; ?>" min="0" class="box" required placeholder="Enter product price">
             <input type="text" name="update_description" value="<?php echo $fetch_update['description']; ?>" class="box" required placeholder="Enter product description">
+            <input type="text" name="update_products_category" value="<?php echo $fetch_update['products_category']; ?>" class="box" required placeholder="Enter product category">
             <input type="file" class="box" name="update_image" accept="image/jpg, image/jpeg, image/png">
             <input type="submit" value="update" name="update_product" class="btn">
             <input type="reset" value="cancel" id="close-update" class="option-btn">

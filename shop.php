@@ -8,7 +8,7 @@ if (!isset($_SESSION['user_id'])) {
     $guest_user_id = 0; // Set the guest user ID
     $_SESSION['user_id'] = $guest_user_id; // Set the session user ID
 }
- 
+
 $user_id = $_SESSION['user_id'];
 
 if (isset($_POST['add_to_cart'])) {
@@ -31,11 +31,15 @@ if (isset($_POST['add_to_cart'])) {
     }
 }
 
-$search = isset($_GET['search']) ? $_GET['search'] : ''; // diri nako gi construct ang query sa search params
+$search = isset($_GET['search']) ? $_GET['search'] : '';
+// diri nako gi kwan ang initialization sa filtering
+$category_filters = isset($_GET['products_category']) ? $_GET['products_category'] : array();
 
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -46,56 +50,101 @@ $search = isset($_GET['search']) ? $_GET['search'] : ''; // diri nako gi constru
     <!-- custom css file link  -->
     <link rel="stylesheet" href="css/style.css">
 </head>
+<!-- partial nga css paki improve ko-->
+<style>
+    
+    .sidebar {
+        width: 20%;
+        float: left;
+        background-color: #f5f5f5;
+        padding: 20px;
+    }
+
+    .main-content {
+        width: 80%;
+        float: right;
+        padding: 20px;
+    }
+</style>
+
 <body>
-   
-<?php include 'header.php'; ?>
 
-<div class="heading">
-    <h3>Featured Products</h3>
-    <p><a href="home.php">Home</a> / Shop</p>
+    <?php include 'header.php'; ?>
 
-   <!-- diri ang ui sa search product-->
-    <form method="GET" class="input-group-mb3">
-        <input type="text" name="search" value="<?php echo $search; ?>" placeholder="Search Products"> 
-        <button type="submit" class="btn btn-primary">Find</button>
-    </form>
-</div>
+    <div class="sidebar">
+        <h3>Filters</h3>
+        <br>
+        <h4>Categories</h4>
+        <!-- diri ang ui sa sidebar nga naay checkbox-->
+        <form method="GET">
+            <label><input type="checkbox" name="products_category[]" value="Computer Package" <?php if (in_array("Computer Package", $category_filters)) echo "checked"; ?>> Computer Package</label><br>
+            <label><input type="checkbox" name="products_category[]" value="Monitor" <?php if (in_array("Monitor", $category_filters)) echo "checked"; ?>> Monitor</label><br>
+            <label><input type="checkbox" name="products_category[]" value="Keyboards" <?php if (in_array("Keyboards", $category_filters)) echo "checked"; ?>> Keyboards</label><br>
+            <button type="submit" class="btn btn-primary">Apply Filters</button>
+        </form>
+    </div>
+    
 
+    <div class="main-content">
+        <div class="heading">
+            <h3>Featured Products</h3>
+            <p><a href="home.php">Home</a> / Shop</p>
 
-<section class="show-products">
-    <section class="products">
-        <div class="box-container">
-
-        <?php
-        // diri ang filtering  
-        $where_clause = !empty($search) ? "WHERE name LIKE '%$search%'" : "";
-        $select_products = mysqli_query($conn, "SELECT * FROM `products` $where_clause") or die('query failed');
-        if (mysqli_num_rows($select_products) > 0) {
-            while ($fetch_products = mysqli_fetch_assoc($select_products)) {
-        ?>
-            <form action="" method="post" class="box">
-                <a href="viewshop.php?id=<?php echo $fetch_products['id']; ?>">
-                    <img class="image" src="uploaded_img/<?php echo $fetch_products['image']; ?>" alt="" height="100" width="260">
-                    <div class="name"><?php echo $fetch_products['name']; ?></div>
-                    <div class="price">₱<?php echo $fetch_products['price']; ?></div>
-                    <input type="number" min="1" name="product_quantity" value="1" class="qty">
-                    <input type="hidden" name="product_name" value="<?php echo $fetch_products['name']; ?>">
-                    <input type="hidden" name="product_price" value="<?php echo $fetch_products['price']; ?>">
-                    <input type="hidden" name="product_image" value="<?php echo $fetch_products['image']; ?>">
-                    <input type="submit" value="add to cart" name="add_to_cart" class="btn">
-                </a>
+            <!-- diri ang ui sa search product-->
+            <form method="GET" class="input-group-mb3">
+                <input type="text" name="search" value="<?php echo $search; ?>" placeholder="Search Products">
+                <button type="submit" class="btn btn-primary">Find</button>
             </form>
-        <?php
-            }
-        } else {
-            echo '<p class="empty">No products added yet!</p>';
-        }
-        ?>
         </div>
-    </section>
-</section>
 
-<!-- custom js file link  -->
-<script src="js/script.js"></script>
+        <section class="show-products">
+            <section class="products">
+                <div class="box-container">
+
+                    <?php
+                    // diri ang query sa filtering
+                    $where_clause = "";
+                    if (!empty($category_filters)) {
+                        $categories = implode("', '", $category_filters);
+                        $where_clause = "WHERE products_category IN ('$categories')";
+                    }
+                    if (!empty($search)) {
+                        if (!empty($where_clause)) {
+                            $where_clause .= " AND name LIKE '%$search%'";
+                        } else {
+                            $where_clause = "WHERE name LIKE '%$search%'";
+                        }
+                    }
+
+                    $select_products = mysqli_query($conn, "SELECT * FROM `products` $where_clause") or die('query failed');
+                    if (mysqli_num_rows($select_products) > 0) {
+                        while ($fetch_products = mysqli_fetch_assoc($select_products)) {
+                            ?>
+                            <form action="" method="post" class="box">
+                                <a href="viewshop.php?id=<?php echo $fetch_products['id']; ?>">
+                                    <img class="image" src="uploaded_img/<?php echo $fetch_products['image']; ?>" alt="" height="100" width="260">
+                                    <div class="name"><?php echo $fetch_products['name']; ?></div>
+                                    <div class="price">₱<?php echo $fetch_products['price']; ?></div>
+                                    <input type="number" min="1" name="product_quantity" value="1" class="qty">
+                                    <input type="hidden" name="product_name" value="<?php echo $fetch_products['name']; ?>">
+                                    <input type="hidden" name="product_price" value="<?php echo $fetch_products['price']; ?>">
+                                    <input type="hidden" name="product_image" value="<?php echo $fetch_products['image']; ?>">
+                                    <input type="submit" value="add to cart" name="add_to_cart" class="btn">
+                                </a>
+                            </form>
+                            <?php
+                        }
+                    } else {
+                        echo '<p class="empty">No products added yet!</p>';
+                    }
+                    ?>
+                </div>
+            </section>
+        </section>
+    </div>
+
+    <!-- custom js file link  -->
+    <script src="js/script.js"></script>
 </body>
+
 </html>
