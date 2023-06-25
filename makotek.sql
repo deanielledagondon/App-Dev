@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 24, 2023 at 03:17 PM
+-- Generation Time: Jun 25, 2023 at 07:56 AM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.2.0
 
@@ -49,7 +49,7 @@ CREATE TABLE `admins` (
 --
 
 INSERT INTO `admins` (`id`, `username`, `firstName`, `lastName`, `middleInitial`, `age`, `address`, `phoneNum`, `position`, `monthlySalary`, `email`, `password`, `user_type`, `admin_pp`) VALUES
-(1, 'dean', 'Angel Deanielle ', 'Dagondon', 'R.', 21, 'Address', '09111111111', 'Developer', '10000', 'dean@gmail.com', '25d55ad283aa400af464c76d713c07ad', 'admin', 'uploads/pic-3.jpg'),
+(1, 'dean', 'Angel Deanielle ', 'Dagondon', 'R.', 21, 'Address', '09111111111', 'Developer', '10000', 'dean@gmail.com', '25d55ad283aa400af464c76d713c07ad', 'admin', 'uploads/University_of_Science_and_Technology_of_Southern_Philippines.png'),
 (2, 'llane', 'Llane Graceza', 'Benting', 'B.', 22, 'Address', '09111111111', 'Developer', '10000', 'llane@gmail.com', '87221652a79fc3c9b04cde0b335fdd5b', 'admin', 'uploads/pic-2.jpg'),
 (4, 'markB', 'Mark', 'Bontia', 'R.', 21, 'Address', '09111111111', 'Manager', '30000', 'markB@gmail.com', 'a38dc7d7a349d2d0d4a8dd0894dea1ee', 'admin', 'uploads/author-5.jpg');
 
@@ -124,11 +124,7 @@ CREATE TABLE `orders` (
 --
 
 INSERT INTO `orders` (`id`, `user_id`, `name`, `number`, `email`, `method`, `address`, `total_products`, `total_price`, `placed_on`, `payment_status`, `delivery_status`) VALUES
-(1, '2', 'Mark Gaje', '111111', 'markG@gmail.com', 'cash on delivery', 'flat no. 121, Bayabas, CDO, Philippines - 8706', ', AMD RYZEN 3 3200G PC PACKAGE (1) ', 18700, '23-Jun-2023', 'Pending', 'Pending'),
-(2, '3', 'Llane Amh', '09551938918', '2232323@gmail.com', 'cash on delivery', 'flat no. 2323232, 23232, Libona, Philippines - 8706', ', INTEL CORE i3-10100 PC PACKAGE (2) , AMD RYZEN 3 3200G PC PACKAGE (1) ', 56102, '24-Jun-2023', 'Pending', 'Pending'),
-(3, '4', 'Nico B. Pacuit', '09551938918', 'nicopee21@gmail.com', 'cash on delivery', 'flat no. 322, Zone 9, Libona, Philippines - 8706', ', AMD RYZEN 3 3200G PC PACKAGE (2) , AMD ATHLON 200GE SYSTEM UNIT PACKAGE (1) ', 52886, '24-Jun-2023', 'Cancelled', 'Pending'),
-(4, '3', 'Nico', '232323232', '1212121@gmail.com', 'cash on delivery', 'flat no. 231231231, Address, Cagayan, Philippines - 23223', ', AMD RYZEN 3 3200G PC PACKAGE (1) ', 18702, '24-Jun-2023', 'Pending', 'Pending'),
-(5, '3', 'wawa', '11', 'wawa@gmail.com', 'cash on delivery', 'flat no. 12, Address, cdo, Philippines - 23223', ', AMD RYZEN 3 3200G PC PACKAGE (2) ', 37404, '24-Jun-2023', 'Completed', 'Pending');
+(14, '3', 'Joshua R. Bracho', '111111111', 'wawa@gmail.com', 'Cash on Delivery', 'Address', ', AMD RYZEN 3 3200G PC PACKAGE (1) , AMD RYZEN 3 3200G WITH VEGA 8 GRAPHICS DESKTOP BUNDLE (PACKAGE) (1) , AMD RYZEN 5 PRO 4650G PC BUNDLE PROMO PACKAGE (1) ', 81158, '25-Jun-2023', 'Pending', 'Pending');
 
 -- --------------------------------------------------------
 
@@ -188,9 +184,9 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `firstName`, `lastName`, `middleInitial`, `username`, `email`, `password`, `age`, `phoneNum`, `address`, `user_type`, `pp`) VALUES
-(1, 'Mark Bontia', '', '', '0', 'mark@gmail.com', '25d55ad283aa400af464c76d713c07ad', 0, '', '', 'user', 'uploads/Untitled.png'),
+(1, 'Mark ', 'Bontia', 'C.', 'mark', 'mark@gmail.com', '25d55ad283aa400af464c76d713c07ad', 21, '12313123', 'A', 'user', 'uploads/University_of_Science_and_Technology_of_Southern_Philippines.png'),
 (2, 'Makurui', 'Bontia', 'C.', 'makurui', 'makurui@gmail.com', '719b8cbe31cdb39eea400b2bd543869e', 21, '111111111', 'Address', 'user', 'uploads/author-4.jpg'),
-(3, 'Joshua', 'Bracho', 'R.', 'wawa', 'wawa@gmail.com', '892a9944cf14665375630c06a1902152', 21, '111111111', 'Address', 'user', 'uploads/author-5.jpg'),
+(3, 'Joshua', 'Bracho', 'R.', 'wawa', 'wawa@gmail.com', '892a9944cf14665375630c06a1902152', 21, '111111111', 'Address', 'user', 'uploads/University_of_Science_and_Technology_of_Southern_Philippines.png'),
 (4, 'Nico', 'Pacuit', 'B.', 'nicopacs', 'nico1@gmail.com', 'd0970714757783e6cf17b26fb8e2298f', 21, '09551938918', 'Libona ', 'user', 'uploads/author-1.jpg'),
 (5, 'Llane', 'Benting', 'D', 'llane', 'llane@gmail.com', 'e10adc3949ba59abbe56e057f20f883e', 22, '09551938918', 'osmena', 'user', 'uploads/451675.image0.jpg');
 
@@ -291,7 +287,7 @@ ALTER TABLE `admins`
 -- AUTO_INCREMENT for table `cart`
 --
 ALTER TABLE `cart`
-  MODIFY `id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
+  MODIFY `id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
 
 --
 -- AUTO_INCREMENT for table `message`
@@ -303,7 +299,7 @@ ALTER TABLE `message`
 -- AUTO_INCREMENT for table `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT for table `products`
