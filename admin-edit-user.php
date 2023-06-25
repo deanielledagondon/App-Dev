@@ -193,7 +193,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                     </div>
                                     <div class="form-group">
                                     <?php if (isset($_SESSION["admin_id"])): ?>
-                                        <a href="admin_users.php" class="btn">Back</a>
+                                        <a href="users_table.php" class="btn">Back</a>
                                     <?php else: ?>
                                         <a href="home.php" class="btn">Back</a>
                                     <?php endif; ?>

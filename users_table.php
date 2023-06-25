@@ -51,32 +51,38 @@ if (isset($_GET['delete']) && isset($_GET['table'])) {
       <thead>
          <tr>
             <th>User ID</th>
+            <th>Fullname</th>
             <th>Username</th>
             <th>Email</th>
-            <th>User Type</th>
-            <th></th>
+            <th>Phone No.</th>
+            <th>Address</th>
+            <th>Actions</th>
          </tr>
       </thead>
       <tbody>
-         <?php
+      <?php
          $select_users = mysqli_query($conn, "SELECT * FROM `users`") or die('query failed');
          while ($fetch_users = mysqli_fetch_assoc($select_users)) {
             if ($fetch_users['user_type'] == 'user') {
+               $fullname = $fetch_users['firstName'] . ' ' . $fetch_users['middleInitial'] . ' ' . $fetch_users['lastName'];
                ?>
                <tr>
-                  <td><?php echo $fetch_users['id']; ?></td>
-                  <td><?php echo $fetch_users['username']; ?></td>
-                  <td><?php echo $fetch_users['email']; ?></td>
-                  <td class="user-type user"><?php echo $fetch_users['user_type']; ?></td>
-                  <td>
-                     <a href="admin-edit-user.php?id=<?php echo $fetch_users['id']; ?>" onclick="return confirm('Update information?');" class="update-btn">Update user</a>
-                     <a href="users_table.php?delete=<?php echo $fetch_users['id']; ?>&table=users" onclick="return confirm('Delete this user?');" class="delete-btn">Delete user</a>
-                  </td>
+                     <td><?php echo $fetch_users['id']; ?></td>
+                     <td><?php echo $fullname; ?></td>
+                     <td><?php echo $fetch_users['username']; ?></td>
+                     <td><?php echo $fetch_users['email']; ?></td>
+                     <td><?php echo $fetch_users['phoneNum']; ?></td>
+                     <td><?php echo $fetch_users['address']; ?></td>
+                     <td>
+                        <a href="admin-edit-user.php?id=<?php echo $fetch_users['id']; ?>" onclick="return confirm('Update information?');" class="update-btn">Update user</a>
+                        <a href="users_table.php?delete=<?php echo $fetch_users['id']; ?>&table=users" onclick="return confirm('Delete this user?');" class="delete-btn">Delete user</a>
+                     </td>
                </tr>
                <?php
             }
          }
          ?>
+
       </tbody>
    </table>
 </section>

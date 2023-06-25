@@ -52,36 +52,40 @@ if (isset($_GET['delete']) && isset($_GET['table'])) {
       <thead>
          <tr>
             <th>User ID</th>
+            <th>Fullname</th>
             <th>Username</th>
             <th>Email</th>
-            <th>User Type</th>
+            <th>Phone No.</th>
             <th>Position</th>
             <th>Monthly Salary</th>
             <th>Actions</th>
          </tr>
       </thead>
       <tbody>
-         <?php
+      <?php
          $select_admins = mysqli_query($conn, "SELECT * FROM `admins`") or die('query failed');
          while ($fetch_admins = mysqli_fetch_assoc($select_admins)) {
             if ($fetch_admins['user_type'] == 'admin') {
+               $fullname = $fetch_admins['firstName'] . ' ' . $fetch_admins['middleInitial'] . ' ' . $fetch_admins['lastName'];
                ?>
                <tr>
-                  <td><?php echo $fetch_admins['id']; ?></td>
-                  <td><?php echo $fetch_admins['username']; ?></td>
-                  <td><?php echo $fetch_admins['email']; ?></td>
-                  <td><?php echo $fetch_admins['user_type']; ?></td>
-                  <td><?php echo $fetch_admins['position']; ?></td>
-                  <td><?php echo $fetch_admins['monthlySalary']; ?></td>
-                  <td>
-                     <a href="edit_admin-profile.php?id=<?php echo $fetch_admins['id']; ?>" onclick="return confirm('Update information?');" class="update-btn">Update user</a>
-                     <a href="admin_users-table.php?delete=<?php echo $fetch_admins['id']; ?>&table=admins" onclick="return confirm('Delete this user?');" class="delete-btn">Delete user</a>
-                  </td>
+                     <td><?php echo $fetch_admins['id']; ?></td>
+                     <td><?php echo $fullname; ?></td>
+                     <td><?php echo $fetch_admins['username']; ?></td>
+                     <td><?php echo $fetch_admins['email']; ?></td>
+                     <td><?php echo $fetch_admins['phoneNum']; ?></td>
+                     <td><?php echo $fetch_admins['position']; ?></td>
+                     <td><?php echo $fetch_admins['monthlySalary']; ?></td>
+                     <td>
+                        <a href="edit_admin-profile.php?id=<?php echo $fetch_admins['id']; ?>" onclick="return confirm('Update information?');" class="update-btn">Update user</a>
+                        <a href="admin_users-table.php?delete=<?php echo $fetch_admins['id']; ?>&table=admins" onclick="return confirm('Delete this user?');" class="delete-btn">Delete user</a>
+                     </td>
                </tr>
                <?php
             }
          }
          ?>
+
       </tbody>
    </table>
 </section>

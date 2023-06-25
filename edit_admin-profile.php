@@ -221,7 +221,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                         <input type="submit" class="update-btn" value="Save Profile">
                                     </div>
                                     <div class="form-group">
-                                        <a href="admin_users.php" class="btn">Back</a>
+                                        <a href="admin_users-table.php" class="btn">Back</a>
                                     </div>
                                 </form>
                             </center>
