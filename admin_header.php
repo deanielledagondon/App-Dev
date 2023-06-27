@@ -4,7 +4,7 @@
       <nav class="navbar">
          <a href="admin_page.php">Home</a>
          <a href="admin_products.php">Products</a>
-         <a href="admin_orders.php">Orders</a>
+         <a href="admin_orders.php">Orders Placed</a>
          <div class="dropdown">
             <button class="dropbtn">Users</button>
             <div class="dropdown-content">
@@ -27,6 +27,8 @@
                <a href="pending_delivery.php?delivery=Pending">Pending</a>
                <a href="in_transit-delivery.php?delivery=In Transit">In Transit</a>
                <a href="completed_delivery.php?delivery=Delivered">Delivered</a>
+               <a href="cancelled_deliv.php?status=Cancelled">Cancelled</a>
+
             </div>
          </div>
       </nav>

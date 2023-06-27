@@ -27,26 +27,12 @@ if (isset($_GET['delete'])) {
    header('location:admin_orders.php');
 }
 
-if (isset($_POST['save_remarks'])) {
-   $order_id = $_POST['order_id'];
-   $remarks = $_POST['remarks'];
-
-   if (!empty($remarks)) {
-      mysqli_query($conn, "UPDATE `orders` SET remarks = '$remarks' WHERE id = '$order_id'") or die('query failed');
-      $message[] = 'Remarks have been saved!';
-   }
-   
-}
-
-
-
 // Check if there are no orders
 $noOrders = true;
 $select_orders = mysqli_query($conn, "SELECT * FROM `orders`") or die('query failed');
 if (mysqli_num_rows($select_orders) > 0) {
    $noOrders = false;
 }
-
 ?>
 
 <!DOCTYPE html>
@@ -67,7 +53,6 @@ if (mysqli_num_rows($select_orders) > 0) {
 
 <body>
    <?php include 'admin_header.php'; ?>
-   
 
    <section class="orders">
       <?php
@@ -89,7 +74,7 @@ if (mysqli_num_rows($select_orders) > 0) {
       if ($noOrders) {
          echo '<p class="empty">There are no orders as of the moment.</p>';
       } else {
-         $select_orders = mysqli_query($conn, "SELECT * FROM `orders` ORDER BY placed_on ASC") or die('query failed');
+         $select_orders = mysqli_query($conn, "SELECT * FROM `orders` ORDER BY placed_on DESC") or die('query failed');
          $orders_by_payment = array();
 
          while ($fetch_orders = mysqli_fetch_assoc($select_orders)) {
@@ -124,7 +109,6 @@ if (mysqli_num_rows($select_orders) > 0) {
                         <th>Payment Method</th>
                         <th>Payment Status</th>
                         <th>Delivery Status</th>
-                        <th>Remarks</th>
                         <th>Actions</th>
                      </tr>
                   </thead>
@@ -141,7 +125,6 @@ if (mysqli_num_rows($select_orders) > 0) {
                         $payment_method = $order['method'];
                         $payment_status = $order['payment_status'];
                         $delivery_status = $order['delivery_status'];
-                        $remarks = $order['remarks'];
                      ?>
                         <tr>
                            <td><?php echo $user_id; ?></td>
@@ -163,13 +146,6 @@ if (mysqli_num_rows($select_orders) > 0) {
                                     <option value="Cancelled" <?php if ($delivery_status == 'Cancelled') echo 'selected'; ?>>Cancelled</option>
                                  </select>
                                  <input type="submit" value="Update" name="update_order" class="update-btn">
-                              </form>
-                           </td>
-                           <td>
-                              <form action="" method="post">
-                                 <input type="hidden" name="order_id" value="<?php echo $order['id']; ?>">
-                                 <textarea name="remarks"><?php echo $remarks; ?></textarea>
-                                 <input type="submit" value="Save" name="save_remarks" class="option-btn">
                               </form>
                            </td>
                            <td>

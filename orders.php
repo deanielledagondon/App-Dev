@@ -29,7 +29,10 @@ if(isset($_GET['delivered_order'])) {
    $message[] = 'Order has been delivered!';
 }
 
+$category_filters = isset($_GET['placed_on']) ? $_GET['placed_on'] : array();
 ?>
+
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -51,7 +54,7 @@ if(isset($_GET['delivered_order'])) {
 <?php include 'header.php'; ?>
 
 <div class="heading">
-   <h3>Your orders</h3>
+   <h3>Order History</h3>
    <p> <a href="home.php">Home</a> / Orders </p>
 </div>
 
@@ -77,21 +80,29 @@ if(isset($_GET['delivered_order'])) {
          <p> Total Price: <span>₱<?php echo $fetch_orders['total_price']; ?></span> </p>
          <p> Order Status: <span style="color:<?php if($fetch_orders['payment_status'] == 'Pending'){ echo 'red'; }else{ echo 'green'; } ?>;"><?php echo $fetch_orders['payment_status']; ?></span> </p>
          <p> Delivery Status: <span style="color:<?php if($fetch_orders['delivery_status'] == 'Pending'){ echo 'red'; }else{ echo 'green'; } ?>;"><?php echo $fetch_orders['delivery_status']; ?></span> </p>
-         <?php
-            if ($fetch_orders['payment_status'] == 'Pending') {
-               $cancelLink = "?cancel_order=" . $fetch_orders['id'];
-               $confirmLink = "?confirm_payment=" . $fetch_orders['id'];
-         ?>
+         <p> Remarks: <span><?php echo $fetch_orders['remarks']; ?></span> </p>
+
+       <?php
+         if ($fetch_orders['payment_status'] == 'Pending') {
+            $cancelLink = "?cancel_order=" . $fetch_orders['id'];
+            $confirmLink = "?confirm_payment=" . $fetch_orders['id'];
+      ?>
             <a href="<?php echo $cancelLink; ?>" class="option-btn">Cancel Order</a>
             <a href="<?php echo $confirmLink; ?>" class="option-btn">Confirm Payment</a>
-         <?php
-            } elseif ($fetch_orders['payment_status'] == 'Paid') {
-               $cancelLink = "?cancel_order=" . $fetch_orders['id'];
-         ?>
-            <a href="<?php echo $cancelLink; ?>" class="option-btn">Cancel Order</a>
-         <?php
-            }
-         ?>
+      <?php
+         } elseif ($fetch_orders['payment_status'] == 'Paid' && $fetch_orders['delivery_status'] == 'Delivered') {
+            // Remove the Cancel Order button for Paid and Delivered orders
+         } elseif ($fetch_orders['payment_status'] == 'Cancelled') {
+            // Skip displaying the Cancel Order button for Cancelled orders
+         } else {
+            $cancelLink = "?cancel_order=" . $fetch_orders['id'];
+      ?>
+          <a href="<?php echo $cancelLink; ?>" class="option-btn">Cancel Order</a>
+<?php
+    }
+?>
+
+
 
       </div>
       <?php

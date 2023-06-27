@@ -61,7 +61,10 @@ $category_filters = isset($_GET['products_category']) ? $_GET['products_category
         <form method="GET">
             <label><input type="checkbox" name="products_category[]" value="Computer Package" <?php if (in_array("Computer Package", $category_filters)) echo "checked"; ?>> Computer Package</label><br>
             <label><input type="checkbox" name="products_category[]" value="Monitor" <?php if (in_array("Monitor", $category_filters)) echo "checked"; ?>> Monitor</label><br>
-            <label><input type="checkbox" name="products_category[]" value="Keyboards" <?php if (in_array("Keyboards", $category_filters)) echo "checked"; ?>> Keyboards</label><br>
+            <label><input type="checkbox" name="products_category[]" value="Keyboard" <?php if (in_array("Keyboard", $category_filters)) echo "checked"; ?>> Keyboard</label><br>
+            <label><input type="checkbox" name="products_category[]" value="Motherboard" <?php if (in_array("Motherboard", $category_filters)) echo "checked"; ?>> Motherboard</label><br>
+            <label><input type="checkbox" name="products_category[]" value="Graphics Card" <?php if (in_array("Graphics Card", $category_filters)) echo "checked"; ?>> Graphics Card</label><br>
+            <label><input type="checkbox" name="products_category[]" value="RAM" <?php if (in_array("RAM", $category_filters)) echo "checked"; ?>> RAM</label><br>
             <button type="submit" class="btn btn-primary">Apply Filters</button>
         </form>
     </div>
@@ -87,7 +90,7 @@ $category_filters = isset($_GET['products_category']) ? $_GET['products_category
                     // diri ang query sa filtering
                     $where_clause = "";
                     if (!empty($category_filters)) {
-                        $categories = implode("', '", $category_filters);
+                        $categories = implode($category_filters);
                         $where_clause = "WHERE products_category IN ('$categories')";
                     }
                     if (!empty($search)) {

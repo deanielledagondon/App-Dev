@@ -674,7 +674,7 @@ section{
    }
 
 }
-/*added*/
+
 .product-container {
    display: flex;
  }
@@ -694,10 +694,13 @@ section{
  .product-image {
    display: flex;
    align-items: center;
+   width: auto;
+   height: auto;
  }
  
  .productimage-box {
    padding: 20px;
+   margin-left: 60px;
  }
  
  .product-details {

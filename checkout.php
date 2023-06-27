@@ -31,26 +31,22 @@ if(isset($_POST['order_btn'])){
       }
    }
 
-   $total_products = implode(', ',$cart_products);
+   $total_products = implode($cart_products);
 
    $order_query = mysqli_query($conn, "SELECT * FROM `orders` WHERE name = '$name' AND number = '$number' AND email = '$email' AND method = '$method' AND address = '$address' AND total_products = '$total_products' AND total_price = '$cart_total'") or die('query failed');
 
-   if($cart_total == 0){
-      $message[] = 'Your cart is empty';
-   }else{
-      if(mysqli_num_rows($order_query) > 0){
-         $message[] = 'Order already placed!'; 
-      }else{
-         mysqli_query($conn, "INSERT INTO `orders`(user_id, name, number, email, method, address, total_products, total_price, placed_on) VALUES('$user_id', '$name', '$number', '$email', '$method', '$address', '$total_products', '$cart_total', '$placed_on')") or die('query failed');
-         $message[] = 'Order placed successfully!';
-         mysqli_query($conn, "DELETE FROM `cart` WHERE user_id = '$user_id'") or die('query failed');
-
-         echo '<script>alert("Successful Checkout");</script>';
-
+   if ($cart_total == 0) {
+       $message[] = 'Your cart is empty';
+   } else {
+       mysqli_query($conn, "INSERT INTO `orders`(user_id, name, number, email, method, address, total_products, total_price, placed_on) VALUES('$user_id', '$name', '$number', '$email', '$method', '$address', '$total_products', '$cart_total', '$placed_on')") or die('query failed');
+       $message[] = 'Order placed successfully!';
+       mysqli_query($conn, "DELETE FROM `cart` WHERE user_id = '$user_id'") or die('query failed');
+   
       }
+
    }
    
-}
+
 
 ?>
 
@@ -74,6 +70,19 @@ if(isset($_POST['order_btn'])){
 <?php include 'header.php'; ?>
 
 <div class="heading">
+   
+         <?php
+         if(isset($message)){
+            foreach($message as $message){
+               echo '
+               <div class="message">
+                  <span>'.$message.'</span>
+                  <i class="fas fa-times" onclick="this.parentElement.remove();"></i>
+               </div>
+               ';
+            }
+         }
+         ?>
    <h3>Checkout</h3>
    <p> <a href="home.php">Home</a> / Checkout </p>
 </div>
@@ -145,13 +154,6 @@ if(isset($_POST['order_btn'])){
       </div>
          <input type="submit" value="Place Order" name="order_btn" class="btn">
 
-         <?php
-            if(isset($message)){
-               foreach($message as $msg){
-                  echo '<div class="alert">'.$msg.'</div>';
-               }
-            }
-         ?>
 
    </form>
 
